@@ -1,0 +1,568 @@
+1.it seemms you still massed up the parsing methodology which doesn't find the correct questions texts and correct answers (previously working very
+  well)
+  - comments still missing (previously working marvelous)
+  - community, highly, AI answers exists before but right now missing at most questions, some of them seems lower some of them upper and most of them
+  doesn't reflect the correct answers in the PDF files.
+  thnik and fix issues - look this screenshot and identify the questions, answers, comments related issues explanied at above [Image #1]
+
+  2. even if merged the configrations to the "examiner_config.json" it seems still some scripts or parts of the application looking the old configs !
+  find and fix them.
+
+  3. most of the parsing rules defined inside the examiner_config.json, question_parser.py still use the hardcoded regex patterns instead of using the
+  config variables.
+
+  I also inserted a new pattern to ignoring some sentences, words and ocr results as "ignored_patterns" in the examiner_config. please consider it to
+  use in the python scripts instead of hardcoded cleansing or ignoring process.
+
+  also double check the regex patterns or other logics inside the python script and implement/transfer these hardcoded things to config file.
+
+  all the PDF files contents, structure, format can be vary, changeable depends on the Exam so that it should be very dynamicaly configurable the parsin
+   strategy via config file, without needing revision on the python script (most of time)
+
+  4. there was a "i" icon previously to show the "Introductory Info" section in another page "Case Study" but it seems you changed its logic and placed
+  into to Question section under as a green background [Image #2]
+  this is not acceptable, why did you changed the existing working metdology again ! i didn't request anything about it !!!
+  take a look at the previous commits of this page/modal and revert it back.
+  case study page should have markdown capability, show the intrıductory info context in pretified format, accept image uploading and editing the
+  content.
+
+  5. "traOc" is mapped to changed to "traffic" in the config file's "ocr_corrections" section but i can see the not corrected text still in the question
+   [Image #3]
+
+  6. Bring back the sending the question and answer options to Claude AI API and getting its suggestion about the correct answer as a GCP expert
+  functionality. because right now all the "AI" answer part seems N/A.
+  this was working perfect previously llm_integrator.py script.
+
+  7. most of the questions correct answer is not available so that "Highlight Answers" button couldn't highliht.
+  find and fix the missing answer options within existing scripts, check all the questions **must** have at least 1 answer (sometimes more than 2, 3)
+
+
+----
+
+görünüşe göre question ve answer parsing yapısını tümüyle bozdun !
+  önceden soru metinleri ve cevaplar çok daha düzgün ve doğru görünürken şu anda bir soru metni içerisinde hem soru, hem cevaplar hemde community
+  commentleri bir arada görünüyor !
+  var olan parsing mekanizmasında ne gibi bir değişiklik yaptıysan onu düzelt.
+  örnek bir soru : [Image #1]
+
+  oysaki question kısmında sadece "Your company is developing a web-based application. You need to make sure that production deployments are linked to
+  source code commits and are fully auditable. What should you do? " yazmalıydı
+
+  answer options ise aşağıdaki gibi olması gerekirdi :
+  "A. Make sure a developer is tagging the code commit with the date and time of commit.
+  B. Make sure a developer is adding a comment to the commit that links to the deployment.
+  C. Make the container tag match the source code commit hash.
+  D. Make sure the developer is tagging the commits with latest. "
+
+  community, highly voted, AI ve comments bölümleri boş N/A görünüyor !
+  oysaki aşağıdaki metin comments olarak değerlendirilip parse edilip, doğru cevap C şıkkı olarak adreslenmeliydi.
+   "djosani Highly Voted 3 years, 3 months ago Developer shouldn't tag or comment every commit with some specific data, like timestamps or something
+  else. There might be an app version, but it's not mentioned. I'd go with C as it's an automated, error-less approach that answers the question.
+  upvoted 35 times Urban_Life 3 years ago @Kopper2019- what do you think about ans C? upvoted 2 times Sayfa 381 / 803"
+
+  lütfen düzgün çalışan kodları **KESİNLİKLE BOZMA** yada **DEĞİŞTİRME** test edip sonuçlarını görmeden.
+
+  ultrahink şimdi düzelt bu problemleri.
+
+  ayrıca eğer config dosyalarını sadeleştirip merkezi hale getirdiysen diğerlerini _backup yada _ex gibi bir dizin altında toplayıp project sturecture
+  sadeleştir.
+
+----
+
+1. how did you import the Questions_<20,21,22,30,31,32,33,34>.pdf files ! because these PDF files are NOT available under the /data/inputs folder
+  [Image #1]
+  I can see these source files in the filter panel [Image #2] and also the questions but its again weird even if the questions available in the web ui,
+  there is no correct answer, community answer, AI answer and comments for them ! [Image #3]
+
+  ultrathink and solve this issue. never try to mimick anything like running or mock data generation.
+
+  2. i tried to upload some new pdf files like this and got error [Image #4]
+  Error: Processing failed:
+  /opt/homebrew/Cellar/python@3.13/3.13.5/Frameworks/Python.framework/Versions/3.13/Resources/Python.app/Contents/MacOS/Python: can't open file
+  '/Users/erkanciftci/repo_local/examtopics_extractor/src/add_new_pdfs.py': [Errno 2] No such file or directory
+
+  why it is still requestion the add_new_pdfs.py ? didn't you fix and reflect the changes all pages, related scripts.
+
+  3. try to upload the pdf files under /samples folder via web ui and check the questions, answers, comments availability.
+
+  4. why we have several different configuration files? which one is using and which are not?
+  config/api_config.json
+  project_config.json
+  .env
+
+  config/processing_config.json
+  config/prompts.json
+  claude_prompts.json
+
+  5. even if these config files has some regex parsing patterns why there are also hardcoded regex parsing patterns inside the python scripts?
+  if it is possible to transfer/move these hardcoded parsing mechanism from python scripts and move them to config file so that dynamicaly manage, add,
+  edit, remove capacility to each parsing mechanism.
+  also do the same logic for the hardcoded fixed strings and contexts etc.
+
+  for example : "Question #\\d+" is exists inside the project_config.json, processing_config.json and also questions_parser.py
+
+  another exmaple: hardcoded inside the question_parser.py which is not acceptable hardcoded inside the code, it must be configurable via config file.
+
+  # Known usernames pattern (expanded)
+  r'^(\s*)(Ahmed_Safwat|SAMBIT|kopper2019|ChinaSailor|AzureDP....
+
+  6. Remove the pdf files under the web_ui/pdfs folder, empty the questions_web_data.json and try to run parsing pipeline from scratch and test the
+  final results.
+
+
+----
+
+1. why did you required to "Created a new script that properly adds questions from uploaded PDFs to the web UI data." ? existing codebase must be
+  cover the newly added pdf files processing pipeline normally !
+  there is no need to generate new scripts per each request, always try to use or enhance the existing scripts without breaking their functionality.
+
+  2. even if the Questions_20.pdf files seems uploaded and parsing pipeline seems worked, it doesn't have the Answers, Comments [Image #1]
+  this is why you generated another script to parse it, i think.
+
+  3. case study page seems a little bit stange because it has 2 scroll bar which is meaningless [Image #2]
+  put the edit, add image and save buttons to top or make them fixed on bottom of page. scroll bar visible only for the case study context.
+
+  4. Add image seems not working becuase i selected an image and upload it but it doesn't seen anyplace of the case study !
+  also case study edit page should support the markdown style editor.
+
+  5. Question #87 at Questions_40.pdf file is parsed wrong.
+  a. "https://www.examtop"cs.com/exams/google/profess"onal-cloud-arch"tect/custom-v"ew/ Sayfa 784 / 803" text should be ignored normally.
+  b. "--- Page 5 ---" should ignored also
+  c. "Profess"onal Cloud Arch"tect Exam - Free Actual Q&As, Page 1 | ExamTop"cs 19.12.2024 13:49" similar texts should be ignored also in the parsing
+  strategy.
+  d. as you can context starts with "Introductory Info" which means that until to seeing the "Question" that section is assumed as Case Study
+  Info.[Image #3]
+  e. Question context should be only that sentences. [Image #4]
+  f. Answers Options also parsed totaly wrong which are shows the community comments as answer but it is not possible. original question and comments
+  section looks like this [Image #5] so that as you can see parsed answer options are wrong.
+
+  6. be sure about how to run the parsing pipeline (application) and identify the unnecessary script files.
+  /src folder main.py, question_parser.py, robust_question_parser.py, pdf_processor.py, pdf_validator.py, text_enhancer.py, llm_integrator.py,
+  add_new_pdfs.py script files seems exists but it is not clear to which one is the base script to run the correct parsing pipeline (entry point) of the
+   application.
+
+  ultrathink to analyze each script, find dependencies and impact analyses to change, delete or merge some of them.
+  re-run the parsing pipeline from scracth and test the output results with the existing and expected results.
+  **DO NOT** generate seperate scripts again for testing, validation or processing pipeline.
+  be sure about the parsed all PDF files via same parsing script and take it as a base (main).
+  update the readme.md and related documents, scripts to reflect this final (clean) project structure.
+
+  also web_ui should run this main script on clicked the "Analyze" and also "Upload PDFs" processed completed.
+
+----
+
+Issue 1: Questions_20, 21 and 22.pdf files seems uploaded to the /data/input folder but the extracted questions are not available in the web ui !
+  there is nothing about these sample PDF files inside the questions_web_data.json.
+  which also don't show these pdf files names at the filter panel.
+
+  2. how did you test upload and validate the extracted questions are working ! because it is not possible.
+
+  also playwright mcp doesn't open web browser page and navigate or mimick anything, does it executed in headless mode? if yes ignore the headless mode
+  and always run the playwright mcp in normal end user mode.
+
+
+  3.there is a "blank" area under the filter panel which occurs to filter panel height needs to viewable only with scrolling but this should NOT be
+  necessaray. [Image #1] fix this to see the filter panel fully (without need to scroll bar)
+
+  4. pretify the "Case Study Information" pages content like the comments page. assume the "." as a new line.
+  remove that line "This background information provides context for understanding and answering the question above."
+  there is no need to another additional box, rectangle inside the page like "Case Study Background" - remove it and put the content fully inside the
+  "Case Study Info" pages with the scroll bar.
+  this part should also support editing text, context and als uploading/showing the use case images.
+
+  think and fix these issues.
+
+
+----
+
+1. "Exam Evaluation Results" page, indicator clicking functionality is NOT working gives this errors on console [Image #1]
+  none of them does not open or show any details when clicked to indicators!
+
+  2. mark icon seems top right corners of the Edit button or Header of the page which is weird because these are not an answer options [Image #2]
+
+  3. fine, upload page/modal comes but it seems not working as expected.
+  I tried to upload "Questions_30.pdf" it shows uploaded and also processed with the new questions but the Questions is not available !
+  also Questions_30.pdf is not seen under the /data/inputs folder. [Image #3]
+  also the web ui filter panel doesn't show the Questions_30.pdf in the Source File filter !
+
+  4. Warnings page still does NOT show the errors, pdf file or page number links.
+  also it doesn't show any warning, info, error about the upload PDF files proces which I had some issues or files are not uploaded to /data/inputs
+  folder.
+  this page seems static/hard coded [Image #4]
+
+  5. renamte the "examtopics_extractor" to "examiner" inside the README.md.
+  update the project structure section to reflect the final folders of the repo.
+
+  also this codebase will be pushed to https://github.com/fxerkan/examiner remote repo so that update the documentations etc. depends on this.
+
+  6. change the api_key from api_config.json to environment variables ".env" to prevent pushing the API Key to a public repo.
+
+  7. check the "Upload PDFs" screen and functionality with playwright mcp as end user. you can find the sample PDF files under the /samples folder to
+  upload.
+  upload them and test the extracting, parsing mechanism worked as expected.
+  uploaded files available under the /data/inputs folder.
+  questions inside the pdf are available in the web ui, total questions number increased or not. it must be increase at least 5-10 questions (right now
+  it is 79)
+  search the new questions via filtering the Source File = uploaded PDF file names must be available in this filter.
+
+----
+
+1. Question title bölümünün başında her bir soruya verilen "Auto-increment numbering" değerini göremedim ! oysaki her sorunun başlığında o numara #1,   │
+│   #2, .. #123 şeklinde olmalı. "Topic : ..." kısmını kaldırabilirsin Title'dan.                                                                           │
+│                                                                                                                                                           │
+│   2. why this part is hardcoded in index.html - [Pasted text #1 +24 lines]                                                                                │
+│                                                                                                                                                           │
+│   3. Warnings kısmında hiçbir hatayı detaylı şekilde göstermiyor. oysaki hangi PDF dokümanı, kaçıncı sayfası olduğu (tıklanabilir şekilde) ve hatanın ne  │
+│   olduğu - eğer mümkünse parsing işlemine sokulup hata alan RAW context - gibi detayların tümü ve "Analyze" butonuna tıklandığında arkaplan oluşan LOG    │
+│   dosyasındaki tüm kayıtlar görülebilmeli [Image #2]                                                                                                      │
+│                                                                                                                                                           │
+│   4. "Exam Evaluation Results" sayfasında tüm sorular ve tipler alt alta değil de ilgili Indicator'e tıklandığında alt kısımda sadece o indicator         │
+│   grubuna ait mesajlar görünecek şekilde, daha kolay kullanılabilir bir tasarım olmalı. [Image #3]                                                        │
+│   örneğin "Wrong Answers" a tıkladığım da sadece hatalı olan soruların listesini göstermeli gibi.                                                         │
+│                                                                                                                                                           │
+│   5. "Edit Questions" sayfasında sorunun DOĞRU cevabının hangisi olduğu görülemiyor yada seçilemiyor. tek yada çoktan seçmeli olarak doğru cevabın        │
+│   hangisi olduğu işaretlenip, değiştirilebilmeli ve bunu json dosyasına kayıt etmeli. [Image #4]                                                          │
+│                                                                                                                                                           │
+│   "Answer Options" bölümünü yanyana değilde alt alta geniş bir şekilde cevap şıklarını gösterip, değiştirebilecek ve hangisi/hangilerinin doğru cevap     │
+│   olduğunu işaretleyebilecek şekilde ayarla.                                                                                                              │
+│                                                                                                                                                           │
+│   6."Upload PDFs" butonu halen çalışmıyor, hiçbir popup/modal açılmıyor halen !                                                                           │
+│                                                                                                                                                           │
+│   7. json dosyası içerisinde halen burada yazıp/yapıştıramadığım bir karakter var. bunu hiç olmayacak şekilde silmeni istiyorum. [Image #5] comment       │
+│   ekranında böyle görünüyor [Image #6]                                                                                                                    │
+│   json içerisinde şöyle görünüyor [Image #7]                                                                                                              │
+│   Hexadecimal Character Codes : 0xf007 olabilir belki.                                                                                                    │
+│                                                                                                                                                           │
+│   8. update the README.md and CLAUDE.md with final improvements and features,  usage samples etc..                                                        │
+│   keep README.md as much as simple, easy to understandable to start using the application.                                                                │
+│   so that you combine/merge the /docs/archieve or delete unnecessarry ones which of them already covered inside the readme.md. ( keep                     │
+│   DEVELOPMENT_GUIDELINES.md )                                                                                                                             │
+
+----
+
+
+1. galiba "Wrong Answer Detection" kısmını tam olarak yapamamışsın. Çünkü işaretlediğim bir cevap şıkkı yanlış olduğu halde halen mavi arkaplan
+  renginde kalıyor "Highlighted Answers" açıldığında hem doğru cevap yeşil olarak görünüyor hemde benim seçtiğim cevap mavi olarak kalıyor, oysaki
+  yanlışsa cevabım arkaplanı onun Kırmızı olmalıydı ! [Image #1]
+
+  2. "Exam Evaluation Results" sayfasıda düzgün çalışmıyor. çünkü 3-4 tane soru için cevapları işaretlemiş olmama karşın sanki hiçbir soru için
+  cevapları işaretlememişim gibi gösteriyor !
+  hepsini "Skipped Questions" olarak gösteriyor. oysaki ilk 4 soru için cevap şıklarını işaretledim. [Image #2]
+
+  3. Exam evaluation results sayfasından herhangibir soruya gitmek için "Answer Now" butonuna tıklanınca daha önceden işaretlenmiş olan tüm cevap
+  şıklarını kayıp ediyor ! oysaki seçilen tüm cevap şıklarını bir yere kayıt etmeli ve ekran yenilendiğinde, pagination ile diğer sayfalara geçildiğinde
+   bu cevapları kayıp etmemeli. Evaluate Answers dendiğinde ise hangi soruya ne cevaplar verildiğini bilip, ona göre doğru/yanlış şıkları değerlendirip
+  bir skorlama çıkarlamalı.
+
+  4. baştan sona tüm sorular için otomatik artan bir numaralandırma uygula, kesinlikle tekil olsun bu sayı. şu anda "Question 1" şeklinde görünen
+  onlarsa soru var ama her birisi farklı farklı. Question title kısmının en başında senin autoincrement olarak oluşturduğun bu soru numarası görünsün ve
+   verilen cevaplar, yorumlar vs. gibi her yerde bu Primary Key olarak kullan onu.
+
+  hardthink, implement as expert without crashing, brekaing anything.
+
+  test all the web ui functionalities with playwright mcp as an end user view.
+  
+----
+
+nice done.
+  user's selected (marked) answer options background must be lightblue because it is confused with the "Highlight Answers".
+  also when the users selected answer is not correct/match with the "Highlighted Answers" it's background should be soft Red color to identify the wrong
+   answers.
+
+  also add another page to evaluate the user's whole marked/selected answers are correct or not. you can put another button to evaluate top header which
+   will be calculate the overall passing score of the exam via users correct answers/all questions correct answers.
+  hangi soruları yanlış cevapladığını görüp, hızlıca o soruya gidebilmeli.
+  toplam skorunu, kaç soruyu doğru kaç tanesini yanlış cevapladığını özet halinde de görebilmeli.
+
+
+----
+
+ well done but still had some issues.
+  1. Comments still not available at any question which was showing at least 1 comment per each question ! [Image #1] **every questions must have the
+  comments** - revise your parsing strategy and also keep the RAW comments data as it is to showing it. (also apply formatting pretifiying to show the
+  comments more readable format, assume "." as a new line and design the comments page to reflect this formatting as well)
+  2. "Highly Voted" answer is mostly available at some questions in pdf but at our application none of any question "highly voted" shows anything -
+  seems always N/A ! check your parsing method or change your parsing method from OCR to maybe image recognition to detect this [Image #2]
+  3. put the Pagination buttons also end of each page bottom to easy nagivation. also include the page number links to fast access specific page.
+  4. previosuly I requested this feature but it doesn't implemented - you missed it !
+  new feature 2: add ability to "mark the selection answer option" (thick or something similar) and when its marked as answer its background should be
+  lightblue so that user can compare his answers and highlighted answers.
+  5. in some questions answers is not only one option, it can be multiple selection like 2 or three.
+  for example in this question's correct answer option selection is Three [Image #3]
+  but UI shows only one single correct answer or option selection which is not good. (highlight answers button select only one option per each question
+  but it can be 2,3,4)
+  so that find a better way to show these type of multi selection required questions. (try to find the Choose Two, Choose Three tags in question context
+   and search the comments for multiple answer options like A,B or A,C and E, B and E, .... etc. )
+
+-----
+
+what did you do, everything crashed, broken !
+  hardthink before changing anything or implementing and fix below issues as an expert.
+  1. Page Number and Source links gone at to question title !
+  2. Community answers are gone !
+  3. Confidence scores gone !
+  4. claude AI answer part totaly gone ! - previously it was showing something.
+  5. comments are gone ! (except the Question_40 which is very weird - why are deleting or changing the already running functionalities? )
+  6. Question_40 and Question_41 için sorular en sonda eklenmiş ve info ikonu ile içerik olsa dahi, sanki bu hardcoded eklenmiş bir bölümmüş gibi
+  görünüyor ! bunu sırf görünsün diye hardcoded şekilde yapmadın değil mi? çünkü filtre panelinde Question_40 ve 41 görünmüyor seçeneklerde ! ayrıca
+  sorular için cevapları highlight eden buton/fonksiyon 40 ve 41 için çalışmıyor, herhangibir şıkkı işaretlemiyor !
+  7.  also implement a pagination for the questions like 25 question per page (next/previous page number selection) so that you can use playwright mcp.
+  fix/solve this issue playwright - Navigate to a URL (MCP)(url:
+  "file:///Users/erkanciftci/repo_local/examtopics_extractor/web_ui/index.html")
+  Error: MCP tool "browser_navigate" response (46706 tokens) exceeds maximum allowed tokens (25000). Please use pagination, filtering, or limit
+  parameters to reduce the response size.
+  8. **MOST IMPORTANT** sana daha öncede söylemiştim, varolan kodlar scriptler varken gidip her seferinde ayrıca bir kod yada dosya oluşturma **ASLA**.
+  varolan scriptleri güncelle.
+  robust_question_parser.py varken neden robust_question_parser_fixed.py diye birşey oluşturdun !
+  questions_web_data.json varken neden questions_data.json adlı yeni bir dosya oluşturdun !
+  llm_integrator.py adlı bir kod varken neden claude_analyzer.py adlı ayrıca bir kod ekledin !
+  **DO NOT** generate seperate several new scripts, always analyze the existing scripts and enhance them without creating a new one!
+  9. analyze the /src and root folder of the project and keep clean the project structure, merge or delete the unused, unnecessary scripts/files without
+   brake the existing functionalities and working application.
+
+-----
+
+issue 1 : still not able to see the Questions_40.pdf and Questions_41.pdf selections inside the Source File filter and also there is no questions from
+   these PDF files ! [Image #1]
+  but there are lots of questions inside that PDFs also there are several Introductory Info sections.
+
+  issue 2 : comments still not showing all the user comments. so that assume any content between two questions as the user comments (except the
+  Introductory Info parts) and put that content as it is without parsing inside the Comments section. you can also put it as an image (screenshot).
+
+  issue 3 : Claude AI answers part show "... randomly to bias. Manual review needed" most of the questions but this is not acceptable. [Image #2]
+  because as you can see attached screenshot question is very clear, answers also clear why Claude AI (API) is not answer that question, fix it.
+  generate a log especially to debuging the send request to Claude AI and its responses for each question.
+
+  issue 4 : Introductory Information section still exists inside the Edit page [Image #3], delete it there is no need it.
+
+  issue 5 : these warning questions which has few options 3 [Image #4] seems had issue but it doesnt. so that keep/transfer them to final parsed/correct
+   questions part even if they had few options. (they must be have at least 3 and/or more options)
+
+  issue 6 : when clicked to Analyze button it re-add the all the analysis results again as duplicate. to prevent this issue first empty the related json
+   and populate it with the new analysis results, not append.
+
+  new feauture 1 : add a floating UP arrow bottom left corner to bring back to user again top of the web ui.
+
+  new feature 2: add ability to mark the selection answer option with the background as lightblue so that user can compare his answers and highlighted
+  answers.
+
+  issue 7: in some questions answers is not only one option, it can be multiple selection like 2 or three.
+  for example in this question correct answer option selection is Three [Image #5]
+  but UI shows only one single correct answer or option selection which is not good. so that find a better way to show these type multi selection
+  required questions.
+  [Image #6]
+
+
+-----
+
+1. comments part need more deep dive analysis correction about the parsing mechnasim because for all question it shows "Comments (1)" always but this
+  is not possible. all the questions have at least 1-2 comments, most of them had several comments from several different users.
+  so that check your comments parsing script mechanism and enhance it to cover to showing all the comments.
+  for example Questions_10.pdf Question $68 has 8 different comments (some of rely for the another comment) [Image #1] consider this approach in your
+  parsing strategy.
+
+  2. Claude AI selected answers explanation seems very limited so that extend it's response to max 500 characters and show pretified structure.
+
+  3. Highly Voted and Most Recent answer section seems always N/A. find a better way to parse them. for example in this comment part [Image #2]
+  "KouShikyou"'s answer marked as "Highly Voted" with this image [Image #3] try to search and identify these type comments selection for the answer like
+   B, C or A etc.
+
+  4. "Introductory Info" section doesn't available in none of any question but it is already available inside some of the PDFs.
+  for example Questions_40.pdf Page 5 has a large Introductory Info section for the question which must be extracted and available inside the question
+  context [Image #4] [Image #5]
+  you can search find these "Introductory Info" sections once and refer it to related questions instead of writing its context several times.
+  you can put another button these type questions to showing the "Introductory Info" part as "i" icon/emoji top right corner of the question.
+
+  there is no need the "Introductory Information" section inside the Edit Question modal.
+  
+
+---
+
+> nice UI looks much better right now, good job.
+  just few inprovements i need;
+  1. Comments button still seems visible without expanded the "Show Answers & Analysis" [Image #1] which must be not visible before clicked to this
+  button.
+  put the comments button near to the answers boxes as 5th item inside the flex area [Image #2]
+
+  2. change the mouse pointer when hover the Claude AI answer label, box to showing the tooltip/hint
+
+  3. when hover the answer options it show a tooltip/hint why? where is it coming it doesn't in the requirements so that delete it for the answers
+  option hint. [Image #3]
+
+  4. pretify the comments area context/content to easy readablility, use the "." as a new line and remove this [Image #4] weird burger icon/character
+  from the content as always.
+  
+----
+> there are still UI improvements that i need like implemented, please solve all of them iteratively;
+  1. what is the purpose of this (dashed) blank area under the content-area div  - there is no need it, delete it  [Image #2]
+  2. keep the questions-container as much as full height, width to showing the question/answers area without needing scrolling. keep the margins minimum
+   0px.
+  3. put the comments button also inside the "Hide Answers & Analysis" section and compact that section size.
+  4. put the Claude AI's comments as a hint/tooltip over the Claude AI's answer option. so that you can delete this section [Image #3] and move its
+  content as a tooltip/hint.
+  5. keep Question name/number as title but others (Topic, Page, ...Confidence etc.) a little bit smaller non-bold font. [Image #4]
+  6. Upload button still doesn't do anything !
+  7. remove the "Export Filtered" button and its backend - no need this button.
+  8. rename the "Show All Answers" button to "Extend All Answers" & "Collapse All Answers" and move it to to top header (near to the upload, analyze
+  stats button)  instead of filter panel.
+  9. add another button at top header "Highlight Answers" which will highlight all the question's answer option as Light Green background  by the
+  Community value. it should seems like this [Image #5]. when re-clicked to "Highlight Answers" button again it will revert back the selected options as
+   normal again.
+
+
+----
+
+1.confidence value and confidence score filter does not match and not working.
+  2.remove this section totaly to enchance the question area hegith. [Image #1] you can put the labels bottom of the filter panel.
+  3.keep that header as much as slim [Image #4] to enhance the question area height so that we should see the questions/answers as much as possible
+  without scrolling. you can put all the buttons at top right corner as small buttons.
+  4.i tried to edit an question context but it says this only browser memory level stored which is not acceptable. it must be update the json data at
+  backend. [Image #5]
+  5. keep this question header as a single line [Image #6], delete the "Claude AI" rectangle which is useless.
+  6.why Claude AI's analysis part seems always like this "Claude's Analysis:Random selection - manual review required" - can you show or log the context
+   send to Claude API and responses seperately? does it really send the corrected/fixed question and options to identify to correct answer? if yes
+  please also include the Claude's comments about why did it choose the which answer option as maximum 250 characters.
+  7. there was a button which shows the community comments why did you delete it? bring it back which must be show the as much as comunity comments
+  related question as it is (also pretify for easy reading)
+
+
+----
+
+> 1. put the filtering panel left side as vertical of the screen because it keeps to much space on the middle and blocking the question/answers content
+  visibility because of the scrolling. as you can see it is very hard to see the question, options and answers on a single page without scrolling [Image
+   #1]
+
+  2. upload PDFs button is not working ! (Run Analysis working - nice ) also keep its text similar to other buttons near of it.
+
+  3. clicking to the PDF file name opens this popup but it does NOT open the related PDF file ! ( parsed pdf files should not under the web_ui folder,
+  never trt to copy of move them to web_ui. find an alternative way to pointing the ./data/input folder )
+
+  4. remove this section [Image #2]
+
+  5.rename the enhanced_ui.html as index.html to access the web ui easily just via http://localhost:9000
+
+  6. there are lots of python scripts, md files inside the project repo. please organize all of them, you can delete, merge, modify them to minimize and
+   easy understandable project structure. WARNING: never delete of crash the existing working mechanism so that after that cleanup operation fully test
+  the all the steps and validate the web ui, outputs.
+
+  7. all the answers seems "A" which is NOT normal. I can see the B, C, D, options already mentioned or selected in the PDF files but none of them is
+  available in your final analysis which is weird ! [Image #3]
+
+----
+
+> as always said to you, test the web ui's with the playwright mcp to be sure it is working as expected.
+  right now it seems doesn't work [Image #1]
+  check the PDF upload functionality again with mcp.
+  check the triggering the python script is can be triggered or not with mcp via web ui.
+  change the top button colors because they are really similar color to header so that not able see easily.
+
+
+-----
+
+> why are you creating additional, new python scripts like "comprehensive_extractor.py", "expert_extractor.py", "production_fixer.py",
+  "advanced_extractor.py" etc. !!!
+  there is already business logic and implemented scripts under the /src folder.
+  you have to always improve, enhance or fix that scripts and logics, not create new seperate script files, never again.
+  check that scripts are already covering or not and implement the requirements only depends "claude.md" and "development_guidelines.md" as your memory.
+  add these functionalities to web ui;
+  * real confidence score value and filtering capability
+  * Edit button / functionality to editing the question, answers, comments etc.
+  * hyperlink for the related document and page location
+  * filter panel should have the question number, source file name, page number, confidence score, has claude ai answer flag, timestamp, Community
+  Answer, Highly Voted Answer, Most Recent Answer, Claude Answer, Latest Date, Topic, Page Number etc. filters and options to quick filtering.
+  pretty the question area format as much as easy readable (put a new line each "?" or "." etc. ) format.
+  check all these requirements running playwright mcp taking screenshots and validate the each requirement coverage score >90%.
+
+  **as always** initialize a git repo localy, created a base main branch until right now than create a new branch, continue to make all your new
+  features, additions, fix etc. as a new commits with the detailed explanation of the commit message
+
+
+-----
+
+> still there are lots of issues, fix them and implement below functionalities, test cases and validations to correct the ocr results and categorization
+   of the questions,answer options,community answers.
+  1. if any line starts with an image, expand/collapse button or nickname/username that means it's a community user's comment about the answer. so that
+  2. it won't **NEVER** parsed or used as a question or answer section.
+  3. All Question sections are starting with "Question #number" pattern consider this pattern in your question/answer parsing strategy.
+  4. in some cases Questions section started with "Question" but do not have the "#number" part, also consider these an option for the parsing strategy
+  5. which are part of an introductory info part of the contiuning question.
+  6. put the questions/answers in a single file for the export/output, keep the community answers as a seperate file.
+  7. so that we should have another capability to deep dive the user comments as a seperate popup/modal page in the web ui that can open this window
+  with the whole community users comments, explanations by timestamp ordered desc.
+  8. btw, still not able the see "Claude AI" answers in none of any question ! does this NLP/LLM based answering mechanism working? did you implemented
+  it fully functional real data and methods?
+
+----
+
+> is this looks correct or production ready? [Image #1]
+  every questions **must be at least 4** or **maybe 5 answer option always**, so that check your extraction and validation scripts search always these numbers of answers per each
+  question. otherwise it means question and answers are not completed.
+  you must be validate each question context is really has question - validata with using LLM to identifying does it really and exam question or another text context.
+  there should not be these characters or words in any question or answers;
+  * 
+  * [Image #2]
+  * "3 years, 8 months ago" simikar things means the community user comment date so these can't be in questions/answer sections and it means also next question section is not
+  started yet.
+  * pretty format the question context to easily readable. after each "." put a new line.
+  * add a hyperlink to the Source part per each question to easily navigate and find out the related question in the PDF file.
+  * always sort the answers A,B,C,D,E order (this is also a validation point for you to check the OCR results that needs to be fixed)
+  add an option to edit/update the question and answers and save the final status to the source json, csv or database. so that i can easily fix some of them manually.
+  answer context could NOT be never inside the question section - if you see these type of question context which means wrong and needs correction - fix the extraction and parsing
+  logic code.
+  validate the llm_integrator results - also the inputs.
+  OCR logis and extraction part needs lots of improvements, so that try alternative better solutions.
+  hardthink to implement above steps and solve them as an expert software developer.
+
+-----
+
+1. did you run and test the application?
+  because it seems doesn't working with the real input files under the /data/input directory.
+  2. HTML web ui doesn't show anything because nothing extracted [Image #1] (I said test it with playwright mcp to be sure it is working!)
+  3. there is nothing inside the output folder except dummy/samples !
+  4. run all the application, test each input files extraction results, validate each question-answers processed, ask to the claude about the exam question and get back it's answer,
+    and if you find any error then fix it.
+  5. re-validate all the steps implemented correctly and fully working inside the claude.md and DEVELOPMENT_GUIDELINES.md files.
+  6. be sure the Questions also include the "introductory info" parts inside the question context.
+  for example: "Dress4Win is a web-based company that helps their users" is a part of the introductory of a question and the question "For this question, refer to the Dress4Win case
+   study. Which of the compute services should be migrated as-is and would still be an optimized architecture for performance in the cloud?"
+  available inside one of the PDF files, check your extractions include this introduction part, question and answers fully.
+
+  7. also explain and include this "introductory info" section/part requirement inside the claude.md and deployment_guidelines.md files, update.
+
+  ----
+
+  claude.md ve deployment_guidelines.md içerisindeki yönergeleri okuyarak ilgili çözüm ve uygulamayı baştan sona geliştir ve testlerini yap.
+
+
+  ---
+
+  Google Professional Cloud Architect sertifikasyon sınavı için ekteki gibi daha önceki sınavlarda sorulmuş sorular, cevapları ve Community tarafından verilen cevapların hangilerinin doğru yada yanlış olduğu belirtilmiş.
+
+Claude Code ile aşağıdaki özelliklere sahip olacak şekilde ilgili verileri extract, parse etmemi sağlayacak olan uygulamayı geliştirebilmem için gerekli CLAUDE.md ve diğer yönergeleri hazırlamnı istiyorum.
+**HİÇBİR şekilde KESİNLİKLE** kod, script geliştirmesi yapma !
+
+Gereksinimler:
+1. Tüm bu PDF dosyasını satır satır tarayıp, tüm soruları ve gerçekten doğru olan cevap şıkkının hangisi olduğunu, sebebiyle birlikte özet bir liste olarak oluşturmanı istiyorum.
+*Page Number bilgisi çok önemli, yaptığın her türlü analiz ve geliştirme için işlemi hangi sayfa üzerinde yaptığını belirtip kolaylıkla bulabileceğimiz şekilde logla ve etiketle kesinlike.
+
+Expected output format as tabular:
+Question No | Question Description | Answer Options | Community Answer | Highly Voted Answer | Most Recent Answer | Claude Answer | Latest Date | Topic | Page Number
+1 | Your company has decided to make a major revision of their API in order to create better experiences for their developers........... | D | D | C | D | A | 3 days ago | Topic 1 | 12 
+
+
+2. Ayrıca sende bir GCP Data Architectsin. Buna göre ilgili soruyu okuyup olması gereken doğru şıkkın hangisi olduğu kısa bir açıklama ile "Claude Answer" bölümünde belirt.
+
+Burada online olarak Claude API kullanarak LLM'e ilgili soru metnini ve şıkları gönderip realtime'da doğru cevabın ne olduğu ve sebebini almalı. hardcoded olmamalı kesinlikle.
+
+3. Doküman içerisinde birden fazla kez aynı soruları yada benzer soruları içeriyor olabilir. Question No tekil değil yada aynı soru numarası bambaşka bir soruyu ifade edebilir. Bu nedenle "Question No + PageNo" gibi birşeyden yararlanarak Unique Autoincrement Question No oluşturabilirsin.
+
+4. Tüm dokümanı tek seferde okuyup sonuçları oluşturmaya **KESİNLİKLE** çalışma. bunun yerine bu dokümanı istediğin bölümlerini okuyup, istenen formatta çıktı oluşturabilecek şekilde bir uygulama/kod geliştirmeye odaklar **SADECE**. bu sayede ilgili kod bloğu kullanılarak istenen bölümler, sorular, sayfalar tekrar tekrar işlenerek hem daha doğru sonuçlar elde edilebilir, hemde özel bir durum yada hata ile karşılaşırsan kodu ona göre revize edebiliriz.
+Örneğin PDF dokümanları küçük parçalar halinde '/Users/erkanciftci/Library/CloudStorage/Dropbox/OREDATA/65-Exams_Certifications/Professional Cloud Architect - PCA/ExamTopics - GCP Professional Cloud Architect Exam - Split' adlı bir dizin altında Questions_1.pdf, Questions_2.pdf, Questions_3.pdf, ..... Questions_N.pdf şeklinde konumlandırılmış durumda.
+
+5. Dokümanın bazı bölümlerinde kaymalar, text ifadelerin görünmemesi, bir sorunun yada cevaplarının bir sonraki sayfaya kayması gibi sorunlar olduğu için her bir soru ve ona ait cevaplar, yorumların metinlerini tekrar bir LLM, NLP agent'dan geçirerek eksik metinleri düzelt, grammer sorunlarını çöz ve anlamlı okunaklı hale getir.
+
+
+6. ignore these words, sections, doc parts from the PDF file in your analysis, there is no need to proceed them;
+* Page number(s)
+* text "https://www.examtopics.com/exams/google/professional-cloud-architect/custom-view/"
+* community user name & logo, image

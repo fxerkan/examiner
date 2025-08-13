@@ -1,0 +1,126 @@
+ToDos
+=====
+
+# Filter panel iyileştirmeleri.
+
+1. there is a "blank" area under the filter panel which occurs to filter panel height needs to viewable only with scrolling but this should NOT be necessaray. fix this to see the filter panel fully (without need to scroll bar)
+
+
+
+# Questions & Answers bölümlerinde yapılması gereken iyileştirmeler.
+
+1. bazı sorular için tüm cevap şıkları görünmüyor. 
+yani normalde minimum 4 tane şık olması gerekirken bazılarında 2-3 oluyor.
+ve bu şıkların sırası/isminde de sıkıntı oluyor. 
+Örneğin normalde A,B,C,D,E... şeklinde olması gerekirken B,C,D, yada C,E gibi atlayarak görünen eksik şıkla oluyor.
+bu tip durumların önüne geçebilmek için ilgili şıkka ait veri yoksa da, cevap şıkları bölümünde A,B,C,D,E şıklarının hepsi görünmeli.
+
+2. bir sorunun cevapları içerisinde "A. ~/bin" gibi bir seçenek var normalde. ancak parsing işlemini bunu elemiş göz ardı etmiş ki etmemeliydi.
+"D. /usr/local/bin" yada "C. /google/scripts" şeklinde ki şıklarda hiçbir sıkıntı yok.
+şıklarla ilgili parsing işlemi kısmını biraz daha kontrollü hale getir ki cevap şıklarını elemesin.
+
+
+
+
+# Case Study sayfasını daha işlevsel ve güzel hale getir.
+
+think
+
+1. "💡 This background information provides context for understanding and answering the question above." labelini sil.
+
+2. popup içerisinde tekrardan bir rectangle içerisinde contexti göstermeye gerek yok. 
+- Direkt olarak case study metnini açılan popup ın ortasında göster.
+- mümkün olduğunca scroll bar olmadan tüm içeriği görebilelim.
+
+3. kullanıcıların istediği gibi bu context üzerinde değişiklik, düzenleme yapabilmesi ve markdown editor içerisinde tüm içeriği göster ve değişiklik yapmaya izin ver.
+- değişiklik sonrasında ki güncel halini tekrar json dosyası içerisine yaz, güncelle.
+- burada güncelleme yaparken hata veriyordu onu da çöz.
+
+4. case study metninin daha kolay ve anlaşılır şekilde okunabilmesi için formatını güzelleştir.
+- "." işaretlerini "\n" olarak kabul edip bir satır aşağı indir.
+- hepsini sola hizalı
+- markdown a uygun şekilde bullet list olabilecek satırları ayarla (hepsini değil "-" yada "*" işareti olanları)
+- buradaki metinin boyutu oldukça uzun olabilir ona göre geniş tut alanı
+
+5. case study sadece metin olmayabilir, kullanıcı isterse resimde ekleyebilir.
+- ilgili yüklenen resim dosyasını da web_ui ın altında bir dizine kayıt edip, case study açıldığında o lokasyondaki resmi gösterecek şekilde ayarla.
+- resim ekleme, silme, değiştirme işlemleri yapılabilmeli.
+
+6. case study sayfasının açılmasını sağlayan butonun emoji/ikonunu değiştir.
+şu anda yuvarlak alanın arkaplan rengi ile emojinin rengi çok yakın olduğu için ayırt edilemiyor.
+
+7. case study modal/popup ın istenirse ayrıca bir sayfa olarak açılabilmesi içinde bir özellik ekle.
+böylelikle kullanıcı soruyu okuduğu browser tabı ile case study tabını yanyana açıp okuyabilmeli.
+
+
+
+# Exam Evaluation Results sayfasını daha doğru ve işlevsel hale getir.
+
+1. Indicator kutucuklarına tıklandığında ilgili soru setini göstermiyor, hiçbir aksiyon yapmıyor.
+- oysaki "Correct Answers" kısmına tıklandığında detaylı bir şekilde hangi soru olduğunun kısa metni, numarası, sayfa ve dosya bilgisi ile birlikte hızlıca ilgili soruya konumlanıp göstermeyi sağlayan bir buton olmalı en sağda.
+
+- "Wrong Answers" bölümünde ise yine benzer bilgilere ek olarak kullanıcının seçtiği cevap şıkları ile aslında sistemdeki doğru olan cevap şıklarının neler olduğunu renkli bir şekilde göstermeli.
+
+
+
+# Warnings sayfasında ki düzeltmeler.
+
+1. still does NOT show the errors, pdf file or page number links.
+
+2. also it does not show any warning, info, error about the upload PDF files proces which I had some issues or files are not uploaded to /data/inputs folder.
+
+3. it should be show application and web ui logs also in a scrollable long textbox to identify issues background.
+
+4. hata olan PDF dosyasını ve sayfasını görebilmek için bir link olmalı ve tıklanınca ilgili PDF sayfası açılabilmeli.
+
+5. yeni bir PDF yüklendiğinde yada Analyze süreci başlatıldığında buraya da loglar düşmeli.
+- işlem sonunda kaç tane soru parse edildi, edilemedi, hata alanlar, hiç aktarılamayanlar, şıkları yakalanamayan, commentler bulunamayan, AI tarafından işlenemeyen yada düzeltilemeyen gibi birçok warning, error, info logları detaylı şekilde görülebilmeli.
+
+
+
+# Config dosyaları ve uygulama ayarlarnın merkezileştirilmesi
+
+ultrathink
+
+şu anda uygulama dizininde onlarca farklı farklı config dizini, dosyası ve environment dosyası varmış gibi görünüyor ki böyle olmamalı ! aşağıdaki düzenlemeleri adım adım uygulayacak şekilde dikkatli bir plan yap.
+- project_config.json
+- claude_prompts.json
+- /config/api_config.json
+- /config/processing_config.json
+- /config/prompts.json
+- .env
+ 
+**ÇOK ÖNEMLİ** config ile ilgili değişiklikleri yaptıktan sonra uygulamanın çalışmasında, soru/cevapları parse edip işlemesinde, AI interpreter, comments, evaluation yada başka hiçbir ekran/modal/popup da **değişiklik olmaMAlı KESİNLİKLE**
+BUNA ÇOK DİKKAT ET ve uygulamanın oluşturduğu tüm sonuçların (questins_web_data.json, config files, index.html etc.) değişiklik öncesinde bir YEDEĞİNİ AL.
+
+Değişiklikleri yaptıktan sonra tüm pipeline'ı baştan sona çalıştırıp aynı sonuçları gördüğünden emin ol.
+Eğer bir sorunla karşılaşırsan da çöz.
+**AMA KESİNLİKLE** yeni bir kod, python script, yöntem yada metot oluşturma !
+
+1. credentials, api key vb. gibi bilgilerin tümü ".env" dosyası içerisinde olacak şekilde düzenle.
+
+2. ayrı ayrı olan tüm configleri tek bir merkezi examiner_config.json gibi bir dosyada topla.
+ilgili tüm python, js yada html scriptlerini bu yeni config dosyasına bakacak şekilde düzenle.
+
+3. python scriptleri içerisinde hardcoded olarak yazılmış onlarca Regex Pattern'ler mevcut.
+
+3a. Oysaki bunların hepsinin parametrik ve konfigüre edilebilir halde merkezi config dosyası içerisinde olması gerekiyor.
+şu anda sadece tek bir sınav için PDF dosyaları yüklenip onun içerisinde fix değerler parse ediliyor olsa dahil ileri de çok farklı sınavlara ait PDF'ler yüklenebilir.
+
+3b. Bu nedenle parse edilecek, question, answer, comment vb. gibi bileşenlerin ne şekilde hangi regex patternler bulunacağı config dosyası içerisinde belirtilebilmeli.
+
+3c. yine aynı şekilde ignore edilecek, temizlenip silinecek yada işlenmeyecek, ui da gösterilmeyecek metinler için regex patternler tanımlanabilmeli.
+
+bu sayede python scriptleri çok daha sade, jenerik olup içerisinde mümkün olduğunca hardcoded metinler bulundurmamalı.
+
+3d. ocr_corrections olarak kullanılan düzeltme işlemlerine ait patternlerde config içerisinde tutulmalı.
+
+Örneğin "Question #\\d+" regex patterni hem project_config.json, hem processing_config.json ve hemde  questions_parser.py scriptlerinin hepsinin içinde tekrar tekrar yazılmış ama hangisi kullanılıyor belli değil.
+bu karışıklığın ve tekrar eden yapının sadeleştirilmesi şart.
+
+
+
+
+
+
+

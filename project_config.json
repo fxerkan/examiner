@@ -1,0 +1,94 @@
+{
+  "project": {
+    "name": "ExamToopics Certification Exam Question Extractor",
+    "version": "1.0.0",
+    "description": "Extract, parse, and analyze Exam Topics Questions (for example: GCP Professional Cloud Architect certification exam) with LLM-powered analysis"
+  },
+  "paths": {
+    "input_directory": "./data/input",
+    "output_directory": "./data/output",
+    "processed_directory": "./data/processed",
+    "logs_directory": "./logs",
+    "config_directory": "./config"
+  },
+  "pdf_processing": {
+    "file_pattern": "Questions_*.pdf",
+    "batch_size": 3,
+    "overlap_pages": 1,
+    "encoding": "utf-8",
+    "ignore_elements": [
+      "page numbers",
+      "https://www.examtopics.com/exams/google/professional-cloud-architect/custom-view/",
+      "community usernames",
+      "logos and images",
+      "navigation elements"
+    ]
+  },
+  "question_parsing": {
+    "question_markers": [
+      "Question #\\d+",
+      "Topic \\d+"
+    ],
+    "option_patterns": [
+      "^[A-F]\\.",
+      "^[A-F]\\)",
+      "^[A-F]\\s+"
+    ],
+    "community_answer_indicators": [
+      "Selected Answer:",
+      "Highly Voted",
+      "Most Recent"
+    ],
+    "minimum_question_length": 50,
+    "maximum_options": 6
+  },
+  "text_enhancement": {
+    "fix_ocr_errors": true,
+    "correct_grammar": true,
+    "standardize_formatting": true,
+    "preserve_technical_terms": true,
+    "handle_page_breaks": true
+  },
+  "llm_integration": {
+    "provider": "claude",
+    "model": "claude-4-sonnet-20250219",
+    "api_key": "sk-ant-api03-4Ogw30F3XsLVnYvK1htgI6Awjp5DzVvqX7Y-qLA-J778ThN_n4qLf4zTzYogLW-6fdsoO-x_5m78_cy-wA-12ed8_2iEzNwAA",
+    "temperature": 0.1,
+    "max_tokens": 4000,
+    "timeout_seconds": 30,
+    "retry_attempts": 3,
+    "rate_limit_requests_per_minute": 50
+  },
+  "output_format": {
+    "file_type": "md",
+    "delimiter": "|",
+    "include_headers": true,
+    "columns": [
+      "Question No",
+      "Question Description",
+      "Answer Options",
+      "Community Answer",
+      "Highly Voted Answer",
+      "Most Recent Answer",
+      "Claude Answer",
+      "Latest Date",
+      "Topic",
+      "Page Number",
+      "Source"
+    ]
+  },
+  "quality_control": {
+    "minimum_confidence_score": 0.8,
+    "validate_question_structure": true,
+    "check_answer_completeness": true,
+    "verify_page_references": true,
+    "flag_duplicates": true
+  },
+  "logging": {
+    "level": "INFO",
+    "format": "%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+    "file": "examtopics_processor.log",
+    "max_file_size_mb": 100,
+    "backup_count": 5
+  }
+}

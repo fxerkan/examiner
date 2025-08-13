@@ -1,0 +1,1359 @@
+{
+  "metadata": {
+    "generated_at": "2025-08-12T00:09:22.105637",
+    "total_comments": 225,
+    "version": "2.1-smart-extraction"
+  },
+  "comments": [
+    {
+      "question_id": "Q1_1",
+      "content": "Selected Answer: D",
+      "page": 1,
+      "source": "Questions_1.pdf"
+    },
+    {
+      "question_id": "Q1_1",
+      "content": "https://www.examtop\"cs.com/exams/google/profess\"onal-cloud-arch\"tect/custom-v\"ew/ Sayfa 1 / 803",
+      "page": 1,
+      "source": "Questions_1.pdf"
+    },
+    {
+      "question_id": "Q5_2",
+      "content": "videos. Cloud Datastore is a NoSQL database (https://cloud.google.com/datastore/docs/concepts/overview)",
+      "page": 5,
+      "source": "Questions_1.pdf"
+    },
+    {
+      "question_id": "Q5_2",
+      "content": "https://www.examtop\"cs.com/exams/google/profess\"onal-cloud-arch\"tect/custom-v\"ew/ Sayfa 5 / 803",
+      "page": 5,
+      "source": "Questions_1.pdf"
+    },
+    {
+      "question_id": "Q8_3",
+      "content": "https://www.examtop\"cs.com/exams/google/profess\"onal-cloud-arch\"tect/custom-v\"ew/ Sayfa 8 / 803",
+      "page": 8,
+      "source": "Questions_1.pdf"
+    },
+    {
+      "question_id": "Q12_4",
+      "content": "https://www.examtop\"cs.com/exams/google/profess\"onal-cloud-arch\"tect/custom-v\"ew/ Sayfa 12 / 803",
+      "page": 12,
+      "source": "Questions_1.pdf"
+    },
+    {
+      "question_id": "Q15_5",
+      "content": "https://www.examtop\"cs.com/exams/google/profess\"onal-cloud-arch\"tect/custom-v\"ew/ Sayfa 15 / 803",
+      "page": 15,
+      "source": "Questions_1.pdf"
+    },
+    {
+      "question_id": "page_17",
+      "content": "Selected Answer: C",
+      "page": 17,
+      "source": "Questions_1.pdf"
+    },
+    {
+      "question_id": "page_17",
+      "content": "Selected Answer: A",
+      "page": 17,
+      "source": "Questions_1.pdf"
+    },
+    {
+      "question_id": "page_17",
+      "content": "Selected Answer: C",
+      "page": 17,
+      "source": "Questions_1.pdf"
+    },
+    {
+      "question_id": "page_17",
+      "content": "Selected Answer: C",
+      "page": 17,
+      "source": "Questions_1.pdf"
+    },
+    {
+      "question_id": "page_17",
+      "content": "https://www.examtop\"cs.com/exams/google/profess\"onal-cloud-arch\"tect/custom-v\"ew/ Sayfa 17 / 803",
+      "page": 17,
+      "source": "Questions_1.pdf"
+    },
+    {
+      "question_id": "Q19_6",
+      "content": "Selected Answer: BC",
+      "page": 19,
+      "source": "Questions_1.pdf"
+    },
+    {
+      "question_id": "Q19_6",
+      "content": "Selected Answer: AC",
+      "page": 19,
+      "source": "Questions_1.pdf"
+    },
+    {
+      "question_id": "Q19_6",
+      "content": "https://www.examtop\"cs.com/exams/google/profess\"onal-cloud-arch\"tect/custom-v\"ew/ Sayfa 19 / 803",
+      "page": 19,
+      "source": "Questions_1.pdf"
+    },
+    {
+      "question_id": "page_3",
+      "content": "https://www.examtop\"cs.com/exams/google/profess\"onal-cloud-arch\"tect/custom-v\"ew/ Sayfa 183 / 803",
+      "page": 3,
+      "source": "Questions_10.pdf"
+    },
+    {
+      "question_id": "page_6",
+      "content": "https://www.examtop\"cs.com/exams/google/profess\"onal-cloud-arch\"tect/custom-v\"ew/ Sayfa 186 / 803",
+      "page": 6,
+      "source": "Questions_10.pdf"
+    },
+    {
+      "question_id": "Q9_68",
+      "content": "Ref: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/",
+      "page": 9,
+      "source": "Questions_10.pdf"
+    },
+    {
+      "question_id": "Q9_68",
+      "content": "And in the document(https://cloud.google.com/iap/docs/concepts-overview), it says:",
+      "page": 9,
+      "source": "Questions_10.pdf"
+    },
+    {
+      "question_id": "Q9_68",
+      "content": "https://www.examtop\"cs.com/exams/google/profess\"onal-cloud-arch\"tect/custom-v\"ew/ Sayfa 189 / 803",
+      "page": 9,
+      "source": "Questions_10.pdf"
+    },
+    {
+      "question_id": "page_11",
+      "content": "https://www.examtop\"cs.com/exams/google/profess\"onal-cloud-arch\"tect/custom-v\"ew/ Sayfa 191 / 803",
+      "page": 11,
+      "source": "Questions_10.pdf"
+    },
+    {
+      "question_id": "page_14",
+      "content": "https://www.examtop\"cs.com/exams/google/profess\"onal-cloud-arch\"tect/custom-v\"ew/ Sayfa 194 / 803",
+      "page": 14,
+      "source": "Questions_10.pdf"
+    },
+    {
+      "question_id": "Q18_71",
+      "content": "Selected Answer: B",
+      "page": 18,
+      "source": "Questions_10.pdf"
+    },
+    {
+      "question_id": "Q18_71",
+      "content": "https://www.examtop\"cs.com/exams/google/profess\"onal-cloud-arch\"tect/custom-v\"ew/ Sayfa 198 / 803",
+      "page": 18,
+      "source": "Questions_10.pdf"
+    },
+    {
+      "question_id": "Q20_72",
+      "content": "https://www.examtop\"cs.com/exams/google/profess\"onal-cloud-arch\"tect/custom-v\"ew/ Sayfa 200 / 803",
+      "page": 20,
+      "source": "Questions_10.pdf"
+    },
+    {
+      "question_id": "Q2_73",
+      "content": "https://www.examtop\"cs.com/exams/google/profess\"onal-cloud-arch\"tect/custom-v\"ew/ Sayfa 202 / 803",
+      "page": 2,
+      "source": "Questions_11.pdf"
+    },
+    {
+      "question_id": "Q6_74",
+      "content": "https://www.examtop\"cs.com/exams/google/profess\"onal-cloud-arch\"tect/custom-v\"ew/ Sayfa 206 / 803",
+      "page": 6,
+      "source": "Questions_11.pdf"
+    },
+    {
+      "question_id": "Q8_75",
+      "content": "https://www.examtop\"cs.com/exams/google/profess\"onal-cloud-arch\"tect/custom-v\"ew/ Sayfa 208 / 803",
+      "page": 8,
+      "source": "Questions_11.pdf"
+    },
+    {
+      "question_id": "Q10_76",
+      "content": "https://www.examtop\"cs.com/exams/google/profess\"onal-cloud-arch\"tect/custom-v\"ew/ Sayfa 210 / 803",
+      "page": 10,
+      "source": "Questions_11.pdf"
+    },
+    {
+      "question_id": "Q13_77",
+      "content": "https://cloud.google.com/vpc/docs/vpc-peering",
+      "page": 13,
+      "source": "Questions_11.pdf"
+    },
+    {
+      "question_id": "Q13_77",
+      "content": "https://cloud.google.com/vpn/docs/how-to/creating-static-vpns",
+      "page": 13,
+      "source": "Questions_11.pdf"
+    },
+    {
+      "question_id": "Q13_77",
+      "content": "https://cloud.google.com/vpc/docs/vpc-peering#benefits_of_exchanging_custom_routes",
+      "page": 13,
+      "source": "Questions_11.pdf"
+    },
+    {
+      "question_id": "Q13_77",
+      "content": "https://cloud.google.com/vpc/docs/vpc-peering allows internal IP address connectivity across two VPC so A is not the answer as the on",
+      "page": 13,
+      "source": "Questions_11.pdf"
+    },
+    {
+      "question_id": "Q13_77",
+      "content": "https://www.examtop\"cs.com/exams/google/profess\"onal-cloud-arch\"tect/custom-v\"ew/ Sayfa 213 / 803",
+      "page": 13,
+      "source": "Questions_11.pdf"
+    },
+    {
+      "question_id": "Q16_78",
+      "content": "https://cloud.google.com/bigquery/docs/managing-tables#updating_a_tables_expiration_time",
+      "page": 16,
+      "source": "Questions_11.pdf"
+    },
+    {
+      "question_id": "Q16_78",
+      "content": "Selected Answer: B",
+      "page": 16,
+      "source": "Questions_11.pdf"
+    },
+    {
+      "question_id": "Q16_78",
+      "content": "Selected Answer: B",
+      "page": 16,
+      "source": "Questions_11.pdf"
+    },
+    {
+      "question_id": "Q16_78",
+      "content": "https://cloud.google.com/bigquery/docs/managing-partitioned-tables#partition-expiration",
+      "page": 16,
+      "source": "Questions_11.pdf"
+    },
+    {
+      "question_id": "Q16_78",
+      "content": "https://cloud.google.com/bigquery/docs/managing-partitioned-tables#partition-expiration",
+      "page": 16,
+      "source": "Questions_11.pdf"
+    },
+    {
+      "question_id": "Q16_78",
+      "content": "Selected Answer: B",
+      "page": 16,
+      "source": "Questions_11.pdf"
+    },
+    {
+      "question_id": "Q16_78",
+      "content": "https://www.examtop\"cs.com/exams/google/profess\"onal-cloud-arch\"tect/custom-v\"ew/ Sayfa 216 / 803",
+      "page": 16,
+      "source": "Questions_11.pdf"
+    },
+    {
+      "question_id": "Q18_79",
+      "content": "https://www.examtop\"cs.com/exams/google/profess\"onal-cloud-arch\"tect/custom-v\"ew/ Sayfa 218 / 803",
+      "page": 18,
+      "source": "Questions_11.pdf"
+    },
+    {
+      "question_id": "page_20",
+      "content": "https://www.examtop\"cs.com/exams/google/profess\"onal-cloud-arch\"tect/custom-v\"ew/ Sayfa 220 / 803",
+      "page": 20,
+      "source": "Questions_11.pdf"
+    },
+    {
+      "question_id": "page_6",
+      "content": "https://www.examtop\"cs.com/exams/google/profess\"onal-cloud-arch\"tect/custom-v\"ew/ Sayfa 226 / 803",
+      "page": 6,
+      "source": "Questions_12.pdf"
+    },
+    {
+      "question_id": "Q9_83",
+      "content": "https://cloud.google.com/logging/docs/audit",
+      "page": 9,
+      "source": "Questions_12.pdf"
+    },
+    {
+      "question_id": "Q9_83",
+      "content": "https://cloud.google.com/bigquery/docs/reference/auditlogs#ids",
+      "page": 9,
+      "source": "Questions_12.pdf"
+    },
+    {
+      "question_id": "Q9_83",
+      "content": "https://cloud.google.com/bigquery/docs/reference/auditlogs#auditdata_examples",
+      "page": 9,
+      "source": "Questions_12.pdf"
+    },
+    {
+      "question_id": "Q9_83",
+      "content": "https://www.examtop\"cs.com/exams/google/profess\"onal-cloud-arch\"tect/custom-v\"ew/ Sayfa 229 / 803",
+      "page": 9,
+      "source": "Questions_12.pdf"
+    },
+    {
+      "question_id": "Q12_84",
+      "content": "https://www.examtop\"cs.com/exams/google/profess\"onal-cloud-arch\"tect/custom-v\"ew/ Sayfa 232 / 803",
+      "page": 12,
+      "source": "Questions_12.pdf"
+    },
+    {
+      "question_id": "Q15_85",
+      "content": "https://cloud.google.com/bigquery/docs/access-control#bigquery.dataViewer",
+      "page": 15,
+      "source": "Questions_12.pdf"
+    },
+    {
+      "question_id": "Q15_85",
+      "content": "https://cloud.google.com/bigquery/docs/access-control#bigquery.jobUser",
+      "page": 15,
+      "source": "Questions_12.pdf"
+    },
+    {
+      "question_id": "Q15_85",
+      "content": "https://www.examtop\"cs.com/exams/google/profess\"onal-cloud-arch\"tect/custom-v\"ew/ Sayfa 235 / 803",
+      "page": 15,
+      "source": "Questions_12.pdf"
+    },
+    {
+      "question_id": "page_16",
+      "content": "Selected Answer: A",
+      "page": 16,
+      "source": "Questions_12.pdf"
+    },
+    {
+      "question_id": "page_16",
+      "content": "https://www.examtop\"cs.com/exams/google/profess\"onal-cloud-arch\"tect/custom-v\"ew/ Sayfa 236 / 803",
+      "page": 16,
+      "source": "Questions_12.pdf"
+    },
+    {
+      "question_id": "Q19_86",
+      "content": "- Storing other type of data is easy but most comments were about boot volume.",
+      "page": 19,
+      "source": "Questions_12.pdf"
+    },
+    {
+      "question_id": "Q19_86",
+      "content": "- Boot volume can be stored to Cloud Storage by creating an Custom Image.",
+      "page": 19,
+      "source": "Questions_12.pdf"
+    },
+    {
+      "question_id": "Q19_86",
+      "content": "https://cloud.google.com/compute/docs/images/create-delete-deprecate-private-images#selecting_image_storage_location",
+      "page": 19,
+      "source": "Questions_12.pdf"
+    },
+    {
+      "question_id": "Q19_86",
+      "content": "---- Upvote if agree for the clarification of others ----",
+      "page": 19,
+      "source": "Questions_12.pdf"
+    },
+    {
+      "question_id": "Q19_86",
+      "content": "Doc ref: https://cloud.google.com/compute/docs/images/export-image",
+      "page": 19,
+      "source": "Questions_12.pdf"
+    },
+    {
+      "question_id": "Q19_86",
+      "content": "https://cloud.google.com/architecture/partners/netapp-cloud-volumes/back-up",
+      "page": 19,
+      "source": "Questions_12.pdf"
+    },
+    {
+      "question_id": "Q19_86",
+      "content": "https://www.examtop\"cs.com/exams/google/profess\"onal-cloud-arch\"tect/custom-v\"ew/ Sayfa 239 / 803",
+      "page": 19,
+      "source": "Questions_12.pdf"
+    },
+    {
+      "question_id": "page_2",
+      "content": "https://www.examtop\"cs.com/exams/google/profess\"onal-cloud-arch\"tect/custom-v\"ew/ Sayfa 242 / 803",
+      "page": 2,
+      "source": "Questions_13.pdf"
+    },
+    {
+      "question_id": "Q5_88",
+      "content": "https://cloud.google.com/cdn/docs/caching#cache-keys",
+      "page": 5,
+      "source": "Questions_13.pdf"
+    },
+    {
+      "question_id": "Q5_88",
+      "content": "https://cloud.google.com/cdn/docs/best-practices#cache-hit-ratio",
+      "page": 5,
+      "source": "Questions_13.pdf"
+    },
+    {
+      "question_id": "Q5_88",
+      "content": "https://www.examtop\"cs.com/exams/google/profess\"onal-cloud-arch\"tect/custom-v\"ew/ Sayfa 245 / 803",
+      "page": 5,
+      "source": "Questions_13.pdf"
+    },
+    {
+      "question_id": "page_7",
+      "content": "https://www.examtop\"cs.com/exams/google/profess\"onal-cloud-arch\"tect/custom-v\"ew/ Sayfa 247 / 803",
+      "page": 7,
+      "source": "Questions_13.pdf"
+    },
+    {
+      "question_id": "Q10_90",
+      "content": "https://www.examtop\"cs.com/exams/google/profess\"onal-cloud-arch\"tect/custom-v\"ew/ Sayfa 250 / 803",
+      "page": 10,
+      "source": "Questions_13.pdf"
+    },
+    {
+      "question_id": "Q12_91",
+      "content": "https://www.examtop\"cs.com/exams/google/profess\"onal-cloud-arch\"tect/custom-v\"ew/ Sayfa 252 / 803",
+      "page": 12,
+      "source": "Questions_13.pdf"
+    },
+    {
+      "question_id": "Q17_93",
+      "content": "https://www.examtop\"cs.com/exams/google/profess\"onal-cloud-arch\"tect/custom-v\"ew/ Sayfa 257 / 803",
+      "page": 17,
+      "source": "Questions_13.pdf"
+    },
+    {
+      "question_id": "Q20_94",
+      "content": "https://cloud.google.com/load-balancing/docs/ssl/#FAQ",
+      "page": 20,
+      "source": "Questions_13.pdf"
+    },
+    {
+      "question_id": "Q20_94",
+      "content": "https://www.examtop\"cs.com/exams/google/profess\"onal-cloud-arch\"tect/custom-v\"ew/ Sayfa 260 / 803",
+      "page": 20,
+      "source": "Questions_13.pdf"
+    },
+    {
+      "question_id": "Q3_95",
+      "content": "D. Monitor https://status.cloud.google.com/feed.atom and only make requests if Cloud Storage is not reporting an incident.",
+      "page": 3,
+      "source": "Questions_14.pdf"
+    },
+    {
+      "question_id": "Q3_95",
+      "content": "https://cloud.google.com/storage/docs/request-rate",
+      "page": 3,
+      "source": "Questions_14.pdf"
+    },
+    {
+      "question_id": "Q3_95",
+      "content": "https://www.examtop\"cs.com/exams/google/profess\"onal-cloud-arch\"tect/custom-v\"ew/ Sayfa 263 / 803",
+      "page": 3,
+      "source": "Questions_14.pdf"
+    },
+    {
+      "question_id": "page_5",
+      "content": "https://www.examtop\"cs.com/exams/google/profess\"onal-cloud-arch\"tect/custom-v\"ew/ Sayfa 265 / 803",
+      "page": 5,
+      "source": "Questions_14.pdf"
+    },
+    {
+      "question_id": "page_7",
+      "content": "https://www.examtop\"cs.com/exams/google/profess\"onal-cloud-arch\"tect/custom-v\"ew/ Sayfa 267 / 803",
+      "page": 7,
+      "source": "Questions_14.pdf"
+    },
+    {
+      "question_id": "Q10_98",
+      "content": "Selected Answer: B",
+      "page": 10,
+      "source": "Questions_14.pdf"
+    },
+    {
+      "question_id": "Q10_98",
+      "content": "https://www.examtop\"cs.com/exams/google/profess\"onal-cloud-arch\"tect/custom-v\"ew/ Sayfa 270 / 803",
+      "page": 10,
+      "source": "Questions_14.pdf"
+    },
+    {
+      "question_id": "Q12_99",
+      "content": "https://cloud.google.com/appengine/docs/standard/php/memcache/using",
+      "page": 12,
+      "source": "Questions_14.pdf"
+    },
+    {
+      "question_id": "Q12_99",
+      "content": "https://cloud.google.com/memorystore/docs/redis/redis-overview",
+      "page": 12,
+      "source": "Questions_14.pdf"
+    },
+    {
+      "question_id": "Q12_99",
+      "content": "Selected Answer: A",
+      "page": 12,
+      "source": "Questions_14.pdf"
+    },
+    {
+      "question_id": "Q12_99",
+      "content": "https://www.examtop\"cs.com/exams/google/profess\"onal-cloud-arch\"tect/custom-v\"ew/ Sayfa 272 / 803",
+      "page": 12,
+      "source": "Questions_14.pdf"
+    },
+    {
+      "question_id": "Q14_100",
+      "content": "B is correct. More appropriately: https://cloud.google.com/solutions/reliable-task-scheduling-compute-engine",
+      "page": 14,
+      "source": "Questions_14.pdf"
+    },
+    {
+      "question_id": "Q14_100",
+      "content": "https://cloud.google.com/solutions/reliable-task-scheduling-compute-engine#schedule-compute-engine",
+      "page": 14,
+      "source": "Questions_14.pdf"
+    },
+    {
+      "question_id": "Q14_100",
+      "content": "Selected Answer: B",
+      "page": 14,
+      "source": "Questions_14.pdf"
+    },
+    {
+      "question_id": "Q14_100",
+      "content": "Selected Answer: B",
+      "page": 14,
+      "source": "Questions_14.pdf"
+    },
+    {
+      "question_id": "Q14_100",
+      "content": "https://cloud.google.com/scheduler/?gad_source=1&gclsrc=ds&gclsrc=ds",
+      "page": 14,
+      "source": "Questions_14.pdf"
+    },
+    {
+      "question_id": "Q14_100",
+      "content": "Selected Answer: B",
+      "page": 14,
+      "source": "Questions_14.pdf"
+    },
+    {
+      "question_id": "Q14_100",
+      "content": "https://cloud.google.com/blog/products/gcp/reliable-task-scheduling-on-google-compute-engine",
+      "page": 14,
+      "source": "Questions_14.pdf"
+    },
+    {
+      "question_id": "Q14_100",
+      "content": "https://www.examtop\"cs.com/exams/google/profess\"onal-cloud-arch\"tect/custom-v\"ew/ Sayfa 274 / 803",
+      "page": 14,
+      "source": "Questions_14.pdf"
+    },
+    {
+      "question_id": "Q16_101",
+      "content": "https://www.examtop\"cs.com/exams/google/profess\"onal-cloud-arch\"tect/custom-v\"ew/ Sayfa 276 / 803",
+      "page": 16,
+      "source": "Questions_14.pdf"
+    },
+    {
+      "question_id": "Q19_102",
+      "content": "with buffering, often using Dataflow.\" https://cloud.google.com/solutions/data-lifecycle-cloud-platform",
+      "page": 19,
+      "source": "Questions_14.pdf"
+    },
+    {
+      "question_id": "Q19_102",
+      "content": "https://www.examtop\"cs.com/exams/google/profess\"onal-cloud-arch\"tect/custom-v\"ew/ Sayfa 279 / 803",
+      "page": 19,
+      "source": "Questions_14.pdf"
+    },
+    {
+      "question_id": "Q2_103",
+      "content": "https://cloud.google.com/migrate/compute-engine/docs/4.5/how-to/migrate-on-premises-to-gcp/overview",
+      "page": 2,
+      "source": "Questions_15.pdf"
+    },
+    {
+      "question_id": "Q2_103",
+      "content": "Selected Answer: C",
+      "page": 2,
+      "source": "Questions_15.pdf"
+    },
+    {
+      "question_id": "Q2_103",
+      "content": "Selected Answer: C",
+      "page": 2,
+      "source": "Questions_15.pdf"
+    },
+    {
+      "question_id": "Q2_103",
+      "content": "Selected Answer: C",
+      "page": 2,
+      "source": "Questions_15.pdf"
+    },
+    {
+      "question_id": "Q2_103",
+      "content": "https://cloud.google.com/migrate/compute-engine/docs/4.11/how-to/migrate-on-premises-to-gcp/overview",
+      "page": 2,
+      "source": "Questions_15.pdf"
+    },
+    {
+      "question_id": "Q2_103",
+      "content": "https://www.examtop\"cs.com/exams/google/profess\"onal-cloud-arch\"tect/custom-v\"ew/ Sayfa 282 / 803",
+      "page": 2,
+      "source": "Questions_15.pdf"
+    },
+    {
+      "question_id": "Q4_104",
+      "content": "https://www.examtop\"cs.com/exams/google/profess\"onal-cloud-arch\"tect/custom-v\"ew/ Sayfa 284 / 803",
+      "page": 4,
+      "source": "Questions_15.pdf"
+    },
+    {
+      "question_id": "Q7_105",
+      "content": "Selected Answer: D",
+      "page": 7,
+      "source": "Questions_15.pdf"
+    },
+    {
+      "question_id": "Q7_105",
+      "content": "Selected Answer: D",
+      "page": 7,
+      "source": "Questions_15.pdf"
+    },
+    {
+      "question_id": "Q7_105",
+      "content": "Selected Answer: D",
+      "page": 7,
+      "source": "Questions_15.pdf"
+    },
+    {
+      "question_id": "Q7_105",
+      "content": "Selected Answer: D",
+      "page": 7,
+      "source": "Questions_15.pdf"
+    },
+    {
+      "question_id": "Q7_105",
+      "content": "https://www.examtop\"cs.com/exams/google/profess\"onal-cloud-arch\"tect/custom-v\"ew/ Sayfa 287 / 803",
+      "page": 7,
+      "source": "Questions_15.pdf"
+    },
+    {
+      "question_id": "page_9",
+      "content": "https://www.examtop\"cs.com/exams/google/profess\"onal-cloud-arch\"tect/custom-v\"ew/ Sayfa 289 / 803",
+      "page": 9,
+      "source": "Questions_15.pdf"
+    },
+    {
+      "question_id": "Q12_107",
+      "content": "https://www.examtop\"cs.com/exams/google/profess\"onal-cloud-arch\"tect/custom-v\"ew/ Sayfa 292 / 803",
+      "page": 12,
+      "source": "Questions_15.pdf"
+    },
+    {
+      "question_id": "Q14_108",
+      "content": "https://www.examtop\"cs.com/exams/google/profess\"onal-cloud-arch\"tect/custom-v\"ew/ Sayfa 294 / 803",
+      "page": 14,
+      "source": "Questions_15.pdf"
+    },
+    {
+      "question_id": "Q18_109",
+      "content": "Selected Answer: CD",
+      "page": 18,
+      "source": "Questions_15.pdf"
+    },
+    {
+      "question_id": "page_18",
+      "content": "detectors to specifically scan for those entries and how to act upon them (link https://cloud.google.com/dlp/docs/concepts-infotypes)",
+      "page": 18,
+      "source": "Questions_15.pdf"
+    },
+    {
+      "question_id": "page_18",
+      "content": "https://www.examtop\"cs.com/exams/google/profess\"onal-cloud-arch\"tect/custom-v\"ew/ Sayfa 298 / 803",
+      "page": 18,
+      "source": "Questions_15.pdf"
+    },
+    {
+      "question_id": "Q1_110",
+      "content": "https://cloud.google.com/appengine/docs/standard/php/service-account",
+      "page": 1,
+      "source": "Questions_16.pdf"
+    },
+    {
+      "question_id": "Q1_110",
+      "content": "Selected Answer: A",
+      "page": 1,
+      "source": "Questions_16.pdf"
+    },
+    {
+      "question_id": "Q1_110",
+      "content": "Selected Answer: A",
+      "page": 1,
+      "source": "Questions_16.pdf"
+    },
+    {
+      "question_id": "Q1_110",
+      "content": "https://www.examtop\"cs.com/exams/google/profess\"onal-cloud-arch\"tect/custom-v\"ew/ Sayfa 301 / 803",
+      "page": 1,
+      "source": "Questions_16.pdf"
+    },
+    {
+      "question_id": "Q3_111",
+      "content": "https://cloud.google.com/blog/products/it-ops/best-practices-for-optimizing-your-cloud-costs",
+      "page": 3,
+      "source": "Questions_16.pdf"
+    },
+    {
+      "question_id": "Q3_111",
+      "content": "https://cloud.google.com/blog/products/storage-data-transfer/save-money-by-stopping-and-starting-compute-engine-instances-on-schedule",
+      "page": 3,
+      "source": "Questions_16.pdf"
+    },
+    {
+      "question_id": "page_3",
+      "content": "https://www.examtop\"cs.com/exams/google/profess\"onal-cloud-arch\"tect/custom-v\"ew/ Sayfa 303 / 803",
+      "page": 3,
+      "source": "Questions_16.pdf"
+    },
+    {
+      "question_id": "page_5",
+      "content": "https://www.examtop\"cs.com/exams/google/profess\"onal-cloud-arch\"tect/custom-v\"ew/ Sayfa 305 / 803",
+      "page": 5,
+      "source": "Questions_16.pdf"
+    },
+    {
+      "question_id": "Q8_113",
+      "content": "Ans - D, https://cloud.google.com/compute/docs/ip-addresses/reserve-static-external-ip-address#disableexternalip",
+      "page": 8,
+      "source": "Questions_16.pdf"
+    },
+    {
+      "question_id": "Q8_113",
+      "content": "Selected Answer: D",
+      "page": 8,
+      "source": "Questions_16.pdf"
+    },
+    {
+      "question_id": "Q8_113",
+      "content": "https://cloud.google.com/compute/docs/ip-addresses/configure-static-external-ip-address#disableexternalip",
+      "page": 8,
+      "source": "Questions_16.pdf"
+    },
+    {
+      "question_id": "Q8_113",
+      "content": "https://cloud.google.com/compute/docs/ip-addresses/reserve-static-external-ip-address#disableexternalip",
+      "page": 8,
+      "source": "Questions_16.pdf"
+    },
+    {
+      "question_id": "Q8_113",
+      "content": "https://www.examtop\"cs.com/exams/google/profess\"onal-cloud-arch\"tect/custom-v\"ew/ Sayfa 308 / 803",
+      "page": 8,
+      "source": "Questions_16.pdf"
+    },
+    {
+      "question_id": "Q10_114",
+      "content": "https://cloud.google.com/network-intelligence-center/docs/firewall-insights/how-to/using-firewall-insights#enabling-fw-rules-logging",
+      "page": 10,
+      "source": "Questions_16.pdf"
+    },
+    {
+      "question_id": "Q10_114",
+      "content": "Selected Answer: B",
+      "page": 10,
+      "source": "Questions_16.pdf"
+    },
+    {
+      "question_id": "Q10_114",
+      "content": "Selected Answer: B",
+      "page": 10,
+      "source": "Questions_16.pdf"
+    },
+    {
+      "question_id": "Q10_114",
+      "content": "https://cloud.google.com/vpc/docs/firewall-rules-logging",
+      "page": 10,
+      "source": "Questions_16.pdf"
+    },
+    {
+      "question_id": "Q10_114",
+      "content": "Selected Answer: B",
+      "page": 10,
+      "source": "Questions_16.pdf"
+    },
+    {
+      "question_id": "Q10_114",
+      "content": "https://cloud.google.com/vpc/docs/firewall-rules-logging",
+      "page": 10,
+      "source": "Questions_16.pdf"
+    },
+    {
+      "question_id": "Q10_114",
+      "content": "https://www.examtop\"cs.com/exams/google/profess\"onal-cloud-arch\"tect/custom-v\"ew/ Sayfa 310 / 803",
+      "page": 10,
+      "source": "Questions_16.pdf"
+    },
+    {
+      "question_id": "page_11",
+      "content": "https://www.examtop\"cs.com/exams/google/profess\"onal-cloud-arch\"tect/custom-v\"ew/ Sayfa 311 / 803",
+      "page": 11,
+      "source": "Questions_16.pdf"
+    },
+    {
+      "question_id": "Q14_116",
+      "content": "see: https://cloud.google.com/compute/docs/instance-groups/rolling-out-updates-to-managed-instance-groups",
+      "page": 14,
+      "source": "Questions_16.pdf"
+    },
+    {
+      "question_id": "Q14_116",
+      "content": "https://www.examtop\"cs.com/exams/google/profess\"onal-cloud-arch\"tect/custom-v\"ew/ Sayfa 314 / 803",
+      "page": 14,
+      "source": "Questions_16.pdf"
+    },
+    {
+      "question_id": "Q17_117",
+      "content": "Selected Answer: C",
+      "page": 17,
+      "source": "Questions_16.pdf"
+    },
+    {
+      "question_id": "Q17_117",
+      "content": "https://cloud.google.com/compute/docs/disks/high-availability-regional-persistent-disk",
+      "page": 17,
+      "source": "Questions_16.pdf"
+    },
+    {
+      "question_id": "Q17_117",
+      "content": "Selected Answer: B",
+      "page": 17,
+      "source": "Questions_16.pdf"
+    },
+    {
+      "question_id": "Q17_117",
+      "content": "Selected Answer: B",
+      "page": 17,
+      "source": "Questions_16.pdf"
+    },
+    {
+      "question_id": "Q17_117",
+      "content": "https://www.examtop\"cs.com/exams/google/profess\"onal-cloud-arch\"tect/custom-v\"ew/ Sayfa 317 / 803",
+      "page": 17,
+      "source": "Questions_16.pdf"
+    },
+    {
+      "question_id": "Q19_118",
+      "content": "- IP Should not overlap so applying new IP address is the solution",
+      "page": 19,
+      "source": "Questions_16.pdf"
+    },
+    {
+      "question_id": "Q19_118",
+      "content": "https://www.examtop\"cs.com/exams/google/profess\"onal-cloud-arch\"tect/custom-v\"ew/ Sayfa 319 / 803",
+      "page": 19,
+      "source": "Questions_16.pdf"
+    },
+    {
+      "question_id": "page_20",
+      "content": "https://cloud.google.com/nat/docs/overview#private-nat",
+      "page": 20,
+      "source": "Questions_16.pdf"
+    },
+    {
+      "question_id": "page_20",
+      "content": "You can't use Cloud NAT according to this documentation: https://cloud.google.com/nat/docs/troubleshooting#overlapping-ip-addresses",
+      "page": 20,
+      "source": "Questions_16.pdf"
+    },
+    {
+      "question_id": "page_20",
+      "content": "Selected Answer: B",
+      "page": 20,
+      "source": "Questions_16.pdf"
+    },
+    {
+      "question_id": "page_20",
+      "content": "https://www.examtop\"cs.com/exams/google/profess\"onal-cloud-arch\"tect/custom-v\"ew/ Sayfa 320 / 803",
+      "page": 20,
+      "source": "Questions_16.pdf"
+    },
+    {
+      "question_id": "page_1",
+      "content": "https://www.examtop\"cs.com/exams/google/profess\"onal-cloud-arch\"tect/custom-v\"ew/ Sayfa 21 / 803",
+      "page": 1,
+      "source": "Questions_2.pdf"
+    },
+    {
+      "question_id": "page_3",
+      "content": "https://www.examtop\"cs.com/exams/google/profess\"onal-cloud-arch\"tect/custom-v\"ew/ Sayfa 23 / 803",
+      "page": 3,
+      "source": "Questions_2.pdf"
+    },
+    {
+      "question_id": "Q6_9",
+      "content": "https://www.examtop\"cs.com/exams/google/profess\"onal-cloud-arch\"tect/custom-v\"ew/ Sayfa 26 / 803",
+      "page": 6,
+      "source": "Questions_2.pdf"
+    },
+    {
+      "question_id": "Q8_10",
+      "content": "B - https://cloud.google.com/bigquery/docs/authorization an access scope is how your client application retrieve access_token with access",
+      "page": 8,
+      "source": "Questions_2.pdf"
+    },
+    {
+      "question_id": "Q8_10",
+      "content": "https://cloud.google.com/compute/docs/access/service-accounts . So , I would go with C",
+      "page": 8,
+      "source": "Questions_2.pdf"
+    },
+    {
+      "question_id": "Q8_10",
+      "content": "https://www.examtop\"cs.com/exams/google/profess\"onal-cloud-arch\"tect/custom-v\"ew/ Sayfa 28 / 803",
+      "page": 8,
+      "source": "Questions_2.pdf"
+    },
+    {
+      "question_id": "page_17",
+      "content": "https://www.examtop\"cs.com/exams/google/profess\"onal-cloud-arch\"tect/custom-v\"ew/ Sayfa 37 / 803",
+      "page": 17,
+      "source": "Questions_2.pdf"
+    },
+    {
+      "question_id": "Q20_14",
+      "content": "https://www.examtop\"cs.com/exams/google/profess\"onal-cloud-arch\"tect/custom-v\"ew/ Sayfa 40 / 803",
+      "page": 20,
+      "source": "Questions_2.pdf"
+    },
+    {
+      "question_id": "page_1",
+      "content": "Selected Answer: A",
+      "page": 1,
+      "source": "Questions_3.pdf"
+    },
+    {
+      "question_id": "page_1",
+      "content": "According to the right url, A is the right answer. https://cloud.google.com/compute/docs/disks/resize-persistent-disk",
+      "page": 1,
+      "source": "Questions_3.pdf"
+    },
+    {
+      "question_id": "page_1",
+      "content": "The right URL for the oficial document is, https://cloud.google.com/compute/docs/disks/resize-persistent-disk",
+      "page": 1,
+      "source": "Questions_3.pdf"
+    },
+    {
+      "question_id": "page_1",
+      "content": "https://www.examtop\"cs.com/exams/google/profess\"onal-cloud-arch\"tect/custom-v\"ew/ Sayfa 41 / 803",
+      "page": 1,
+      "source": "Questions_3.pdf"
+    },
+    {
+      "question_id": "page_2",
+      "content": "https://www.examtop\"cs.com/exams/google/profess\"onal-cloud-arch\"tect/custom-v\"ew/ Sayfa 42 / 803",
+      "page": 2,
+      "source": "Questions_3.pdf"
+    },
+    {
+      "question_id": "Q5_16",
+      "content": "https://www.examtop\"cs.com/exams/google/profess\"onal-cloud-arch\"tect/custom-v\"ew/ Sayfa 45 / 803",
+      "page": 5,
+      "source": "Questions_3.pdf"
+    },
+    {
+      "question_id": "Q7_17",
+      "content": "https://www.examtop\"cs.com/exams/google/profess\"onal-cloud-arch\"tect/custom-v\"ew/ Sayfa 47 / 803",
+      "page": 7,
+      "source": "Questions_3.pdf"
+    },
+    {
+      "question_id": "page_9",
+      "content": "https://www.examtop\"cs.com/exams/google/profess\"onal-cloud-arch\"tect/custom-v\"ew/ Sayfa 49 / 803",
+      "page": 9,
+      "source": "Questions_3.pdf"
+    },
+    {
+      "question_id": "Q12_19",
+      "content": "https://www.examtop\"cs.com/exams/google/profess\"onal-cloud-arch\"tect/custom-v\"ew/ Sayfa 52 / 803",
+      "page": 12,
+      "source": "Questions_3.pdf"
+    },
+    {
+      "question_id": "Q14_20",
+      "content": "Selected Answer: D",
+      "page": 14,
+      "source": "Questions_3.pdf"
+    },
+    {
+      "question_id": "Q14_20",
+      "content": "https://www.examtop\"cs.com/exams/google/profess\"onal-cloud-arch\"tect/custom-v\"ew/ Sayfa 54 / 803",
+      "page": 14,
+      "source": "Questions_3.pdf"
+    },
+    {
+      "question_id": "Q16_21",
+      "content": "https://www.examtop\"cs.com/exams/google/profess\"onal-cloud-arch\"tect/custom-v\"ew/ Sayfa 56 / 803",
+      "page": 16,
+      "source": "Questions_3.pdf"
+    },
+    {
+      "question_id": "page_19",
+      "content": "https://www.examtop\"cs.com/exams/google/profess\"onal-cloud-arch\"tect/custom-v\"ew/ Sayfa 59 / 803",
+      "page": 19,
+      "source": "Questions_3.pdf"
+    },
+    {
+      "question_id": "page_3",
+      "content": "- MySQL - user data, inventory, static data",
+      "page": 3,
+      "source": "Questions_39.pdf"
+    },
+    {
+      "question_id": "page_3",
+      "content": "- Redis - metadata, social graph, caching",
+      "page": 3,
+      "source": "Questions_39.pdf"
+    },
+    {
+      "question_id": "page_3",
+      "content": "- Tomcat - Java micro-services",
+      "page": 3,
+      "source": "Questions_39.pdf"
+    },
+    {
+      "question_id": "page_3",
+      "content": "- Nginx - static content",
+      "page": 3,
+      "source": "Questions_39.pdf"
+    },
+    {
+      "question_id": "page_3",
+      "content": "- Apache Beam - Batch processing",
+      "page": 3,
+      "source": "Questions_39.pdf"
+    },
+    {
+      "question_id": "page_3",
+      "content": "- iSCSI for VM hosts",
+      "page": 3,
+      "source": "Questions_39.pdf"
+    },
+    {
+      "question_id": "page_3",
+      "content": "- Fiber channel SAN - MySQL databases",
+      "page": 3,
+      "source": "Questions_39.pdf"
+    },
+    {
+      "question_id": "page_3",
+      "content": "- NAS - image storage, logs, backups",
+      "page": 3,
+      "source": "Questions_39.pdf"
+    },
+    {
+      "question_id": "page_3",
+      "content": "- Data analysis",
+      "page": 3,
+      "source": "Questions_39.pdf"
+    },
+    {
+      "question_id": "page_3",
+      "content": "- Real-time trending calculations",
+      "page": 3,
+      "source": "Questions_39.pdf"
+    },
+    {
+      "question_id": "page_3",
+      "content": "- Messaging",
+      "page": 3,
+      "source": "Questions_39.pdf"
+    },
+    {
+      "question_id": "page_3",
+      "content": "- Social notiKcations",
+      "page": 3,
+      "source": "Questions_39.pdf"
+    },
+    {
+      "question_id": "page_3",
+      "content": "- Events",
+      "page": 3,
+      "source": "Questions_39.pdf"
+    },
+    {
+      "question_id": "page_3",
+      "content": "- Jenkins, monitoring, bastion hosts, security scanners",
+      "page": 3,
+      "source": "Questions_39.pdf"
+    },
+    {
+      "question_id": "page_3",
+      "content": "https://www.examtop\"cs.com/exams/google/profess\"onal-cloud-arch\"tect/custom-v\"ew/ Sayfa 763 / 803",
+      "page": 3,
+      "source": "Questions_39.pdf"
+    },
+    {
+      "question_id": "page_6",
+      "content": "https://www.examtop\"cs.com/exams/google/profess\"onal-cloud-arch\"tect/custom-v\"ew/ Sayfa 766 / 803",
+      "page": 6,
+      "source": "Questions_39.pdf"
+    },
+    {
+      "question_id": "page_9",
+      "content": "https://www.examtop\"cs.com/exams/google/profess\"onal-cloud-arch\"tect/custom-v\"ew/ Sayfa 769 / 803",
+      "page": 9,
+      "source": "Questions_39.pdf"
+    },
+    {
+      "question_id": "page_12",
+      "content": "Selected Answer: B",
+      "page": 12,
+      "source": "Questions_39.pdf"
+    },
+    {
+      "question_id": "page_12",
+      "content": "https://cloud.google.com/architecture/building-production-ready-data-pipelines-using-dataflow-developing-and-testing#end-to-end_tests",
+      "page": 12,
+      "source": "Questions_39.pdf"
+    },
+    {
+      "question_id": "page_12",
+      "content": "Selected Answer: B",
+      "page": 12,
+      "source": "Questions_39.pdf"
+    },
+    {
+      "question_id": "page_12",
+      "content": "https://www.examtop\"cs.com/exams/google/profess\"onal-cloud-arch\"tect/custom-v\"ew/ Sayfa 772 / 803",
+      "page": 12,
+      "source": "Questions_39.pdf"
+    },
+    {
+      "question_id": "page_13",
+      "content": "https://www.examtop\"cs.com/exams/google/profess\"onal-cloud-arch\"tect/custom-v\"ew/ Sayfa 773 / 803",
+      "page": 13,
+      "source": "Questions_39.pdf"
+    },
+    {
+      "question_id": "page_17",
+      "content": "- MySQL - user data, inventory, static data",
+      "page": 17,
+      "source": "Questions_39.pdf"
+    },
+    {
+      "question_id": "page_17",
+      "content": "- Redis - metadata, social graph, caching",
+      "page": 17,
+      "source": "Questions_39.pdf"
+    },
+    {
+      "question_id": "page_17",
+      "content": "- Tomcat - Java micro-services",
+      "page": 17,
+      "source": "Questions_39.pdf"
+    },
+    {
+      "question_id": "page_17",
+      "content": "- Nginx - static content",
+      "page": 17,
+      "source": "Questions_39.pdf"
+    },
+    {
+      "question_id": "page_17",
+      "content": "- Apache Beam - Batch processing",
+      "page": 17,
+      "source": "Questions_39.pdf"
+    },
+    {
+      "question_id": "page_17",
+      "content": "- iSCSI for VM hosts",
+      "page": 17,
+      "source": "Questions_39.pdf"
+    },
+    {
+      "question_id": "page_17",
+      "content": "- Fiber channel SAN - MySQL databases",
+      "page": 17,
+      "source": "Questions_39.pdf"
+    },
+    {
+      "question_id": "page_17",
+      "content": "- NAS - image storage, logs, backups",
+      "page": 17,
+      "source": "Questions_39.pdf"
+    },
+    {
+      "question_id": "page_17",
+      "content": "- Data analysis",
+      "page": 17,
+      "source": "Questions_39.pdf"
+    },
+    {
+      "question_id": "page_17",
+      "content": "- Real-time trending calculations",
+      "page": 17,
+      "source": "Questions_39.pdf"
+    },
+    {
+      "question_id": "page_17",
+      "content": "- Messaging",
+      "page": 17,
+      "source": "Questions_39.pdf"
+    },
+    {
+      "question_id": "page_17",
+      "content": "- Social notiKcations",
+      "page": 17,
+      "source": "Questions_39.pdf"
+    },
+    {
+      "question_id": "page_17",
+      "content": "- Events",
+      "page": 17,
+      "source": "Questions_39.pdf"
+    },
+    {
+      "question_id": "page_17",
+      "content": "- Jenkins, monitoring, bastion hosts, security scanners",
+      "page": 17,
+      "source": "Questions_39.pdf"
+    },
+    {
+      "question_id": "page_17",
+      "content": "https://www.examtop\"cs.com/exams/google/profess\"onal-cloud-arch\"tect/custom-v\"ew/ Sayfa 777 / 803",
+      "page": 17,
+      "source": "Questions_39.pdf"
+    },
+    {
+      "question_id": "page_4",
+      "content": "https://www.examtop\"cs.com/exams/google/profess\"onal-cloud-arch\"tect/custom-v\"ew/ Sayfa 784 / 803",
+      "page": 4,
+      "source": "Questions_40.pdf"
+    },
+    {
+      "question_id": "page_9",
+      "content": "- MySQL 5.8",
+      "page": 9,
+      "source": "Questions_40.pdf"
+    },
+    {
+      "question_id": "page_9",
+      "content": "- 8 core CPUs",
+      "page": 9,
+      "source": "Questions_40.pdf"
+    },
+    {
+      "question_id": "page_9",
+      "content": "- 128 GB of RAM",
+      "page": 9,
+      "source": "Questions_40.pdf"
+    },
+    {
+      "question_id": "page_9",
+      "content": "- 2x 5 TB HDD (RAID 1)",
+      "page": 9,
+      "source": "Questions_40.pdf"
+    },
+    {
+      "question_id": "page_9",
+      "content": "- Redis 3.2",
+      "page": 9,
+      "source": "Questions_40.pdf"
+    },
+    {
+      "question_id": "page_9",
+      "content": "- 4 core CPUs",
+      "page": 9,
+      "source": "Questions_40.pdf"
+    },
+    {
+      "question_id": "page_9",
+      "content": "- 32GB of RAM",
+      "page": 9,
+      "source": "Questions_40.pdf"
+    },
+    {
+      "question_id": "page_9",
+      "content": "- Tomcat",
+      "page": 9,
+      "source": "Questions_40.pdf"
+    },
+    {
+      "question_id": "page_9",
+      "content": "- Nginx",
+      "page": 9,
+      "source": "Questions_40.pdf"
+    },
+    {
+      "question_id": "page_9",
+      "content": "- 4 core CPUs",
+      "page": 9,
+      "source": "Questions_40.pdf"
+    },
+    {
+      "question_id": "page_9",
+      "content": "- 32 GB of RAM",
+      "page": 9,
+      "source": "Questions_40.pdf"
+    },
+    {
+      "question_id": "page_9",
+      "content": "- Data analysis",
+      "page": 9,
+      "source": "Questions_40.pdf"
+    },
+    {
+      "question_id": "page_9",
+      "content": "https://www.examtop\"cs.com/exams/google/profess\"onal-cloud-arch\"tect/custom-v\"ew/ Sayfa 789 / 803",
+      "page": 9,
+      "source": "Questions_40.pdf"
+    },
+    {
+      "question_id": "page_11",
+      "content": "Selected Answer: C",
+      "page": 11,
+      "source": "Questions_40.pdf"
+    },
+    {
+      "question_id": "page_11",
+      "content": "Selected Answer: C",
+      "page": 11,
+      "source": "Questions_40.pdf"
+    },
+    {
+      "question_id": "page_11",
+      "content": "Selected Answer: C",
+      "page": 11,
+      "source": "Questions_40.pdf"
+    },
+    {
+      "question_id": "page_11",
+      "content": "https://www.examtop\"cs.com/exams/google/profess\"onal-cloud-arch\"tect/custom-v\"ew/ Sayfa 791 / 803",
+      "page": 11,
+      "source": "Questions_40.pdf"
+    },
+    {
+      "question_id": "page_12",
+      "content": "- MySQL 5.8",
+      "page": 12,
+      "source": "Questions_40.pdf"
+    },
+    {
+      "question_id": "page_12",
+      "content": "https://www.examtop\"cs.com/exams/google/profess\"onal-cloud-arch\"tect/custom-v\"ew/ Sayfa 792 / 803",
+      "page": 12,
+      "source": "Questions_40.pdf"
+    },
+    {
+      "question_id": "page_15",
+      "content": "https://www.examtop\"cs.com/exams/google/profess\"onal-cloud-arch\"tect/custom-v\"ew/ Sayfa 795 / 803",
+      "page": 15,
+      "source": "Questions_40.pdf"
+    },
+    {
+      "question_id": "page_19",
+      "content": "https://www.examtop\"cs.com/exams/google/profess\"onal-cloud-arch\"tect/custom-v\"ew/ Sayfa 799 / 803",
+      "page": 19,
+      "source": "Questions_40.pdf"
+    }
+  ]
+}

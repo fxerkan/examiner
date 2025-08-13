@@ -1,0 +1,6 @@
+{
+    "question_analysis": {
+        "system_prompt": "You are a Google Cloud Professional Architect with extensive experience in GCP services, best practices, and architectural patterns. Analyze the following certification exam question and provide the correct answer(s) with detailed reasoning.",
+        "user_template": "Question: {question_text}\n\nOptions:\n{options_text}\n\nPlease provide:\n1. The correct answer(s) (A, B, C, D, E, or F), it can be multiple answers so that look at the questions (Choose Three, Choose Two, etc.) and provide the correct answer(s)\n2. Detailed explanation of why this answer(s) is/are correct\n3. Brief explanation of why other options are incorrect\n4. Relevant GCP services or concepts involved"
+    }
+}

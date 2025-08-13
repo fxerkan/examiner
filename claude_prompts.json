@@ -1,0 +1,77 @@
+{
+  "system_prompts": {
+    "gcp_expert": {
+      "role": "You are a Google Cloud Professional Architect with 10+ years of experience in cloud architecture, GCP services, and enterprise solutions. You have successfully designed and implemented hundreds of GCP solutions and have deep expertise in all GCP services including Compute, Storage, Networking, Data Analytics, Machine Learning, and Security.",
+      "context": "You are analyzing Google Professional Cloud Architect certification exam questions. These questions test knowledge of GCP best practices, architectural patterns, service selection, cost optimization, security, and operational excellence.",
+      "objective": "Provide accurate, well-reasoned answers based on official GCP documentation, best practices, and real-world implementation experience."
+    }
+  },
+  "question_analysis_prompts": {
+    "main_analysis": {
+      "template": "**Question Analysis Request**\n\nQuestion: {question_text}\n\n**Answer Options:**\n{options_formatted}\n\n**Community Context:**\n- Most voted community answer: {community_answer}\n- Highly voted answer: {highly_voted_answer}\n- Most recent answer: {most_recent_answer}\n\n**Required Analysis:**\n\n1. **Correct Answer**: Provide the correct option (A, B, C, D, E, or F)\n\n2. **Detailed Reasoning**: Explain why this answer is correct using:\n   - Relevant GCP services and features\n   - Best practices and architectural principles  \n   - Official GCP documentation references\n   - Real-world implementation considerations\n\n3. **Alternative Analysis**: Briefly explain why each incorrect option is wrong\n\n4. **Key Concepts**: List the main GCP concepts/services tested\n\n5. **Confidence Level**: Rate your confidence (1-10) and explain any uncertainties\n\nProvide a comprehensive but concise analysis focusing on accuracy and practical GCP knowledge.",
+      "max_tokens": 4000,
+      "temperature": 0.1
+    },
+    "quick_analysis": {
+      "template": "**GCP Exam Question - Quick Analysis**\n\nQ: {question_text}\n\nOptions:\n{options_formatted}\n\n**Provide:**\n1. Correct answer (letter only): \n2. Key reason (1-2 sentences):\n3. Main GCP service(s): \n4. Confidence (1-10):",
+      "max_tokens": 1000,
+      "temperature": 0.1
+    }
+  },
+  "text_enhancement_prompts": {
+    "fix_extraction_errors": {
+      "template": "**Text Enhancement Request**\n\nThe following text was extracted from a PDF and may contain OCR errors, formatting issues, or incomplete sentences. Please clean and enhance it while preserving all technical content, GCP service names, and code examples.\n\n**Original Text:**\n{raw_text}\n\n**Requirements:**\n- Fix OCR errors and typos\n- Complete fragmented sentences\n- Standardize formatting\n- Preserve technical terminology exactly\n- Maintain original meaning\n- Fix line breaks and spacing\n\n**Enhanced Text:**",
+      "max_tokens": 3000,
+      "temperature": 0.2
+    }
+  },
+  "validation_prompts": {
+    "question_structure_check": {
+      "template": "**Question Structure Validation**\n\nPlease validate if this is a properly formatted exam question:\n\n{question_block}\n\n**Check for:**\n1. Clear question statement\n2. Multiple choice options (A-F)\n3. Complete and understandable content\n4. Technical accuracy\n\n**Response Format:**\nValid: [YES/NO]\nIssues: [List any problems]\nSuggestions: [Any fixes needed]",
+      "max_tokens": 1000,
+      "temperature": 0.1
+    }
+  },
+  "specialized_prompts": {
+    "compute_services": {
+      "context": "Focus on GCP Compute services: Compute Engine, App Engine, Cloud Run, Cloud Functions, GKE, and container orchestration.",
+      "emphasis": "Consider scalability, cost optimization, deployment models, and service selection criteria."
+    },
+    "data_analytics": {
+      "context": "Focus on GCP Data & Analytics: BigQuery, Dataflow, Pub/Sub, Cloud Storage, Dataproc, and data pipeline architecture.",
+      "emphasis": "Consider data processing patterns, real-time vs batch processing, and cost-effective data storage."
+    },
+    "networking_security": {
+      "context": "Focus on GCP Networking & Security: VPC, Cloud Load Balancing, Cloud CDN, Identity & Access Management, and network architecture.",
+      "emphasis": "Consider network topology, security best practices, and compliance requirements."
+    },
+    "storage_databases": {
+      "context": "Focus on GCP Storage & Databases: Cloud SQL, Cloud Spanner, Firestore, Bigtable, and storage solutions.",
+      "emphasis": "Consider data consistency, scalability, and appropriate database selection for use cases."
+    }
+  },
+  "error_handling_prompts": {
+    "api_retry": {
+      "template": "Previous analysis failed. Retry with simplified approach:\n\nQuestion: {question_text}\nOptions: {options_text}\n\nProvide only:\n1. Correct answer: \n2. Brief reason:",
+      "max_tokens": 500,
+      "temperature": 0.1
+    }
+  },
+  "confidence_scoring": {
+    "high_confidence": "Answer is based on well-documented GCP features and best practices",
+    "medium_confidence": "Answer follows general GCP principles but may have edge case considerations",
+    "low_confidence": "Answer requires additional context or has multiple reasonable interpretations",
+    "uncertain": "Question may have ambiguous requirements or outdated information"
+  },
+  "prompt_formatting": {
+    "options_format": "A. {option_a}\nB. {option_b}\nC. {option_c}\nD. {option_d}\nE. {option_e}\nF. {option_f}",
+    "question_prefix": "**GCP Professional Cloud Architect Question:**\n",
+    "analysis_sections": [
+      "CORRECT ANSWER",
+      "REASONING", 
+      "ALTERNATIVE ANALYSIS",
+      "KEY CONCEPTS",
+      "CONFIDENCE ASSESSMENT"
+    ]
+  }
+}

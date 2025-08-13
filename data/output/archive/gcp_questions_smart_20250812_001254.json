@@ -1,0 +1,921 @@
+{
+  "metadata": {
+    "generated_at": "2025-08-12T00:12:54.301605",
+    "total_questions": 53,
+    "version": "2.1-smart-extraction",
+    "stats": {
+      "files_processed": 13,
+      "pages_processed": 243,
+      "question_blocks_found": 92,
+      "valid_questions": 53,
+      "community_comments": 225,
+      "claude_api_calls": 53
+    }
+  },
+  "questions": [
+    {
+      "id": "Q1_1",
+      "number": "1",
+      "description": "Your company has decided to make a major revision of their API in order to create better experiences for their developers. They need to keep the old version of the API available and deployable, while allowing new customers and testers to try out the new API. They want to keep the same SSL and DNS records in place to serve both APIs. What should they do?   shandy Highly Voted  2 months, 4 weeks ago D is the answer because HTTP(S) load balancer can direct traffic reaching a single IP to different backends based on the incoming URL. A is not correct because configuring a new load balancer would require a new or different SSL and DNS records which conflicts with the requirements to keep the same SSL and DNS records. B is not correct because it goes against the requirements. The company wants to keep the old API available while new customers and testers try the new API. C is not correct because it is not a requirement to decommission the implementation behind the old API. Moreover, it introduces unnecessary risk in case bugs or incompatibilities are discovered in the new API. upvoted 104 times   AzureDP900 2 years, 2 months ago D is right upvoted 3 times   AWS56 Highly Voted  5 years ago agreed, The answer is D upvoted 19 times   FI22 Most Recent  1 week, 3 days ago D is good for keep the same records. upvoted 1 times",
+      "options": {
+        "A": "ConKgure a new load balancer for the new version of the API",
+        "B": "ReconKgure old clients to use a new endpoint for the new API",
+        "C": "Have the old API forward traOc to the new API based on the path",
+        "D": "Use separate backend pools for each API path behind the load balancer"
+      },
+      "introductory_info": "",
+      "page": 1,
+      "source": "Questions_1.pdf",
+      "confidence": 0.7999999999999999,
+      "claude_answer": "D",
+      "claude_reasoning": "Load balancer with separate backend pools provides the best solution for API versioning."
+    },
+    {
+      "id": "Q5_2",
+      "number": "2",
+      "description": "Your company plans to migrate a multi-petabyte data set to the cloud. The data set must be available 24hrs a day. Your business analysts have experience only with using a SQL interface. How should you store the data to optimize it for ease of analysis?   Eroc Highly Voted  2 months, 4 weeks ago This question could go either way for A or B. But Big Query was designed with this in mind, according to numerous Google presentation and Cloud Storage does not have an SQL interface. The previous two sentences eliminate options C and D. So I'd pick \"A\". upvoted 35 times   tartar 4 years, 4 months ago A is ok upvoted 16 times",
+      "options": {
+        "A": "Load data into Google BigQuery",
+        "B": "Insert data into Google Cloud SQL",
+        "C": "Put ^at Kles into Google Cloud Storage",
+        "D": "Stream data into Google Cloud Datastore"
+      },
+      "introductory_info": "",
+      "page": 5,
+      "source": "Questions_1.pdf",
+      "confidence": 0.7999999999999999,
+      "claude_answer": "A",
+      "claude_reasoning": "Analysis pending - requires manual review."
+    },
+    {
+      "id": "Q8_3",
+      "number": "3",
+      "description": "The operations manager asks you for a list of recommended practices that she should consider when migrating a J2EE application to the cloud. Which three practices should you recommend? (Choose three.)   NapoleonBorntoparty Highly Voted  2 months, 4 weeks ago This is talking about the APPLICATION not the infrastructure, therefore I believe we should focus on the APP-side of things: 1. port the app to app engine for content delivery 2. add monitoring for troubleshooting 3. use a CI/CD workflow for continuous delivery w/testing for a stable application so, for me: A, C and E should be the answers upvoted 63 times",
+      "options": {
+        "A": "Port the application code to run on Google App Engine",
+        "B": "Integrate Cloud Data^ow into the application to capture real-time metrics",
+        "C": "Instrument the application with a monitoring tool like Stackdriver Debugger",
+        "D": "Select an automation framework to reliably provision the cloud infrastructure",
+        "E": "Deploy a continuous integration tool with automated testing in a staging environment",
+        "F": "Migrate from MySQL to a managed NoSQL database like Google Cloud Datastore or Bigtable"
+      },
+      "introductory_info": "",
+      "page": 8,
+      "source": "Questions_1.pdf",
+      "confidence": 0.7999999999999999,
+      "claude_answer": "A",
+      "claude_reasoning": "Analysis pending - requires manual review."
+    },
+    {
+      "id": "Q12_4",
+      "number": "4",
+      "description": "A news feed web service has the following code running on Google App Engine. During peak load, users report that they can see news articles they already viewed. What is the most likely cause of this problem?   jackdbd Highly Voted  2 months, 4 weeks ago It's A. AppEngine spins up new containers automatically according to the load. During peak traffic, HTTP requests originated by the same user could be served by different containers. Given that the variable `sessions` is recreated for each container, it might store different data. The problem here is that this Flask app is stateful. The `sessions` variable is the state of this app. And stateful variables in AppEngine / Cloud Run / Cloud Functions are problematic. A solution would be to store the session in some database (e.g. Firestore, Memorystore) and retrieve it from there. This way the app would fetch the session from a single place and would be stateless. upvoted 115 times",
+      "options": {
+        "A": "The session variable is local to just a single instance",
+        "B": "The session variable is being overwritten in Cloud Datastore",
+        "C": "The URL of the API needs to be modiKed to prevent caching",
+        "D": "The HTTP Expires header needs to be set to -1 stop caching"
+      },
+      "introductory_info": "",
+      "page": 12,
+      "source": "Questions_1.pdf",
+      "confidence": 0.7999999999999999,
+      "claude_answer": "A",
+      "claude_reasoning": "Analysis pending - requires manual review."
+    },
+    {
+      "id": "Q15_5",
+      "number": "5",
+      "description": "An application development team believes their current logging tool will not meet their needs for their new cloud-based product. They want a better tool to capture errors and help them analyze their historical log data. You want to help them Knd a solution that meets their needs. What should you do?   dummyemailforexam Highly Voted  4 years, 7 months ago upvoted 113 times   Ziegler 4 years, 6 months ago Remember that agent is only required for non cloud based resources. The question is saying their cloud based... feel C meets this need upvoted 11 times   kkhurana 2 years, 11 months ago logging agent is required for compute engine too. upvoted 4 times   try_jai 3 years, 6 months ago It's given as 'cloud based resource' but didn't mention if it is 'GCP'. It could be any cloud provider. So Stackdriver might be the answer. upvoted 4 times   Meyucho 8 months, 1 week ago Is an Architect exam... the team THINKS that the tool WILL NOT MEET requirements... you should help to undesntend what they need... Is C... it not says that you will offert third party solution upvoted 4 times   willrof 4 years ago Totally Agree. offering Stackdriver Logging is what they want from a GCA. answer is A. upvoted 6 times   AzureDP900 2 years, 2 months ago Agreed upvoted 1 times",
+      "options": {
+        "A": "This is GCP exam. They will always promote their services. Not a third party solution.",
+        "B": "Send them a list of online resources about logging best practices",
+        "C": "Help them deKne their requirements and assess viable logging tools",
+        "D": "Help them upgrade their current tool to take advantage of any new features"
+      },
+      "introductory_info": "",
+      "page": 15,
+      "source": "Questions_1.pdf",
+      "confidence": 0.7999999999999999,
+      "claude_answer": "A",
+      "claude_reasoning": "Analysis pending - requires manual review."
+    },
+    {
+      "id": "Q19_6",
+      "number": "6",
+      "description": "Solution should meet their needs upvoted 1 times You nee a d k t s o h a re t d h u _s c h e e t t h t e y 1 n 0 u m m b o e n r th o s f a u g n o planned rollbacks of erroneous production deployments in your company's web hosting platform. ImprTovheemree inst ctoo stht eo fQ IAO/PS , data storage and compute cost of querying of historical data , if I were an organization that decided to implement an open source solution in GCP I would incur these costs anyways plus developer cost for implementation. I would rather go with whats already there . Of Test processes accomplished an 80% reduction. course writing data to a cheaper cloud provider on regular intervals via a message Q could be another option but then again that would incur Whicsho amded ietixotnraal ntwetow aoprpk rcooascthse sa sc awne yllo. uS itnackee ttoh efuy rrtehqeur irreed aunce im thme erodlilabtaec skos?lu (tCiohno oI sweo tuwldo .g)o with A. upvoted 1 times   JustJack21 Highly Voted  3 years, 3 months ago Now between A) and B) a nearly identical new release—both of which are running in production. c) In software, a canary process is usually the first instance that receives live production traffic about a new configuration update, either a binary or configuration rollout. The new release only goes to the canary at first. The fact that the canary handles real user traffic is key: if it breaks, real users get affected, so canarying should be the first step in your deployment process, as opposed to the last step in testing in production. \" While both green-blue and canary releases are useful, B) suggests \"replacing QA\" with canary releases - which is not good. QA got the issue down by 80%. Hence A) and C) upvoted 65 times   jdpinto Highly Voted  3 years, 6 months ago A & C for me upvoted 34 times   MikeMike7 Most Recent  1 week, 6 days ago it is blue green not green blue upvoted 1 times   Ekramy_Elnaggar 1 month, 1 week ago Answer is A & C. production environments (\"green\" and \"blue\"). You deploy the new version to the \"blue\" environment while \"green\" remains live. After testing and verification in \"blue,\" you switch traffic to \"blue,\" making it the new live environment. If issues arise, you can quickly switch back to \"green.\" safety and flexibility. still need a controlled environment for thorough testing before releasing to production. upvoted 2 times   LEIChan 6 months ago B & C see should be the correct answer. There is no green-blue deployment but rather a blue green. upvoted 2 times   MikeMike7 1 week, 6 days ago Agree, also Canary is a safe good option upvoted 1 times",
+      "options": {
+        "A": "Introduce a green-blue deployment model: This is a great way to reduce risk and downtime during deployments. You have two identical",
+        "B": "is not correct because while canary releases are valuable, they are a testing strategy, not a replacement for a dedicated QA environment. You",
+        "C": "Fragment the monolithic platform into microservices: This is a more involved architectural change, but it can significantly improve deployment",
+        "D": "and E) are pointless in this context.",
+        "E": "Replace the platform's relational database systems with a NoSQL database"
+      },
+      "introductory_info": "",
+      "page": 19,
+      "source": "Questions_1.pdf",
+      "confidence": 0.7999999999999999,
+      "claude_answer": "A",
+      "claude_reasoning": "Analysis pending - requires manual review."
+    },
+    {
+      "id": "Q9_68",
+      "number": "68",
+      "description": "  A21325412 1 year, 1 month ago Your company wants to start using Google Cloud resources but wants to retain their on-premises Active Directory domain controller for identity manageCmoernret.ct. Because we can spec the resources on our pods is why C is chosen over A (f1-micro). This is what allows us to \"maximize machine utilization\"! What should you do? upvoted 3 times Google Cloud Directory Sync.   KouShikyou Highly Voted  5 years, 2 months ago According to the reference, my understanding is B is correct. If you need to create Google Accounts for your existing users, you can use Google Cloud Directory Sync to synchronize with your Active Directory or LDAP server. Is it possible to explain why correct answer is C? upvoted 44 times   MikeB19 3 years, 3 months ago It’s simple. Domain controllers are not meant authenticate saas or web applications. This includes iam. Domain controllers speak ntlm and Kerberos. This why we use federation. Because web apps do not speak Kerberos or ntlm. They speak languages such oauth. Hence the need for ad federation proxy B is correct upvoted 5 times   Bill831231 3 years, 2 months ago thanks for the explanation, may I ask if we go with SAML, why need sync the useraccount? seems we just need set up the federation between cloud and on-premise upvoted 2 times   Ekramy_Elnaggar 1 month ago if not, you will not be able to access resources on GCP with same accounts as onprem. upvoted 1 times   BiddlyBdoyng 2 years, 2 months ago \"...As a prerequisite for access to GCP resources, employees must have a Google identity set up...\" upvoted 4 times   tartar 4 years, 4 months ago B is ok upvoted 9 times   kumarp6 4 years, 1 month ago B should be correct upvoted 5 times",
+      "options": {
+        "A": "Use the Admin Directory API to authenticate against the Active Directory domain controller.",
+        "B": "Use Google Cloud Directory Sync to synchronize Active Directory usernames with cloud identities and conKgure SAML SSO.",
+        "C": "Use Cloud Identity-Aware Proxy conKgured to use the on-premises Active Directory domain controller as an identity provider.",
+        "D": "Use Compute Engine to create an Active Directory (AD) domain controller that is a replica of the on-premises AD domain controller using"
+      },
+      "introductory_info": "",
+      "page": 9,
+      "source": "Questions_10.pdf",
+      "confidence": 0.7999999999999999,
+      "claude_answer": "A",
+      "claude_reasoning": "Analysis pending - requires manual review."
+    },
+    {
+      "id": "Q18_71",
+      "number": "71",
+      "description": "Your company is running a stateless application on a Compute Engine instance. The application is used heavily during regular business hours and lightly outside of business hours. Users are reporting that the application is slow during peak hours. You need to optimize the application's performance. What should you do? the instance template. custom image. instance group from the instance template. instance group from the custom image.   sdsdfasdf4 Highly Voted  3 years, 12 months ago The easiest way would be to create template from --source-instance, and then create MIG, but it is not listed here, also you cannot create a MIG from image directly, you need a template, so answer is C (image -> template -> mig). upvoted 30 times   6721sora 2 years, 3 months ago C is correct. To sdsdfasd4's point - Not recommended to create template from --source-instance as If the existing instance contains a static external IP address, that address is copied into the instance template and might limit the use of the template. Templates are best created from images or other templates. Creating the template from a running instance may require work to clean it up before it can be used for a MIG upvoted 8 times   AWS56 Highly Voted  4 years, 11 months ago C is the right answer upvoted 12 times   heretolearnazure 1 year, 3 months ago C is definitely the right answer upvoted 1 times   nareshthumma Most Recent  1 month, 3 weeks ago Answer A: Create a snapshot of the existing disk. Create an instance template from the snapshot. Create an autoscaled managed instance group from the instance template. Here’s why this option is the best: 1.Autoscaling: By creating an autoscaled managed instance group, you can automatically adjust the number of instances based on the load. This means that during peak business hours, additional instances will be created to handle the increased traffic, improving application performance. During off-peak hours, the number of instances can scale down to reduce costs. 2.Snapshot Creation: Taking a snapshot of the existing disk ensures that you have a backup of the current state of your application. This snapshot can be used to create the new instance template, ensuring that your autoscaled instances have the same configuration as the original instance. upvoted 1 times   46f094c 5 months, 3 weeks ago I prefer B, is better because I don't need to stop the instance to create the disk image. upvoted 1 times",
+      "options": {
+        "A": "Create a snapshot of the existing disk. Create an instance template from the snapshot. Create an autoscaled managed instance group from",
+        "B": "Create a snapshot of the existing disk. Create a custom image from the snapshot. Create an autoscaled managed instance group from the",
+        "C": "Create a custom image from the existing disk. Create an instance template from the custom image. Create an autoscaled managed",
+        "D": "Create an instance template from the existing disk. Create a custom image from the instance template. Create an autoscaled managed"
+      },
+      "introductory_info": "",
+      "page": 18,
+      "source": "Questions_10.pdf",
+      "confidence": 0.7999999999999999,
+      "claude_answer": "A",
+      "claude_reasoning": "Analysis pending - requires manual review."
+    },
+    {
+      "id": "Q20_72",
+      "number": "72",
+      "description": "Your web application has several VM instances running within a VPC. You want to restrict communications between instances to only the paths and ports you authorize, but you don't want to rely on static IP addresses or subnets because the app can autoscale. How should you restrict communications?   AWS56 Highly Voted  3 years, 5 months ago Agree B upvoted 24 times   kumarp6 2 years, 7 months ago Yes B it is upvoted 2 times   nitinz 2 years, 3 months ago B is correct upvoted 2 times   omermahgoub Highly Voted  6 months ago To restrict communications between VM instances within a VPC without relying on static IP addresses or subnets, you can use firewall rules based on network tags attached to the compute instances. This will allow you to specify which instances are allowed to communicate with each other and on which paths and ports. You can then attach the relevant network tags to the compute instances when they are created, allowing you to control communication between the instances without relying on static IP addresses or subnets. upvoted 11 times   omermahgoub 6 months ago Option A, using separate VPCs to restrict traffic, would not be a suitable solution because it would not allow the instances to communicate with each other, which is likely necessary for the functioning of the web application. Option C, using Cloud DNS and only allowing connections from authorized hostnames, would not be a suitable solution because it would not allow you to control communication between the instances based on their IP addresses or other characteristics. Option D, using service accounts and configuring the web application to authorize particular service accounts to have access, would not be a suitable solution because it would not allow you to control communication between the instances based on their IP addresses or other characteristics. upvoted 4 times",
+      "options": {
+        "A": "Use separate VPCs to restrict traOc",
+        "B": "Use firewall rules based on network tags attached to the compute instances",
+        "C": "Use Cloud DNS and only allow connections from authorized hostnames",
+        "D": "Use service accounts and conKgure the web application to authorize particular service accounts to have access"
+      },
+      "introductory_info": "",
+      "page": 20,
+      "source": "Questions_10.pdf",
+      "confidence": 0.7999999999999999,
+      "claude_answer": "A",
+      "claude_reasoning": "Analysis pending - requires manual review."
+    },
+    {
+      "id": "Q2_73",
+      "number": "73",
+      "description": "You are using Cloud SQL as the database backend for a large CRM deployment. You want to scale as usage increases and ensure that you don't run out of storage, maintain 75% CPU usage cores, and keep replication lag below 60 seconds. What are the correct steps to meet your requirements? type to reduce CPU usage. 3. Create a Stackdriver alert for replication lag, and shard the database to reduce replication time. 75%. 3. Create a Stackdriver alert for replication lag, and deploy memcache to reduce load on the master. memcached to reduce CPU load. 3. Change the instance type to a 32-core machine type to reduce replication lag. memcached to reduce CPU load. 3. Create a Stackdriver alert for replication lag, and change the instance type to a 32-core machine type to reduce replication lag.   AWS56 Highly Voted  4 years, 11 months ago Agree with A upvoted 26 times   heretolearnazure 1 year, 3 months ago Sharding database will reduce latency upvoted 4 times   AzureDP900 2 years, 2 months ago 1. Enable automatic storage increase for the instance. 2. Create a Stackdriver alert when CPU usage exceeds 75%, and change the instance type to reduce CPU usage. 3. Create a Stackdriver alert for replication lag, and shard the database to reduce replication time. upvoted 2 times   9xnine Highly Voted  2 years, 6 months ago Has anyone who has taken the exam recently seen any lingering questions with the Stackdriver nomenclature or is it all cloud logging, cloud monitoring, etc.? upvoted 16 times   nareshthumma Most Recent  1 month, 3 weeks ago Answer is: A upvoted 1 times",
+      "options": {
+        "A": "1. Enable automatic storage increase for the instance. 2. Create a Stackdriver alert when CPU usage exceeds 75%, and change the instance",
+        "B": "1. Enable automatic storage increase for the instance. 2. Change the instance type to a 32-core machine type to keep CPU usage below",
+        "C": "1. Create a Stackdriver alert when storage exceeds 75%, and increase the available storage on the instance to create more space. 2. Deploy",
+        "D": "1. Create a Stackdriver alert when storage exceeds 75%, and increase the available storage on the instance to create more space. 2. Deploy"
+      },
+      "introductory_info": "",
+      "page": 2,
+      "source": "Questions_11.pdf",
+      "confidence": 0.7999999999999999,
+      "claude_answer": "A",
+      "claude_reasoning": "Analysis pending - requires manual review."
+    },
+    {
+      "id": "Q6_74",
+      "number": "74",
+      "description": "You are tasked with building an online analytical processing (OLAP) marketing analytics and reporting tool. This requires a relational database that can operate on hundreds of terabytes of data. What is the Google-recommended tool for such applications?   AWS56 Highly Voted  4 years, 11 months ago Agree D upvoted 20 times   tartar 4 years, 4 months ago D is ok upvoted 5 times   Nastrand 3 years, 10 months ago What about the relational part? BigQuery uses SQL but it's not relational... I'm not sure its D upvoted 4 times   riderrick 3 years, 6 months ago BigQuery is relational! upvoted 5 times   lovingsmart2000 3 years, 5 months ago Pls do not confuse - Cloud SQL and BigQuery are RDBMS. Cloud Datastore, Bigtable are NoSQL. Right answer is D - BQ upvoted 14 times   kumarp6 4 years, 1 month ago Yes it is D upvoted 2 times   nitinz 3 years, 9 months ago D, OLAP=BQ upvoted 4 times   Sur_Nikki 1 year, 7 months ago Well Said upvoted 1 times   JasonL_GCP 3 years, 2 months ago The question asks \"This requires a relational database that can operate on hundreds of terabytes of data\", but bq doesn't meet this condition? upvoted 2 times   elaineshi 2 years, 6 months ago BigQuery supports relational and query of join tables. upvoted 2 times   gfhbox0083 Highly Voted  4 years, 6 months ago D, for sure. BigQuery for OLAP Google Cloud Spanner for OLTP. upvoted 15 times",
+      "options": {
+        "A": "Cloud Spanner, because it is globally distributed",
+        "B": "Cloud SQL, because it is a fully managed relational database",
+        "C": "Cloud Firestore, because it offers real-time synchronization across devices",
+        "D": "BigQuery, because it is designed for large-scale processing of tabular data"
+      },
+      "introductory_info": "",
+      "page": 6,
+      "source": "Questions_11.pdf",
+      "confidence": 0.7999999999999999,
+      "claude_answer": "A",
+      "claude_reasoning": "BigQuery is designed for multi-petabyte analytics with SQL interface."
+    },
+    {
+      "id": "Q8_75",
+      "number": "75",
+      "description": "You have deployed an application to Google Kubernetes Engine (GKE), and are using the Cloud SQL proxy container to make the Cloud SQL database available to the services running on Kubernetes. You are notiKed that the application is reporting database connection issues. Your company policies require a post- mortem. What should you do?   jcmoranp Highly Voted  4 years, 1 month ago post mortem always includes log analysis, answer is C upvoted 65 times   Sur_Nikki 7 months, 2 weeks ago Thanks for the info upvoted 1 times   AzureDP900 1 year, 2 months ago C is right for Root Cause Analysis. upvoted 1 times",
+      "options": {
+        "A": "Use gcloud sql instances restart.",
+        "B": "Validate that the Service Account used by the Cloud SQL proxy container still has the Cloud Build Editor role.",
+        "C": "In the GCP Console, navigate to Stackdriver Logging. Consult logs for (GKE) and Cloud SQL.",
+        "D": "In the GCP Console, navigate to Cloud SQL. Restore the latest backup. Use kubectl to restart all pods."
+      },
+      "introductory_info": "",
+      "page": 8,
+      "source": "Questions_11.pdf",
+      "confidence": 0.7999999999999999,
+      "claude_answer": "A",
+      "claude_reasoning": "Analysis pending - requires manual review."
+    },
+    {
+      "id": "Q10_76",
+      "number": "76",
+      "description": "Your company pushes batches of sensitive transaction data from its application server VMs to Cloud Pub/Sub for processing and storage. What is the Google- recommended way for your application to authenticate to the required Google Cloud services? IAM roles. IAM roles.   AWS56 Highly Voted  4 years, 5 months ago Agree A upvoted 26 times   nitinz 3 years, 3 months ago A is correct upvoted 2 times   kumarp6 3 years, 7 months ago Yes A it is upvoted 2 times",
+      "options": {
+        "A": "Ensure that VM service accounts are granted the appropriate Cloud Pub/Sub IAM roles.",
+        "B": "Ensure that VM service accounts do not have access to Cloud Pub/Sub, and use VM access scopes to grant the appropriate Cloud Pub/Sub",
+        "C": "Generate an OAuth2 access token for accessing Cloud Pub/Sub, encrypt it, and store it in Cloud Storage for access from each VM.",
+        "D": "Create a gateway to Cloud Pub/Sub using a Cloud Function, and grant the Cloud Function service account the appropriate Cloud Pub/Sub"
+      },
+      "introductory_info": "",
+      "page": 10,
+      "source": "Questions_11.pdf",
+      "confidence": 0.7999999999999999,
+      "claude_answer": "A",
+      "claude_reasoning": "Analysis pending - requires manual review."
+    },
+    {
+      "id": "Q13_77",
+      "number": "77",
+      "description": "You want to establish a Compute Engine application in a single VPC across two regions. The application must communicate over VPN to an on- premises network. How should you deploy the VPN?   Googler2 Highly Voted  4 years, 8 months ago It can't be -A - VPC Network Peering only allows private RFC 1918 connectivity across two Virtual Private Cloud (VPC) networks. In this example is one VPC with on-premise network It is not definitely - B - Can't be It is not C - Because Cloud VPN gateways and tunnels are regional objects, not global So, it the answer is D - upvoted 45 times   amxexam 3 years, 3 months ago Why not A? The second use case is exactly what is in the question. Don't get the argument about RFC 1918. Will go with A upvoted 1 times   ochanz 3 years ago premise network need to use public IP. cmiiw upvoted 4 times   AdityaGupta 1 year, 2 months ago The question clearly asks us to use VPN. upvoted 2 times   AzureDP900 2 years, 2 months ago Agreed with D. upvoted 1 times",
+      "options": {
+        "A": "Use VPC Network Peering between the VPC and the on-premises network.",
+        "B": "Expose the VPC to the on-premises network using IAM and VPC Sharing.",
+        "C": "Create a global Cloud VPN Gateway with VPN tunnels from each region to the on-premises peer gateway.",
+        "D": "Deploy Cloud VPN Gateway in each region. Ensure that each region has at least one VPN tunnel to the on-premises peer gateway."
+      },
+      "introductory_info": "",
+      "page": 13,
+      "source": "Questions_11.pdf",
+      "confidence": 0.7999999999999999,
+      "claude_answer": "A",
+      "claude_reasoning": "Analysis pending - requires manual review."
+    },
+    {
+      "id": "Q16_78",
+      "number": "78",
+      "description": "Your applications will be writing their logs to BigQuery for analysis. Each application should have its own table. Any logs older than 45 days should be removed. You want to optimize storage and follow Google-recommended practices. What should you do?   KouShikyou Highly Voted  4 years, 8 months ago Could you please help clarify? I think B is correct. It looks like table will be deleted with option A. When you delete a table, any data in the table is also deleted. To automatically delete tables after a specified period of time, set the default table expiration for the dataset or set the expiration time when you create the table. upvoted 39 times   AzureDP900 1 year, 8 months ago Agreed and going with B upvoted 2 times   kumarp6 3 years, 7 months ago it is B, if you use option A, on 46th day there is no table/content in table for application :) upvoted 11 times   nitinz 3 years, 3 months ago B partition table upvoted 4 times   tartar 3 years, 10 months ago B is ok upvoted 8 times   aviv Highly Voted  4 years, 6 months ago Agreed with B. upvoted 10 times   OSAMA911 Most Recent  3 months, 4 weeks ago I think B is correct. upvoted 1 times   AdityaGupta 8 months, 2 weeks ago B is the correct answer. upvoted 3 times   SSPPJi 11 months, 2 weeks ago upvoted 4 times   FaizAhmed 12 months ago B is correct upvoted 1 times",
+      "options": {
+        "A": "ConKgure the expiration time for your tables at 45 days",
+        "B": "Make the tables time-partitioned, and conKgure the partition expiration at 45 days",
+        "C": "Rely on BigQuery's default behavior to prune application logs older than 45 days",
+        "D": "Create a script that uses the BigQuery command line tool (bq) to remove records older than 45 days"
+      },
+      "introductory_info": "",
+      "page": 16,
+      "source": "Questions_11.pdf",
+      "confidence": 0.7999999999999999,
+      "claude_answer": "A",
+      "claude_reasoning": "Analysis pending - requires manual review."
+    },
+    {
+      "id": "Q18_79",
+      "number": "79",
+      "description": "You want your Google Kubernetes Engine cluster to automatically add or remove nodes based on CPU load. What should you do? gcloud command. from the GCP Console.   Unfaithful Highly Voted  2 years, 5 months ago Answer: A Support: How does Horizontal Pod Autoscaler work with Cluster Autoscaler? Horizontal Pod Autoscaler changes the deployment's or replicaset's number of replicas based on the current CPU load. If the load increases, HPA will create new replicas, for which there may or may not be enough space in the cluster. If there are not enough resources, CA will try to bring up some nodes, so that the HPA-created pods have a place to run. If the load decreases, HPA will stop some of the replicas. As a result, some nodes may become underutilized or completely empty, and then CA will terminate such unneeded nodes. upvoted 62 times   heretolearnazure 3 months, 3 weeks ago very well explained upvoted 1 times   AzureDP900 1 year, 2 months ago Nice and detailed explanation. I agree with A. upvoted 1 times   LaxmanTiwari 7 months, 1 week ago Nice and detailed explanation. I agree with A. upvoted 1 times   Rajasa 2 years ago Good Explaination upvoted 3 times",
+      "options": {
+        "A": "ConKgure a HorizontalPodAutoscaler with a target CPU usage. Enable the Cluster Autoscaler from the GCP Console.",
+        "B": "ConKgure a HorizontalPodAutoscaler with a target CPU usage. Enable autoscaling on the managed instance group for the cluster using the",
+        "C": "Create a deployment and set the maxUnavailable and maxSurge properties. Enable the Cluster Autoscaler using the gcloud command.",
+        "D": "Create a deployment and set the maxUnavailable and maxSurge properties. Enable autoscaling on the cluster managed instance group"
+      },
+      "introductory_info": "",
+      "page": 18,
+      "source": "Questions_11.pdf",
+      "confidence": 0.7999999999999999,
+      "claude_answer": "A",
+      "claude_reasoning": "Analysis pending - requires manual review."
+    },
+    {
+      "id": "Q9_83",
+      "number": "83",
+      "description": "Your BigQuery project has several users. For audit purposes, you need to see how many queries each user ran in the last month. What should you do?   Googler2 Highly Voted  4 years, 8 months ago D- reasons: 1.-Cloud Audit Logs maintains audit logs for admin activity, data access and system events. BIGQUERY is automatically send to cloud audit log functionality. 2.- In the filter you can filter relevant BigQuery Audit messages, you can express filters as part of the export",
+      "options": {
+        "A": "Connect Google Data Studio to BigQuery. Create a dimension for the users and a metric for the amount of queries per user.",
+        "B": "In the BigQuery interface, execute a query on the JOBS table to get the required information.",
+        "C": "Use 'bq show' to list all jobs. Per job, use 'bq ls' to list job information and get the required information.",
+        "D": "Use Cloud Audit Logging to view Cloud Audit Logs, and create a Klter on the query operation to get the required information."
+      },
+      "introductory_info": "",
+      "page": 9,
+      "source": "Questions_12.pdf",
+      "confidence": 0.7999999999999999,
+      "claude_answer": "A",
+      "claude_reasoning": "Analysis pending - requires manual review."
+    },
+    {
+      "id": "Q12_84",
+      "number": "84",
+      "description": "You want to automate the creation of a managed instance group. The VMs have many OS package dependencies. You want to minimize the startup time for new VMs in the instance group. What should you do? VM image.   crypt0 Highly Voted  3 years, 8 months ago Why is it not answer B? upvoted 42 times",
+      "options": {
+        "A": "Use Terraform to create the managed instance group and a startup script to install the OS package dependencies.",
+        "B": "Create a custom VM image with all OS package dependencies. Use Deployment Manager to create the managed instance group with the",
+        "C": "Use Puppet to create the managed instance group and install the OS package dependencies.",
+        "D": "Use Deployment Manager to create the managed instance group and Ansible to install the OS package dependencies."
+      },
+      "introductory_info": "",
+      "page": 12,
+      "source": "Questions_12.pdf",
+      "confidence": 0.7999999999999999,
+      "claude_answer": "A",
+      "claude_reasoning": "Analysis pending - requires manual review."
+    },
+    {
+      "id": "Q15_85",
+      "number": "85",
+      "description": "Your company captures all web traOc data in Google Analytics 360 and stores it in BigQuery. Each country has its own dataset. Each dataset has multiple tables. You want analysts from each country to be able to see and query only the data for their respective countries. How should you conKgure the access rights? as members. Grant the 'all_analysts' group the IAM role of BigQuery jobUser. Share the appropriate dataset with view access with each respective analyst country-group. as members. Grant the 'all_analysts' group the IAM role of BigQuery jobUser. Share the appropriate tables with view access with each respective analyst country-group. as members. Grant the 'all_analysts' group the IAM role of BigQuery dataViewer. Share the appropriate dataset with view access with each respective analyst country- group. as members. Grant the 'all_analysts' group the IAM role of BigQuery dataViewer. Share the appropriate table with view access with each respective analyst country-group.   Sebatian Highly Voted  5 years ago It should be A. The question requires that user from each country can only view a specific data set, so BQ dataViewer cannot be assigned at project level. Only A could limit the user to query and view the data that they are supposed to be allowed to. upvoted 61 times   jits1984 1 year, 8 months ago Should be C. Data viewer role can be applied to a Table and a View. JobUser can be applied only at a Project level not at a Dataset level upvoted 11 times   jits1984 1 year, 3 months ago incorrect, should be A, BigQuery Job User (roles/bigquery.jobUser) Provides permissions to run jobs, including queries, within the project. upvoted 3 times   RKS_2021 1 year, 2 months ago A is wrong upvoted 1 times",
+      "options": {
+        "A": "Create a group per country. Add analysts to their respective country-groups. Create a single group 'all_analysts', and add all country-groups",
+        "B": "Create a group per country. Add analysts to their respective country-groups. Create a single group 'all_analysts', and add all country-groups",
+        "C": "Create a group per country. Add analysts to their respective country-groups. Create a single group 'all_analysts', and add all country-groups",
+        "D": "Create a group per country. Add analysts to their respective country-groups. Create a single group 'all_analysts', and add all country-groups"
+      },
+      "introductory_info": "",
+      "page": 15,
+      "source": "Questions_12.pdf",
+      "confidence": 0.7999999999999999,
+      "claude_answer": "A",
+      "claude_reasoning": "Analysis pending - requires manual review."
+    },
+    {
+      "id": "Q19_86",
+      "number": "86",
+      "description": "You have been engaged by your client to lead the migration of their application infrastructure to GCP. One of their current problems is that the on- premises high performance SAN is requiring frequent and expensive upgrades to keep up with the variety of workloads that are identiKed as follows: 20 TB of log archives retained for legal reasons; 500 GB of VM boot/data volumes and templates; 500 GB of image thumbnails; 200 GB of customer session state data that allows customers to restart sessions even if off-line for several days. Which of the following best re^ects your recommendations for a cost-effective storage allocation? and VM boot/data volumes. Storage for log archives and thumbnails. volumes. Cloud Storage for log archives and thumbnails.   OSNG Highly Voted  4 years ago B is correct. WHY NOT OTHERS. for several days). WHY B? Left with B that's why, but the question is how to store Boot/Data volume on Cloud Storage? upvoted 108 times   rsamant 3 years, 6 months ago Cloud Storage can be used to store image but it can't be used for boot. upvoted 8 times   Davidik79 2 years, 9 months ago \"If you need to move your Compute Engine boot disk data outside of your Compute Engine project, you can export a boot disk image to Cloud Storage as a tar.gz file\" upvoted 1 times   Ishu_awsguy 2 years, 4 months ago Customer is migrating their apps , not only data. So B is wrong. App wont work with data volumes in compresses format on cloud storage ( obvious) upvoted 2 times   Chute5118 2 years, 4 months ago Cloud Volumes Service has the ability to send volumes of the CVS service type to Google Cloud Object Storage for long-term backup and archive. This data-management feature complements volume snapshots, which provide access for development or test use cases that require short-term recovery upvoted 1 times   Manh 3 years, 3 months ago it's B. the question is all about storing data. B is right answer upvoted 2 times",
+      "options": {
+        "A": "is wrong Local SSD in non-persistent therefore cannot be used for session state (as questions also need to save data for users who are offline",
+        "B": "Memcache backed by Cloud Datastore for the customer session state data. Lifecycle-managed Cloud Storage for log archives, thumbnails,",
+        "C": "Again Local SSD cannot be used for boot volume (because its Non-persistent again) and always used for temporary data storage.",
+        "D": "Same reason as C."
+      },
+      "introductory_info": "",
+      "page": 19,
+      "source": "Questions_12.pdf",
+      "confidence": 0.7999999999999999,
+      "claude_answer": "C",
+      "claude_reasoning": "Cloud Storage provides cost-effective backup solutions."
+    },
+    {
+      "id": "Q5_88",
+      "number": "88",
+      "description": "You are using Cloud CDN to deliver static HTTP(S) website content hosted on a Compute Engine instance group. You want to improve the cache hit ratio. What should you do?   shandy Highly Voted  5 years ago Option A is Correct. upvoted 23 times   tartar 4 years, 4 months ago A is ok upvoted 7 times   kumarp6 4 years, 1 month ago Yes, A is correct upvoted 2 times   nitinz 3 years, 9 months ago A, both http and https will use same key. upvoted 3 times   MestreCholas 1 year, 9 months ago upvoted 6 times   gfhbox0083 Highly Voted  4 years, 6 months ago A, for sure. By default, Cloud CDN uses the complete request URL to build the cache key. For performance and scalability, it’s important to optimize cache hit ratio. To help optimize your cache hit ratio, you can use custom cache keys ..... upvoted 9 times",
+      "options": {
+        "A": "Customize the cache keys to omit the protocol from the key.",
+        "B": "Shorten the expiration time of the cached objects.",
+        "C": "Make sure the HTTP(S) header ג€Cache-Regionג€ points to the closest region of your users.",
+        "D": "Replicate the static content in a Cloud Storage bucket. Point CloudCDN toward a load balancer on that bucket."
+      },
+      "introductory_info": "",
+      "page": 5,
+      "source": "Questions_13.pdf",
+      "confidence": 0.7999999999999999,
+      "claude_answer": "A",
+      "claude_reasoning": "Analysis pending - requires manual review."
+    },
+    {
+      "id": "Q10_90",
+      "number": "90",
+      "description": "You have an App Engine application that needs to be updated. You want to test the update with production traOc before replacing the current application version. What should you do? current applications.   KouShikyou Highly Voted  3 years, 8 months ago I think B is correct. Because GAE supports service version control and A/B test. Is my understanding correct? upvoted 60 times   kumarp6 2 years, 7 months ago Yes, B is correct upvoted 5 times   nitinz 2 years, 3 months ago Only B works. upvoted 4 times   ADVIT Highly Voted  3 years, 4 months ago Only one App Engine application can be created per Project. So it's B. upvoted 15 times",
+      "options": {
+        "A": "Deploy the update using the Instance Group Updater to create a partial rollout, which allows for canary testing.",
+        "B": "Deploy the update as a new version in the App Engine application, and split traOc between the new and current versions.",
+        "C": "Deploy the update in a new VPC, and use Google's global HTTP load balancing to split traOc between the update and current applications.",
+        "D": "Deploy the update as a new App Engine application, and use Google's global HTTP load balancing to split traOc between the new and"
+      },
+      "introductory_info": "",
+      "page": 10,
+      "source": "Questions_13.pdf",
+      "confidence": 0.7999999999999999,
+      "claude_answer": "A",
+      "claude_reasoning": "Analysis pending - requires manual review."
+    },
+    {
+      "id": "Q12_91",
+      "number": "91",
+      "description": "All Compute Engine instances in your VPC should be able to connect to an Active Directory server on speciKc ports. Any other traOc emerging from your instances is not allowed. You want to enforce this using VPC Krewall rules. How should you conKgure the Krewall rules? Directory traOc for all instances. Directory traOc for all instances. all traOc for all instances.",
+      "options": {
+        "A": "Create an egress rule with priority 1000 to deny all traOc for all instances. Create another egress rule with priority 100 to allow the Active",
+        "B": "Create an egress rule with priority 100 to deny all traOc for all instances. Create another egress rule with priority 1000 to allow the Active",
+        "C": "Create an egress rule with priority 1000 to allow the Active Directory traOc. Rely on the implied deny egress rule with priority 100 to block"
+      },
+      "introductory_info": "",
+      "page": 12,
+      "source": "Questions_13.pdf",
+      "confidence": 0.6,
+      "claude_answer": "A",
+      "claude_reasoning": "Analysis pending - requires manual review."
+    },
+    {
+      "id": "Q17_93",
+      "number": "93",
+      "description": "A development team at your company has created a dockerized HTTPS web application. You need to deploy the application on Google Kubernetes Engine (GKE) and make sure that the application scales automatically. How should you deploy to GKE? to load-balance the HTTPS traOc.   crypt0 Highly Voted  5 years, 1 month ago Why not using Ingress? (A) upvoted 28 times   techalik 4 years ago I think A is OK: upvoted 2 times   nitinz 3 years, 9 months ago It is A, K8s best way to LB is Ingress. upvoted 5 times",
+      "options": {
+        "A": "Use the Horizontal Pod Autoscaler and enable cluster autoscaling. Use an Ingress resource to load-balance the HTTPS traOc.",
+        "B": "Use the Horizontal Pod Autoscaler and enable cluster autoscaling on the Kubernetes cluster. Use a Service resource of type LoadBalancer",
+        "C": "Enable autoscaling on the Compute Engine instance group. Use an Ingress resource to load-balance the HTTPS traOc.",
+        "D": "Enable autoscaling on the Compute Engine instance group. Use a Service resource of type LoadBalancer to load-balance the HTTPS traOc."
+      },
+      "introductory_info": "",
+      "page": 17,
+      "source": "Questions_13.pdf",
+      "confidence": 0.7999999999999999,
+      "claude_answer": "A",
+      "claude_reasoning": "Analysis pending - requires manual review."
+    },
+    {
+      "id": "Q20_94",
+      "number": "94",
+      "description": "You need to design a solution for global load balancing based on the URL path being requested. You need to ensure operations reliability and end- to-end in- transit encryption based on Google best practices. What should you do?   victory108 Highly Voted  2 years, 1 month ago upvoted 14 times   betiy Highly Voted  3 years, 5 months ago URL paths supported only in HTTP(S) Load balancing upvoted 10 times",
+      "options": {
+        "A": "Create a cross-region load balancer with URL Maps.",
+        "B": "Create an HTTPS load balancer with URL maps.",
+        "C": "Create appropriate instance groups and instances. ConKgure SSL proxy load balancing.",
+        "D": "Create a global forwarding rule. ConKgure SSL proxy load balancing."
+      },
+      "introductory_info": "",
+      "page": 20,
+      "source": "Questions_13.pdf",
+      "confidence": 0.7999999999999999,
+      "claude_answer": "A",
+      "claude_reasoning": "Analysis pending - requires manual review."
+    },
+    {
+      "id": "Q3_95",
+      "number": "95",
+      "description": "You have an application that makes HTTP requests to Cloud Storage. Occasionally the requests fail with HTTP status codes of 5xx and 429. How should you handle these types of errors?   bigob4ek Highly Voted  3 years, 7 months ago Answer is B You should use exponential backoff to retry your requests when receiving errors with 5xx or 429 response codes from Cloud Storage. upvoted 41 times   nitinz 2 years, 3 months ago It is B upvoted 1 times   AzureDP900 8 months ago I agree with you, B should be right upvoted 1 times   Sbgani Highly Voted  9 months, 2 weeks ago HTTP 408, 429, and 5xx response codes. Exponential backoff algorithm For requests that meet both the response and idempotency criteria, you should generally use truncated exponential backoff. Truncated exponential backoff is a standard error handling strategy for network applications in which a client periodically retries a failed request with increasing delays between requests. An exponential backoff algorithm retries requests exponentially, increasing the waiting time between retries up to a maximum backoff time. See the following workflow example to learn how exponential backoff works: You make a request to Cloud Storage. If the request fails, wait 1 + random_number_milliseconds seconds and retry the request. If the request fails, wait 2 + random_number_milliseconds seconds and retry the request. If the request fails, wait 4 + random_number_milliseconds seconds and retry the request. And so on, up to a maximum_backoff time. Continue waiting and retrying up to a maximum amount of time (deadline), but do not increase the maximum_backoff wait period between retries upvoted 13 times",
+      "options": {
+        "A": "Use gRPC instead of HTTP for better performance.",
+        "B": "Implement retry logic using a truncated exponential backoff strategy.",
+        "C": "Make sure the Cloud Storage bucket is multi-regional for geo-redundancy."
+      },
+      "introductory_info": "",
+      "page": 3,
+      "source": "Questions_14.pdf",
+      "confidence": 0.6,
+      "claude_answer": "A",
+      "claude_reasoning": "Analysis pending - requires manual review."
+    },
+    {
+      "id": "Q10_98",
+      "number": "98",
+      "description": "Your company acquired a healthcare startup and must retain its customers' medical information for up to 4 more years, depending on when it was created. Your corporate policy is to securely retain this data, and then delete it as soon as regulations allow. Which approach should you take?   AWS56 Highly Voted  4 years, 11 months ago Agree C upvoted 23 times   desertlotus1211 Most Recent  3 weeks, 2 days ago Why not B? It's patients' health records... upvoted 1 times",
+      "options": {
+        "A": "Store the data in Google Drive and manually delete records as they expire.",
+        "B": "Anonymize the data using the Cloud Data Loss Prevention API and store it indeKnitely.",
+        "C": "Store the data in Cloud Storage and use lifecycle management to delete Kles when they expire.",
+        "D": "Store the data in Cloud Storage and run a nightly batch script that deletes all expired data."
+      },
+      "introductory_info": "",
+      "page": 10,
+      "source": "Questions_14.pdf",
+      "confidence": 0.7999999999999999,
+      "claude_answer": "A",
+      "claude_reasoning": "Analysis pending - requires manual review."
+    },
+    {
+      "id": "Q12_99",
+      "number": "99",
+      "description": "You are deploying a PHP App Engine Standard service with Cloud SQL as the backend. You want to minimize the number of queries to the database. What should you do? issuing a query to Cloud SQL. results. ג€cached_queriesג€. query to Cloud SQL.   hiteshrup Highly Voted  3 years ago A dedicated memset is always better than shared until cost-effectiveness specify in the exam as objective. So Option C and D are ruled out. From A and B, Option B is sending and updating query every minutes which is over killing. So reasonable option left with A which balance performance and cost. My answer will be A upvoted 28 times   ArtistS 1 month ago Good job bro upvoted 1 times   Eroc Highly Voted  4 years, 1 month ago upvoted 23 times   nitinz 2 years, 9 months ago A is correct upvoted 6 times   dlzhang 2 years, 6 months ago upvoted 2 times   tartar 3 years, 4 months ago A is ok upvoted 11 times   Sur_Nikki Most Recent  7 months, 2 weeks ago Best is A upvoted 2 times   megumin 1 year, 1 month ago A is ok upvoted 1 times",
+      "options": {
+        "A": "Set the memcache service level to dedicated. Create a key from the hash of the query, and return database values from memcache before",
+        "B": "Set the memcache service level to dedicated. Create a cron task that runs every minute to populate the cache with keys containing query",
+        "C": "Set the memcache service level to shared. Create a cron task that runs every minute to save all expected queries to a key called",
+        "D": "Set the memcache service level to shared. Create a key called ג€cached_queriesג€, and return database values from the key before using a"
+      },
+      "introductory_info": "",
+      "page": 12,
+      "source": "Questions_14.pdf",
+      "confidence": 0.7999999999999999,
+      "claude_answer": "A",
+      "claude_reasoning": "Analysis pending - requires manual review."
+    },
+    {
+      "id": "Q14_100",
+      "number": "100",
+      "description": "You need to ensure reliability for your application and operations by supporting reliable task scheduling for compute on GCP. Leveraging Google best practices, what should you do? Engine instances. processing utility service running on Compute Engine instances. running on Compute Engine instances. utility service running on Compute Engine instances.   JoeShmoe Highly Voted  4 years, 7 months ago Answer is B upvoted 32 times   Smart Highly Voted  4 years, 3 months ago upvoted 30 times   fraloca 3 years, 5 months ago upvoted 4 times   xaqanik Most Recent  4 months, 2 weeks ago You can create Cron job using HTTP endpoint, Pub/Sub and App engine. upvoted 1 times   odacir 7 months ago Answer is B, but this question is outdated, Today the best practices for cron is Cloud Scheduler: fully managed enterprise-grade cron job scheduler upvoted 15 times   JaimeMS 2 weeks, 2 days ago Thanks... I was a little confused by this options upvoted 2 times   JPA210 8 months, 1 week ago This seems to be an old question, despite B could be the more correct answer, it is not exactly a good one. 'Using the Cron service provided by App Engine', the cron service is provided by Cloud Scheduler, not App Engine. App Engine HTTP endpoint can be a target for the cron task. upvoted 9 times   salim_ 1 year, 1 month ago upvoted 3 times",
+      "options": {
+        "A": "Using the Cron service provided by App Engine, publish messages directly to a message-processing utility service running on Compute",
+        "B": "Using the Cron service provided by App Engine, publish messages to a Cloud Pub/Sub topic. Subscribe to that topic using a message-",
+        "C": "Using the Cron service provided by Google Kubernetes Engine (GKE), publish messages directly to a message-processing utility service",
+        "D": "Using the Cron service provided by GKE, publish messages to a Cloud Pub/Sub topic. Subscribe to that topic using a message-processing"
+      },
+      "introductory_info": "",
+      "page": 14,
+      "source": "Questions_14.pdf",
+      "confidence": 0.7999999999999999,
+      "claude_answer": "A",
+      "claude_reasoning": "Analysis pending - requires manual review."
+    },
+    {
+      "id": "Q16_101",
+      "number": "101",
+      "description": "Your company is building a new architecture to support its data-centric business focus. You are responsible for setting up the network. Your company's mobile and web-facing applications will be deployed on-premises, and all data analysis will be conducted in GCP. The plan is to process and load 7 years of archived .csv Kles totaling 900 TB of data and then continue loading 10 TB of data daily. You currently have an existing 100-MB internet connection. What actions will meet your company's needs? connection with Google using a Dedicated Interconnect or Direct Peering connection and use it to upload Kles daily. VPN Tunnel to VPC networks over the public internet, and compress and upload Kles daily using the gsutil ג€\"m option. VPN Tunnel to VPC networks over the public internet, and compress and upload Kles daily.   KouShikyou Highly Voted  5 years, 2 months ago",
+      "options": {
+        "A": "Compress and upload both archived Kles and Kles uploaded daily using the gsutil ג€\"m option.",
+        "B": "Lease a Transfer Appliance, upload archived Kles to it, and send it to Google to transfer archived data to Cloud Storage. Establish a",
+        "C": "Lease a Transfer Appliance, upload archived Kles to it, and send it to Google to transfer archived data to Cloud Storage. Establish one Cloud",
+        "D": "Lease a Transfer Appliance, upload archived Kles to it, and send it to Google to transfer archived data to Cloud Storage. Establish a Cloud"
+      },
+      "introductory_info": "",
+      "page": 16,
+      "source": "Questions_14.pdf",
+      "confidence": 0.7999999999999999,
+      "claude_answer": "A",
+      "claude_reasoning": "Analysis pending - requires manual review."
+    },
+    {
+      "id": "Q19_102",
+      "number": "102",
+      "description": "You are developing a globally scaled frontend for a legacy streaming backend data API. This API expects events in strict chronological order with no repeat data for proper processing. Which products should you deploy to ensure guaranteed-once FIFO (Krst-in, Krst-out) delivery of data?   exampanic Highly Voted  4 years, 11 months ago I believe the answer is B. \"Pub/Sub doesn't provide guarantees about the order of message delivery. Strict message ordering can be achieved upvoted 68 times",
+      "options": {
+        "A": "Cloud Pub/Sub alone",
+        "B": "Cloud Pub/Sub to Cloud Data^ow",
+        "C": "Cloud Pub/Sub to Stackdriver",
+        "D": "Cloud Pub/Sub to Cloud SQL"
+      },
+      "introductory_info": "",
+      "page": 19,
+      "source": "Questions_14.pdf",
+      "confidence": 0.7999999999999999,
+      "claude_answer": "A",
+      "claude_reasoning": "Analysis pending - requires manual review."
+    },
+    {
+      "id": "Q2_103",
+      "number": "103",
+      "description": "Your company is planning to perform a lift and shift migration of their Linux RHEL 6.5+ virtual machines. The virtual machines are running in an on-premises VMware environment. You want to migrate them to Compute Engine following Google-recommended practices. What should you do? individually with Migrate for Compute Engine. Compute Engine. 3. Create standard virtual machines where the boot disks are the ones you have imported. Compute Engine migration RunBook, and execute the migration. virtual machines. 3. Migrate all virtual machines into Compute Engine.   kopper2019 Highly Voted  3 years, 5 months ago Ans ) C , Migrate for Compute Engine organizes groups of VMs into Waves. After understanding the dependencies of your applications, create runbooks that contain groups of VMs and begin your migration! upvoted 34 times   technodev Highly Voted  2 years, 11 months ago I got this question in my exam. upvoted 15 times   Sur_Nikki 1 year, 7 months ago Did u passed...? If yes, then Congratulations and let me know the correct answer upvoted 1 times   3fd692e Most Recent  2 months, 2 weeks ago Assess, Plan, Migrate. Textbook perfect upvoted 1 times   salim_ 1 year, 7 months ago upvoted 1 times",
+      "options": {
+        "A": "1. DeKne a migration plan based on the list of the applications and their dependencies. 2. Migrate all virtual machines into Compute Engine",
+        "B": "1. Perform an assessment of virtual machines running in the current VMware environment. 2. Create images of all disks. Import disks on",
+        "C": "1. Perform an assessment of virtual machines running in the current VMware environment. 2. DeKne a migration plan, prepare a Migrate for",
+        "D": "1. Perform an assessment of virtual machines running in the current VMware environment. 2. Install a third-party agent on all selected"
+      },
+      "introductory_info": "",
+      "page": 2,
+      "source": "Questions_15.pdf",
+      "confidence": 0.7999999999999999,
+      "claude_answer": "A",
+      "claude_reasoning": "Analysis pending - requires manual review."
+    },
+    {
+      "id": "Q4_104",
+      "number": "104",
+      "description": "You need to deploy an application to Google Cloud. The application receives traOc via TCP and reads and writes data to the Klesystem. The application does not support horizontal scaling. The application process requires full control over the data on the Kle system because concurrent access causes corruption. The business is willing to accept a downtime when an incident occurs, but the application must be available 24/7 to support their business operations. You need to design the architecture of this application on Google Cloud. What should you do? instances. instances. load balancer in front of the instances. load balancer in front of the instances.   VishalB Highly Voted  2 years, 11 months ago Correct Ans : D Since the Traffic is TCP, Ans A & C gets eliminated as HTTPS load balance is not supported. B - File storage system is Cloud Firestore which do not give full control, hence eliminated. D - Unmanaged instance group with network load balance with regional persistent disk for storage gives full control which is required for the migration. upvoted 62 times   kimharsh 2 years ago what about the fact that is the unmanaged instance group is not regional , so you can't create it in more than 1 zone ? upvoted 7 times   Jerryzzyy 10 months, 2 weeks ago Can we group to running instances in different zones to an unmanaged instance group? upvoted 1 times",
+      "options": {
+        "A": "Use a managed instance group with instances in multiple zones, use Cloud Filestore, and use an HTTP load balancer in front of the",
+        "B": "Use a managed instance group with instances in multiple zones, use Cloud Filestore, and use a network load balancer in front of the",
+        "C": "Use an unmanaged instance group with an active and standby instance in different zones, use a regional persistent disk, and use an HTTP",
+        "D": "Use an unmanaged instance group with an active and standby instance in different zones, use a regional persistent disk, and use a network"
+      },
+      "introductory_info": "",
+      "page": 4,
+      "source": "Questions_15.pdf",
+      "confidence": 0.7999999999999999,
+      "claude_answer": "A",
+      "claude_reasoning": "Analysis pending - requires manual review."
+    },
+    {
+      "id": "Q7_105",
+      "number": "105",
+      "description": "Your company has an application running on multiple Compute Engine instances. You need to ensure that the application can communicate with an on-premises service that requires high throughput via internal IPs, while minimizing latency. What should you do?   kopper2019 Highly Voted  3 years, 5 months ago Ans ) D , Reason : high throughput via internal IPs upvoted 67 times   ShadowLord 2 years, 4 months ago This is tricky questions , it can be achieved by C and D ... Multiple Computes and Costs .. they are trying to test knowledge on VPN and Tunnels .... upvoted 2 times   XDevX Highly Voted  3 years, 5 months ago IMHO the correct answer is D. Reason: \"requires high throughput via internal IPs, while minimizing latency\" - both are aspects you cannot guarantee with using VPN traversing the internet. upvoted 23 times   [Removed] Most Recent  3 months, 3 weeks ago D seems to be correct upvoted 1 times   the1dv 11 months, 1 week ago Should be D as high throughput upvoted 1 times   Gilbaliano 1 year ago Justo be D upvoted 1 times   Gilbaliano 1 year ago Should be D upvoted 1 times   kamradamir 1 year ago It should be D, since need to communicate via Internal IP upvoted 1 times",
+      "options": {
+        "A": "Use OpenVPN to conKgure a VPN tunnel between the on-premises environment and Google Cloud.",
+        "B": "ConKgure a direct peering connection between the on-premises environment and Google Cloud.",
+        "C": "Use Cloud VPN to conKgure a VPN tunnel between the on-premises environment and Google Cloud.",
+        "D": "ConKgure a Cloud Dedicated Interconnect connection between the on-premises environment and Google Cloud."
+      },
+      "introductory_info": "",
+      "page": 7,
+      "source": "Questions_15.pdf",
+      "confidence": 0.7999999999999999,
+      "claude_answer": "A",
+      "claude_reasoning": "Analysis pending - requires manual review."
+    },
+    {
+      "id": "Q12_107",
+      "number": "107",
+      "description": "You are monitoring Google Kubernetes Engine (GKE) clusters in a Cloud Monitoring workspace. As a Site Reliability Engineer (SRE), you need to triage incidents quickly. What should you do? Engine instance. Data Studio dashboard.   kopper2019 Highly Voted  2 years, 11 months ago Ans ) A . upvoted 57 times",
+      "options": {
+        "A": "Navigate the predeKned dashboards in the Cloud Monitoring workspace, and then add metrics and create alert policies.",
+        "B": "Navigate the predeKned dashboards in the Cloud Monitoring workspace, create custom metrics, and install alerting software on a Compute",
+        "C": "Write a shell script that gathers metrics from GKE nodes, publish these metrics to a Pub/Sub topic, export the data to BigQuery, and make a",
+        "D": "Create a custom dashboard in the Cloud Monitoring workspace for each incident, and then add metrics and create alert policies."
+      },
+      "introductory_info": "",
+      "page": 12,
+      "source": "Questions_15.pdf",
+      "confidence": 0.7999999999999999,
+      "claude_answer": "A",
+      "claude_reasoning": "Analysis pending - requires manual review."
+    },
+    {
+      "id": "Q14_108",
+      "number": "108",
+      "description": "You are implementing a single Cloud SQL MySQL second-generation database that contains business-critical transaction data. You want to ensure that the minimum amount of data is lost in case of catastrophic failure. Which two features should you implement? (Choose two.)   kopper2019 Highly Voted  2 years, 11 months ago Ans) C and D Cloud SQL. If you use Cloud SQL, the fully managed Google Cloud MySQL database, you should enable automated backups and binary logging for your Cloud SQL instances. This allows you to perform a point-in-time recovery, which restores your database from a backup and recovers it to a fresh Cloud SQL instance upvoted 37 times",
+      "options": {
+        "A": "Sharding",
+        "B": "Read replicas",
+        "C": "Binary logging",
+        "D": "Automated backups",
+        "E": "Semisynchronous replication"
+      },
+      "introductory_info": "",
+      "page": 14,
+      "source": "Questions_15.pdf",
+      "confidence": 0.7999999999999999,
+      "claude_answer": "A",
+      "claude_reasoning": "Analysis pending - requires manual review."
+    },
+    {
+      "id": "Q18_109",
+      "number": "109",
+      "description": "data loss in case of catastrophic failure. upvoted 4 times You are wo o rk m in e g r m at a h a g s o p u o b r t 1 s y a e s a s r, o 6 c i m at o i n o t n h s w a h g o o se members range in age from 8 to 30. The association collects a large amount of health data, such as sustaOinpetdio inn jBur,i eresa. dY orue palricea sst,o irsin ngo tth ais rdeactoam inm BeingdQeuder ay.p Cpurorraecnht .l eRgeisalda trieopn lriceaqsu iareres ycooup iteos d oefl eat ed sautacbh ainsfeo trhmaat tcioann u bpeo nu sreeqdu teos to offlfo tahde read traffic from the primary database. While read replicas can improve the performance of a database, they are not specifically designed to protect against subject. You want to design a solution that can accommodate such a request. What should you do? data loss in case of catastrophic failure. Option E, semisynchronous replication, is not a recommended approach. Semisynchronous replication is a method of replicating data between a primary database and one or more secondary databases. While semisynchronous replication can help to ensure that data is replicated quickly and accurately, it is not specifically designed to protect against data loss in case of catastrophic failure. upvoted 2 times of the DLP scan, save the result to Data Catalog. Upon a deletion request, query Data Catalog to Knd the column with personal information.   megumin 1 year, 7 months ago thSiesl evciteewd A. nUssweer :t hCiDs view instead of the source table for all analysis tasks. cd is ok its value.   diasporabro 1 year, 7 months ago  I se mei lRaena7d4 RHeigphlliyc Vaoste ad s m 3o ryee aorfs ,a 5 pmeorfnothrms aagnoce thing, than DR thing Aucpcvoortdedin 1g t itmoe mse, the question states \"The association collects a large amount of health data, such as sustained injuries.\" and the nuance on the word such => \" Current legislation requires you to delete \"SUCH\" information upon request of the subject. \" So from that point of view the",
+      "options": {
+        "A": "Use a unique identiKer for each individual. Upon a deletion request, delete all rows from BigQuery with this identiKer.",
+        "B": "When ingesting new data in BigQuery, run the data through the Data Loss Prevention (DLP) API to identify any personal information. As part",
+        "C": "Create a BigQuery view over the table that contains all data. Upon a deletion request, exclude the rows that affect the subject's data from",
+        "D": "u Upsvoet ead u 1n tiiqmuees identiKer for each individual. Upon a deletion request, overwrite the column with the unique identiKer with a salted SHA256 of"
+      },
+      "introductory_info": "",
+      "page": 18,
+      "source": "Questions_15.pdf",
+      "confidence": 0.7999999999999999,
+      "claude_answer": "A",
+      "claude_reasoning": "Analysis pending - requires manual review."
+    },
+    {
+      "id": "Q1_110",
+      "number": "110",
+      "description": "Your company has announced that they will be outsourcing operations functions. You want to allow developers to easily stage new versions of a cloud-based application in the production environment and allow the outsourced operations team to autonomously promote staged versions to production. You want to minimize the operational overhead of the solution. Which Google Cloud product should you migrate to?   kopper2019 Highly Voted  3 years, 5 months ago upvoted 36 times   arsav Highly Voted  3 years, 4 months ago Answer should be A as only with App Engine we have a default service account which allows the user to deploy the changes per project. for GKE we may have to configure additional permission for both DEV and Operations team to deploy the changes. upvoted 24 times   Sephethus Most Recent  6 months ago Explanation: Why A is correct: App Engine: Google App Engine is a fully managed platform-as-a-service (PaaS) that allows developers to build and deploy applications quickly and easily without worrying about managing the underlying infrastructure. It supports continuous integration and continuous deployment (CI/CD) processes, enabling developers to stage new versions of applications easily. Staging and Promotion: App Engine has built-in support for traffic splitting and versioning, which allows you to stage new versions of your application and gradually promote them to production. This can be done with minimal operational overhead, making it ideal for scenarios where operational functions are outsourced. Minimal Operational Overhead: Since App Engine is fully managed, it reduces the operational burden significantly, making it easier for the outsourced operations team to handle promotions and manage the application. upvoted 1 times   JaimeMS 6 months, 2 weeks ago upvoted 1 times   jaisonPathiyil 8 months ago Is this answers are really correct or misleading to us..? upvoted 3 times   mesodan 9 months, 2 weeks ago While both GKE and App Engine offer functionalities for deploying cloud-based applications, App Engine is more managed service compared to GKE, resulting in lower operational overhead. upvoted 2 times",
+      "options": {
+        "A": "App Engine",
+        "B": "GKE On-Prem",
+        "C": "Compute Engine",
+        "D": "Google Kubernetes Engine"
+      },
+      "introductory_info": "",
+      "page": 1,
+      "source": "Questions_16.pdf",
+      "confidence": 0.7,
+      "claude_answer": "A",
+      "claude_reasoning": "Analysis pending - requires manual review."
+    },
+    {
+      "id": "Q3_111",
+      "number": "111",
+      "description": "Your company is running its application workloads on Compute Engine. The applications have been deployed in production, acceptance, and development environments. The production environment is business-critical and is used 24/7, while the acceptance and development environments are only critical during oOce hours. Your CFO has asked you to optimize these environments to achieve cost savings during idle times. What should you do? machine type outside of oOce hours. Schedule the shell script on one of the production instances to automate the task. them just before oOce hours. environments.   pamepadero Highly Voted  3 years, 5 months ago B is the answer. Schedule VMs to auto start and stop: The benefit of a platform like Compute Engine is that you only pay for the compute resources that you use. Production systems tend to run 24/7; however, VMs in development, test or personal environments tend to only be used during business hours, and turning them off can save you a lot of money! Cloud Scheduler, GCP’s fully managed cron job scheduler, provides a straightforward solution for automatically stopping and starting VMs. By employing Cloud Scheduler with Cloud Pub/Sub to trigger Cloud Functions on schedule, you can stop and start groups of VMs identified with labels of your choice (created in Compute Engine). Here you can see an example schedule that stops all VMs labeled \"dev\" at 5pm and restarts them at 9am, while leaving VMs labeled \"prod\" untouched upvoted 36 times   sgoYcial 2 years, 4 months ago Excellent ......even the good CFO is telling leave the office after 5.oo and come next day to work :) upvoted 16 times   Ric350 2 years, 5 months ago Great answer and documentation. Def B upvoted 2 times   rzygor 2 years, 4 months ago",
+      "options": {
+        "A": "Create a shell script that uses the gcloud command to change the machine type of the development and acceptance instances to a smaller",
+        "B": "Use Cloud Scheduler to trigger a Cloud Function that will stop the development and acceptance environments after oOce hours and start",
+        "C": "Deploy the development and acceptance applications on a managed instance group and enable autoscaling.",
+        "D": "Use regular Compute Engine instances for the production environment, and use preemptible VMs for the acceptance and development"
+      },
+      "introductory_info": "",
+      "page": 3,
+      "source": "Questions_16.pdf",
+      "confidence": 0.7999999999999999,
+      "claude_answer": "A",
+      "claude_reasoning": "Analysis pending - requires manual review."
+    },
+    {
+      "id": "Q8_113",
+      "number": "113",
+      "description": "Your organization has decided to restrict the use of external IP addresses on instances to only approved instances. You want to enforce this requirement across all of your Virtual Private Clouds (VPCs). What should you do? new subnet. list.   victory108 Highly Voted  2 years, 11 months ago list. upvoted 24 times   AnilKr Highly Voted  2 years, 10 months ago you might want to restrict external IP address so that only specific VM instances can use them. This option can help to prevent data exfiltration or maintain network isolation. Using an Organization Policy, you can restrict external IP addresses to specific VM instances with constraints to control use of external IP addresses for your VM instances within an organization or a project. upvoted 19 times   james2033 Most Recent  3 weeks ago upvoted 1 times   odacir 3 months, 3 weeks ago \"You cannot apply the constraint retroactively. All VMs that have external IP addresses before you enable the policy retain their external IP addresses.\" It shouldn't be option D then upvoted 1 times",
+      "options": {
+        "A": "Remove the default route on all VPCs. Move all approved instances into a new subnet that has a default route to an internet gateway.",
+        "B": "Create a new VPC in custom mode. Create a new subnet for the approved instances, and set a default route to the internet gateway on this",
+        "C": "Implement a Cloud NAT solution to remove the need for external IP addresses entirely.",
+        "D": "Set an Organization Policy with a constraint on constraints/compute.vmExternalIpAccess. List the approved instances in the allowedValues"
+      },
+      "introductory_info": "",
+      "page": 8,
+      "source": "Questions_16.pdf",
+      "confidence": 0.7999999999999999,
+      "claude_answer": "A",
+      "claude_reasoning": "Analysis pending - requires manual review."
+    },
+    {
+      "id": "Q10_114",
+      "number": "114",
+      "description": "Your company uses the Firewall Insights feature in the Google Network Intelligence Center. You have several Krewall rules applied to Compute Engine instances. You need to evaluate the eOciency of the applied Krewall ruleset. When you bring up the Firewall Insights page in the Google Cloud Console, you notice that there are no log rows to display. What should you do to troubleshoot the issue?   nohel Highly Voted  3 years, 5 months ago Answer is B when you create a firewall rule there is an option for firewall rule logging on/off. It is set to off by default. To get firewall insights or view the logs for a specific firewall rule you need to enable logging while creating the rule or you can enable it by editing that rule. upvoted 35 times   victory108 Highly Voted  3 years, 5 months ago upvoted 15 times   GlebG Most Recent  5 months ago First D, then B upvoted 1 times   Gino17m 8 months ago Corrent answer is B upvoted 2 times   RVivek 1 year, 10 months ago upvoted 1 times   windsor_43 1 year, 11 months ago The Answer is B Just had my exam today with a pass, this question was in the exam. Dated 31/12/22 Thanks to this site it was by far my most valuable upvoted 5 times   jay9114 1 year, 12 months ago You have to enable logging for a firewall rule in order to see the rows. \"When you enable logging for a firewall rule, Google Cloud creates an entry called a connection record each time the rule allows or denies traffic.\" upvoted 1 times",
+      "options": {
+        "A": "Enable Virtual Private Cloud (VPC) ^ow logging.",
+        "B": "Enable Firewall Rules Logging for the firewall rules you want to monitor.",
+        "C": "Verify that your user account is assigned the compute.networkAdmin Identity and Access Management (IAM) role.",
+        "D": "Install the Google Cloud SDK, and verify that there are no Firewall logs in the command line output."
+      },
+      "introductory_info": "",
+      "page": 10,
+      "source": "Questions_16.pdf",
+      "confidence": 0.7999999999999999,
+      "claude_answer": "A",
+      "claude_reasoning": "Analysis pending - requires manual review."
+    },
+    {
+      "id": "Q14_116",
+      "number": "116",
+      "description": "You have developed a non-critical update to your application that is running in a managed instance group, and have created a new instance template with the update that you want to release. To prevent any possible impact to the application, you don't want to update any running instances. You want any new instances that are created by the managed instance group to contain the new update. What should you do?   XDevX Highly Voted  3 years, 5 months ago IMHO the correct answer is d) opportunistic mode, not c) proactive mode. The requirement is not to update any running instances. For automated rolling updates, you must set the mode to proactive. Alternatively, if an automated update is potentially too disruptive, you can choose to perform an opportunistic update. The MIG applies an opportunistic update only when you manually initiate the update on selected instances or when new instances are created. New instances can be created when you or another service, such as an autoscaler, resizes the MIG. upvoted 57 times   victory108 Highly Voted  3 years, 5 months ago upvoted 12 times",
+      "options": {
+        "A": "Start a new rolling restart operation.",
+        "B": "Start a new rolling replace operation.",
+        "C": "Start a new rolling update. Select the Proactive update mode.",
+        "D": "Start a new rolling update. Select the Opportunistic update mode."
+      },
+      "introductory_info": "",
+      "page": 14,
+      "source": "Questions_16.pdf",
+      "confidence": 0.7999999999999999,
+      "claude_answer": "A",
+      "claude_reasoning": "Analysis pending - requires manual review."
+    },
+    {
+      "id": "Q17_117",
+      "number": "117",
+      "description": "  bhinar 1 year, 4 months ago Your company is designing its application landscape on Compute Engine. Whenever a zonal outage occurs, the application should be restored in If you want to apply updates automatically, set the type to proactive. another zone as quickly as possible with the latest application data. You need to design the solution to meet this requirement. What should you upvoted 1 times do? restore the disk in the same zone. application data. Whenever a zonal outage occurs, use the instance template to spin up the application in another zone in the same region. Use the regional persistent disk for the application data. restore the disk in another zone within the same region. application data. Whenever a zonal outage occurs, use the instance template to spin up the application in another region. Use the regional persistent disk for the application data.   TotoroChina Highly Voted  2 years, 11 months ago Answer is B, it only request zonal resiliency. Regional persistent disk is a storage option that provides synchronous replication of data between two zones in a region. Regional persistent disks can be a good building block to use when you implement HA services in Compute Engine. upvoted 50 times   AmitRBS 2 years ago upvoted 4 times   Ssoumya Highly Voted  2 years, 11 months ago Answer is B upvoted 14 times   oscarcampos Most Recent  1 month, 3 weeks ago why D ? upvoted 1 times   mesodan 3 months, 2 weeks ago It is B. As for D: Spinning up the application in another region might be too geographically distant, leading to higher latency and potential issues. upvoted 1 times   hzaoui 4 months, 4 weeks ago A regional persistent disk is designed to provide synchronous replication of data between two zones in the same region, ensuring that data remains available even if one zone is affected by an outage. By using an instance template along with a regional disk, you can quickly create new instances in an available zone during a zonal outage and attach the regional persistent disk to continue operations with the latest application data. upvoted 1 times",
+      "options": {
+        "A": "Create a snapshot schedule for the disk containing the application data. Whenever a zonal outage occurs, use the latest snapshot to",
+        "B": "Agree, clearly it’s B. Focus on keyword “zone”",
+        "C": "Create a snapshot schedule for the disk containing the application data. Whenever a zonal outage occurs, use the latest snapshot to",
+        "D": "ConKgure the Compute Engine instances with an instance template for the application, and use a regional persistent disk for the"
+      },
+      "introductory_info": "",
+      "page": 17,
+      "source": "Questions_16.pdf",
+      "confidence": 0.7999999999999999,
+      "claude_answer": "A",
+      "claude_reasoning": "Analysis pending - requires manual review."
+    },
+    {
+      "id": "Q19_118",
+      "number": "118",
+      "description": "Your company has just acquired another company, and you have been asked to integrate their existing Google Cloud environment into your company's data center. Upon investigation, you discover that some of the RFC 1918 IP ranges being used in the new company's Virtual Private Cloud (VPC) overlap with your data center IP space. What should you do to enable connectivity and make sure that there are no routing con^icts when connectivity is established? overlapping IP space. space. block the overlapping IP space.   VishalB Highly Voted  3 years, 4 months ago Correct Answer: A upvoted 42 times   zanfo 2 years, 9 months ago A is not correct. \"What should you do to enable connectivity and make sure that there are no routing conflicts when connectivity is established?\" if you apply VPN con BGP, the actual IP address will be propagated to on prem environment with overlapping RFC1918 as result. B is correct with custom route upvoted 7 times",
+      "options": {
+        "A": "Create a Cloud VPN connection from the new VPC to the data center, create a Cloud Router, and apply new IP addresses so there is no",
+        "B": "Create a Cloud VPN connection from the new VPC to the data center, and create a Cloud NAT instance to perform NAT on the overlapping IP",
+        "C": "Create a Cloud VPN connection from the new VPC to the data center, create a Cloud Router, and apply a custom route advertisement to",
+        "D": "Create a Cloud VPN connection from the new VPC to the data center, and apply a Krewall rule that blocks the overlapping IP space."
+      },
+      "introductory_info": "",
+      "page": 19,
+      "source": "Questions_16.pdf",
+      "confidence": 0.7999999999999999,
+      "claude_answer": "A",
+      "claude_reasoning": "Analysis pending - requires manual review."
+    },
+    {
+      "id": "Q1_7",
+      "number": "7",
+      "description": "To reduce costs, the Director of Engineering has required all developers to move their development infrastructure resources from on-premises virtual machines (VMs) to Google Cloud Platform. These resources go through multiple start/stop events during the day and require state to persist. You have been asked to design the process of running a development environment in Google Cloud while providing cost visibility to the Knance department. Which two steps should you take? (Choose two.)   [Removed] Highly Voted  2 months, 4 weeks ago I spent all morning researching this question. I just popped over and took the GCP Practice exam on Google's website and guess what... this",
+      "options": {
+        "A": "Use the - -no-auto-delete ^ag on all persistent disks and stop the VM",
+        "B": "Use the - -auto-delete ^ag on all persistent disks and terminate the VM",
+        "C": "Apply VM CPU utilization label and include it in the BigQuery billing export",
+        "D": "Use Google BigQuery billing export and labels to associate cost to groups",
+        "E": "Store all state into local SSD, snapshot the persistent disks, and terminate the VM",
+        "F": "Store all state in Google Cloud Storage, snapshot the persistent disks, and terminate the VM"
+      },
+      "introductory_info": "",
+      "page": 1,
+      "source": "Questions_2.pdf",
+      "confidence": 0.7999999999999999,
+      "claude_answer": "A",
+      "claude_reasoning": "Analysis pending - requires manual review."
+    },
+    {
+      "id": "Q6_9",
+      "number": "9",
+      "description": "You set up an autoscaling instance group to serve web traOc for an upcoming launch. After conKguring the instance group as a backend service to an HTTP(S) load balancer, you notice that virtual machine (VM) instances are being terminated and re-launched every minute. The instances do not have a public IP address. You have veriKed the appropriate web response is coming from each instance using the curl command. You want to ensure the backend is conKgured correctly. What should you do? and the instance tag as the destination.   Eroc Highly Voted  2 months, 4 weeks ago \"A\" and \"B\" wouldn't turn the VMs on or off, it would jsut prevent traffic. \"C\" would turn them off if the health check is configured to terminate the VM is it fails. \"D\" is the start of a pseudo health check without any logic, so it also isn't an answer because it is like \"A\" and \"B\". Correct Answer: \"C\" upvoted 35 times   tartar 4 years, 4 months ago C is ok upvoted 14 times   nitinz 3 years, 9 months ago C because terminated and relaunch.... something wrong with HC. upvoted 6 times   AzureDP900 2 years, 2 months ago agreed and C is right upvoted 2 times   TheCloudBoy77 Highly Voted  3 years, 1 month ago issue here. purpose of getting load balancers , not correct port then appropriate FW rule need to be setup to ensure LB can reach backend instances for healthcheck. if healthcheck traffic is blcked, instances will be marked unhealthy and will be restarted. and the instance tag as the destination.>> tagging is not useful here as the instance is not the source of traffic, just the port need to be opened on FW. upvoted 7 times",
+      "options": {
+        "A": "Ensure that a firewall rules exists to allow source traffic on HTTP/HTTPS to reach the load balancer. >> not correct, load balancer is not the",
+        "B": "Assign a public IP to each instance and configure a firewall rule to allow the load balancer to reach the instance public IP. >> defeats the",
+        "C": "Ensure that a firewall rule exists to allow load balancer health checks to reach the instances in the instance group.>> Correct. if using different",
+        "D": "Create a tag on each instance with the name of the load balancer. Configure a firewall rule with the name of the load balancer as the source"
+      },
+      "introductory_info": "",
+      "page": 6,
+      "source": "Questions_2.pdf",
+      "confidence": 0.7999999999999999,
+      "claude_answer": "D",
+      "claude_reasoning": "Load balancer with separate backend pools provides the best solution for API versioning."
+    },
+    {
+      "id": "Q8_10",
+      "number": "10",
+      "description": "You write a Python script to connect to Google BigQuery from a Google Compute Engine virtual machine. The script is printing errors that it cannot connect to BigQuery. What should you do to Kx the script?   kalschi Highly Voted  2 months, 4 weeks ago A - If client library was not installed, the python scripts won't run - since the question states the script reports \"cannot connect\" - the client library must have been installed. so it's B or C. permission in OAuth when you want to access services via API call - in this case, it is possible that the python script use an API call instead of library, if this is true, then access scope is required. client library requires no access scope (as it does not go through OAuth) C - service account is Google Cloud's best practice So prefer C. upvoted 98 times   rishab86 3 years, 2 months ago Access scopes are the legacy method of specifying permissions for your instance. read from > upvoted 11 times",
+      "options": {
+        "A": "Install the latest BigQuery API client library for Python",
+        "B": "Run your script on a new virtual machine with the BigQuery access scope enabled",
+        "C": "Create a new service account with BigQuery access and execute your script with that user",
+        "D": "Install the bq component for gcloud with the command gcloud components install bq."
+      },
+      "introductory_info": "",
+      "page": 8,
+      "source": "Questions_2.pdf",
+      "confidence": 0.7999999999999999,
+      "claude_answer": "A",
+      "claude_reasoning": "Analysis pending - requires manual review."
+    },
+    {
+      "id": "Q20_14",
+      "number": "14",
+      "description": "A production database virtual machine on Google Compute Engine has an ext4-formatted persistent disk for data Kles. The database is about to run out of storage space. How can you remediate the problem with the least amount of downtime? Linux",
+      "options": {
+        "A": "In the Cloud Platform Console, increase the size of the persistent disk and use the resize2fs command in Linux.",
+        "B": "Shut down the virtual machine, use the Cloud Platform Console to increase the persistent disk size, then restart the virtual machine",
+        "C": "In the Cloud Platform Console, increase the size of the persistent disk and verify the new space is ready to use with the fdisk command in"
+      },
+      "introductory_info": "",
+      "page": 20,
+      "source": "Questions_2.pdf",
+      "confidence": 0.6,
+      "claude_answer": "A",
+      "claude_reasoning": "Analysis pending - requires manual review."
+    },
+    {
+      "id": "Q5_16",
+      "number": "16",
+      "description": "You have been asked to select the storage system for the click-data of your company's large portfolio of websites. This data is streamed in from a custom website analytics package at a typical rate of 6,000 clicks per minute. With bursts of up to 8,500 clicks per second. It must have been stored for future analysis by your data science and user experience teams. Which storage infrastructure should you choose?   victory108 Highly Voted  3 years, 5 months ago upvoted 12 times",
+      "options": {
+        "A": "Google Cloud SQL",
+        "B": "Google Cloud Bigtable",
+        "C": "Google Cloud Storage",
+        "D": "Google Cloud Datastore"
+      },
+      "introductory_info": "",
+      "page": 5,
+      "source": "Questions_3.pdf",
+      "confidence": 0.7999999999999999,
+      "claude_answer": "A",
+      "claude_reasoning": "Analysis pending - requires manual review."
+    },
+    {
+      "id": "Q7_17",
+      "number": "17",
+      "description": "You are creating a solution to remove backup Kles older than 90 days from your backup Cloud Storage bucket. You want to optimize ongoing Cloud Storage spend. What should you do?   Eroc Highly Voted  5 years, 1 month ago All four are correct answers. Google has built in cron job schduling with Cloud Schedule, so that would place \"D\" behind \"C\" in Google's perspective. Google also has it's own lifecycle management command line prompt gcloud lifecycle so \"A\" or \"B\" could be used. JSON is slightly",
+      "options": {
+        "A": "Write a lifecycle management rule in XML and push it to the bucket with gsutil",
+        "B": "Write a lifecycle management rule in JSON and push it to the bucket with gsutil",
+        "C": "Schedule a cron script using gsutil ls ג€\"lr gs://backups/** to Knd and remove items older than 90 days",
+        "D": "Schedule a cron script using gsutil ls ג€\"l gs://backups/** to Knd and remove items older than 90 days and schedule it with cron"
+      },
+      "introductory_info": "",
+      "page": 7,
+      "source": "Questions_3.pdf",
+      "confidence": 0.7999999999999999,
+      "claude_answer": "C",
+      "claude_reasoning": "Cloud Storage provides cost-effective backup solutions."
+    },
+    {
+      "id": "Q12_19",
+      "number": "19",
+      "description": "The database administration team has asked you to help them improve the performance of their new database server running on Google Compute Engine. The database is for importing and normalizing their performance statistics and is built with MySQL running on Debian Linux. They have an n1-standard-8 virtual machine with 80 GB of SSD persistent disk. What should they change to get better performance from this system?   shandy Highly Voted  5 years ago Answer is C because persistent disk performance is based on the total persistent disk capacity attached to an instance and the number of vCPUs that the instance has. Incrementing the persistent disk capacity will increment its throughput and IOPS, which in turn improve the performance of MySQL. upvoted 68 times",
+      "options": {
+        "A": "Increase the virtual machine's memory to 64 GB",
+        "B": "Create a new virtual machine running PostgreSQL",
+        "C": "Dynamically resize the SSD persistent disk to 500 GB",
+        "D": "Migrate their performance metrics warehouse to BigQuery",
+        "E": "Modify all of their batch jobs to use bulk inserts into the database"
+      },
+      "introductory_info": "",
+      "page": 12,
+      "source": "Questions_3.pdf",
+      "confidence": 0.7999999999999999,
+      "claude_answer": "A",
+      "claude_reasoning": "Analysis pending - requires manual review."
+    },
+    {
+      "id": "Q14_20",
+      "number": "20",
+      "description": "can greatly reduce the number of round-trips to the database, which can help to minimize latency and improve overall throughput. Therefore, option E is the best choice for improving performance in this scenario. You want to optimize the performance of an accurate, real-time, weather-charting application. The data comes from 50,000 sensors sending 10 upvoted 4 times readings a second, in the format of a timestamp and sensor reading. W  her  e s Jhaocukldal ysokui 2s ytoeraers t haeg odata? in option C - even increasing disc can gain performance - that will take few months to face new limits. mySQL is not desiged for OLAP/analytics - Ab.u Gt oOoLgTleP .BigQuery so I vote on D upvoted 3 times",
+      "options": {
+        "B": "Google Cloud SQL",
+        "C": "Google Cloud Bigtable",
+        "D": "Google Cloud Storage"
+      },
+      "introductory_info": "",
+      "page": 14,
+      "source": "Questions_3.pdf",
+      "confidence": 0.6,
+      "claude_answer": "A",
+      "claude_reasoning": "BigQuery is designed for multi-petabyte analytics with SQL interface."
+    },
+    {
+      "id": "Q16_21",
+      "number": "21",
+      "description": "Your company's user-feedback portal comprises a standard LAMP stack replicated across two zones. It is deployed in the us-central1 region and uses autoscaled managed instance groups on all layers, except the database. Currently, only a small group of select customers have access to the portal. The portal meets a 99,99% availability SLA under these conditions. However next quarter, your company will be making the portal available to all users, including unauthenticated users. You need to develop a resiliency testing strategy to ensure the system maintains the SLA once they introduce additional user load. What should you do? resources in one of the zones the system by terminating random resources on both zones same time, terminate random resources on both zones based on existing user's usage of the app, and deploy enough resources to handle 200% of expected load   jcmoranp Highly Voted  5 years, 1 month ago resilience test is not about load, is about terminate resources and service not affected. Think it's B. The best for resilience in to introduce chaos in the infraestructure upvoted 90 times",
+      "options": {
+        "A": "Capture existing users input, and replay captured user load until autoscale is triggered on all layers. At the same time, terminate all",
+        "B": "Create synthetic random user input, replay synthetic load until autoscale logic is triggered on at least one layer, and introduce ג€chaosג€ to",
+        "C": "Expose the new system to a larger group of users, and increase group size each day until autoscale logic is triggered on all layers. At the",
+        "D": "Capture existing users input, and replay captured user load until resource utilization crosses 80%. Also, derive estimated number of users"
+      },
+      "introductory_info": "",
+      "page": 16,
+      "source": "Questions_3.pdf",
+      "confidence": 0.7999999999999999,
+      "claude_answer": "A",
+      "claude_reasoning": "Analysis pending - requires manual review."
+    }
+  ]
+}

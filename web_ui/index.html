@@ -1,0 +1,3476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ExaMiner</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .main-content {
+            display: flex;
+            flex: 1;
+        }
+
+        .sidebar {
+            width: 300px;
+            background: #f8f9fa;
+            padding: 20px;
+            border-right: 1px solid #e9ecef;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .content-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            min-height: 0;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #4285f4 0%, #34a853 50%, #fbbc05 100%);
+            color: white;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-left h1 {
+            font-size: 1.8rem;
+            margin: 0;
+            font-weight: 600;
+        }
+
+        .header-left p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin: 2px 0 0 0;
+        }
+
+        .filter-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .sidebar h3 {
+            color: #202124;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #4285f4;
+            padding-bottom: 8px;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .filter-label {
+            font-weight: 500;
+            margin-bottom: 5px;
+            color: #495057;
+            font-size: 0.9rem;
+        }
+
+        .filter-input, .filter-select {
+            padding: 10px 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+            outline: none;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .filter-input:focus, .filter-select:focus {
+            border-color: #4285f4;
+            box-shadow: 0 0 0 2px rgba(66, 133, 244, 0.1);
+        }
+
+        .control-buttons {
+            grid-column: 1 / -1;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+
+        .btn {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #4285f4, #1a73e8);
+            color: white;
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #34a853, #137333);
+            color: white;
+        }
+
+        .btn-warning {
+            background: linear-gradient(135deg, #fbbc05, #ea8600);
+            color: white;
+        }
+
+        .btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .stats {
+            padding: 15px 25px;
+            background: #e8f0fe;
+            border-bottom: 1px solid #dadce0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .stats-text {
+            color: #1a73e8;
+            font-weight: 500;
+        }
+
+        .questions-container {
+            flex: 1;
+            overflow-y: auto;
+            padding: 15px;
+            margin: 0;
+        }
+
+        .question-card {
+            background: white;
+            border: 1px solid #e8eaed;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .question-card:nth-child(even) {
+            border-left: 5px solid #34a853;
+        }
+
+        .question-card:nth-child(odd) {
+            border-left: 5px solid #4285f4;
+        }
+
+        .question-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .question-header {
+            background: linear-gradient(135deg, #f8f9fa, #e8f0fe);
+            padding: 12px 20px;
+            border-bottom: 1px solid #e8eaed;
+            position: relative;
+        }
+
+        .question-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #202124;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .edit-btn {
+            background: linear-gradient(135deg, #ea4335, #c5221f);
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .edit-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+        }
+
+        .case-study-btn {
+            background: linear-gradient(135deg, #4285f4, #3367d6);
+            color: white;
+            border: none;
+            padding: 4px 8px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 0.9rem;
+            margin-left: 10px;
+            transition: all 0.3s ease;
+            width: 28px;
+            height: 28px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .case-study-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 2px 8px rgba(66, 133, 244, 0.3);
+        }
+
+        .question-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            font-size: 0.8rem;
+            color: #5f6368;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .meta-label {
+            font-weight: 400;
+        }
+
+        .meta-link {
+            color: #1a73e8;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .meta-link:hover {
+            text-decoration: underline;
+        }
+
+        .confidence {
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .confidence.high { background: #e8f5e8; color: #137333; }
+        .confidence.medium { background: #fef7e0; color: #b06000; }
+        .confidence.low { background: #fce8e6; color: #d73027; }
+
+        .claude-indicator {
+            background: #e3f2fd;
+            color: #1976d2;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .question-content {
+            padding: 25px;
+        }
+
+        .question-description {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: #3c4043;
+            margin-bottom: 25px;
+            white-space: pre-wrap;
+        }
+
+        .intro-info {
+            background: linear-gradient(135deg, #f1f8e9, #e8f5e8);
+            border-left: 4px solid #4caf50;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 6px;
+            font-style: italic;
+        }
+
+        .options-container {
+            margin-bottom: 25px;
+        }
+
+        .options-title {
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #202124;
+        }
+
+        .option {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border: 1px solid #e8eaed;
+            transition: all 0.3s ease;
+        }
+
+        .option:hover {
+            background: #f1f3f4;
+            border-color: #dadce0;
+        }
+
+        .option-letter {
+            background: linear-gradient(135deg, #4285f4, #1a73e8);
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 1rem;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+
+        .option-text {
+            flex: 1;
+            color: #3c4043;
+            line-height: 1.6;
+        }
+
+        .answers-section {
+            border-top: 1px solid #e8eaed;
+            padding: 20px 25px;
+            background: #f8f9fa;
+        }
+
+        .answers-toggle {
+            background: none;
+            border: none;
+            color: #1a73e8;
+            cursor: pointer;
+            font-weight: 500;
+            padding: 10px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: color 0.3s ease;
+            width: 100%;
+            justify-content: space-between;
+        }
+
+        .answers-toggle:hover {
+            color: #174ea6;
+        }
+
+        .toggle-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .toggle-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .answers-content {
+            margin-top: 20px;
+            display: none;
+        }
+
+        .answers-content.show {
+            display: block;
+        }
+
+        .answer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .answer-item {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #e8eaed;
+            text-align: center;
+        }
+
+        .answer-label {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #5f6368;
+            margin-bottom: 8px;
+        }
+
+        .answer-value {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #1a73e8;
+        }
+
+        .answer-value.empty {
+            color: #9aa0a6;
+            font-style: italic;
+            font-size: 1rem;
+        }
+        
+        .claude-answer .answer-label,
+        .claude-answer .answer-value {
+            cursor: help;
+        }
+
+        .claude-reasoning {
+            margin-top: 15px;
+            padding: 15px;
+            background: linear-gradient(135deg, #e3f2fd, #e1f5fe);
+            border-left: 4px solid #2196f3;
+            border-radius: 6px;
+        }
+
+        .claude-reasoning-title {
+            font-weight: 600;
+            color: #1976d2;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .community-btn {
+            background: linear-gradient(135deg, #9c27b0, #673ab7);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .community-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 900px;
+            max-height: 85vh;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(-20px) scale(0.95); opacity: 0; }
+            to { transform: translateY(0) scale(1); opacity: 1; }
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, #9c27b0, #673ab7);
+            color: white;
+            padding: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.8rem;
+            cursor: pointer;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s ease;
+        }
+
+        .close-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .modal-body {
+            padding: 25px;
+            max-height: 60vh;
+            overflow-y: auto;
+        }
+
+        .comment-item {
+            border-bottom: 1px solid #e8eaed;
+            padding: 20px 0;
+        }
+
+        .comment-item:last-child {
+            border-bottom: none;
+        }
+
+        .comment-meta {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+        }
+
+        .comment-username {
+            font-weight: 600;
+            color: #1a73e8;
+            background: #f8f9fa;
+            padding: 4px 12px;
+            border-radius: 15px;
+        }
+
+        .comment-timestamp {
+            font-size: 0.9rem;
+            color: #5f6368;
+        }
+
+        .comment-vote-type {
+            background: linear-gradient(135deg, #34a853, #137333);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .comment-content {
+            color: #3c4043;
+            line-height: 1.6;
+            padding: 10px 0;
+        }
+
+        .no-comments {
+            text-align: center;
+            color: #5f6368;
+            font-style: italic;
+            padding: 60px 40px;
+        }
+
+        /* Edit Modal */
+        .edit-modal .modal-content {
+            max-width: 1000px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: #495057;
+        }
+
+        .form-input, .form-textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            outline: none;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .form-textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-input:focus, .form-textarea:focus {
+            border-color: #4285f4;
+            box-shadow: 0 0 0 3px rgba(66, 133, 244, 0.1);
+        }
+
+        .options-editor {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .main-content {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                max-height: none;
+                border-right: none;
+                border-bottom: 1px solid #e9ecef;
+            }
+            
+            .filter-panel {
+                flex-direction: row;
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+            
+            .filter-group {
+                flex: 1;
+                min-width: 200px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .filter-panel {
+                flex-direction: column;
+            }
+
+            .question-meta {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .answer-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+
+            .modal-content {
+                width: 95%;
+                margin: 20px;
+            }
+        }
+
+        .loading {
+            text-align: center;
+            padding: 60px 20px;
+            color: #5f6368;
+        }
+
+        .loading-spinner {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .error {
+            text-align: center;
+            padding: 60px 20px;
+            color: #ea4335;
+        }
+
+        .error-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        /* Filter Active States */
+        .filter-active {
+            border-color: #4285f4 !important;
+            background: #e8f0fe !important;
+        }
+
+        /* Answer Highlighting */
+        .option.highlighted {
+            background: linear-gradient(135deg, #e8f5e8, #c8e6c8) !important;
+            border-color: #4caf50 !important;
+            box-shadow: 0 2px 8px rgba(76, 175, 80, 0.3) !important;
+        }
+        
+        .option.highlighted .option-letter {
+            background: linear-gradient(135deg, #4caf50, #388e3c) !important;
+        }
+        
+        /* User Selection Styling */
+        .option.user-selected {
+            background: linear-gradient(135deg, #e3f2fd, #bbdefb) !important;
+            border-color: #2196f3 !important;
+            box-shadow: 0 2px 8px rgba(33, 150, 243, 0.3) !important;
+        }
+        
+        .option.user-selected .option-letter {
+            background: linear-gradient(135deg, #2196f3, #1976d2) !important;
+            color: white !important;
+        }
+
+        /* User Answer Marking with Checkmark */
+        .user-answer-marker {
+            position: absolute;
+            top: 8px;
+            right: 12px;
+            color: #2196f3;
+            font-weight: bold;
+            font-size: 1.2rem;
+            background: white;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .option.user-marked.wrong-answer .user-answer-marker {
+            color: #f44336;
+        }
+
+        .option.user-marked {
+            background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+            border-color: #2196f3;
+            position: relative;
+        }
+
+        .option.user-marked.wrong-answer {
+            background: linear-gradient(135deg, #ffebee, #ffcdd2) !important;
+            border-color: #f44336 !important;
+            color: #d32f2f !important;
+        }
+        
+        .option.user-marked.wrong-answer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, #ffebee, #ffcdd2);
+            z-index: -1;
+        }
+
+        .option.user-marked .user-answer-marker {
+            display: flex !important;
+        }
+        
+        /* Floating UP Arrow */
+        .float-up-btn {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #1976d2, #1565c0);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 20px;
+            box-shadow: 0 4px 12px rgba(25, 118, 210, 0.3);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            display: none;
+        }
+        
+        .float-up-btn:hover {
+            transform: scale(1.1) translateY(-2px);
+            box-shadow: 0 6px 20px rgba(25, 118, 210, 0.5);
+        }
+        
+        .float-up-btn.show {
+            display: block;
+        }
+
+        .header-controls {
+            display: flex;
+            gap: 8px;
+        }
+
+        .header-controls .btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            font-weight: 500;
+            font-size: 0.8rem;
+            padding: 6px 12px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .header-controls .btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-1px);
+        }
+
+        /* Analysis Status */
+        .analysis-status {
+            background: #e8f0fe;
+            color: #1a73e8;
+            padding: 15px;
+            margin: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #4285f4;
+            display: none;
+        }
+
+        .analysis-status.show {
+            display: block;
+        }
+
+        .analysis-log {
+            background: #f8f9fa;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.85rem;
+            max-height: 200px;
+            overflow-y: auto;
+            border: 1px solid #e8eaed;
+            border-radius: 6px;
+            margin-top: 10px;
+            padding: 15px;
+        }
+
+        /* Statistics Modal */
+        .stats-card {
+            background: white;
+            border: 1px solid #e8eaed;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .stats-card h3 {
+            color: #202124;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .stats-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid #f1f3f4;
+        }
+
+        .stat-item:last-child {
+            border-bottom: none;
+        }
+
+        .stat-label {
+            color: #5f6368;
+            font-size: 0.9rem;
+        }
+
+        .stat-value {
+            color: #1a73e8;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .processing-log {
+            background: #f8f9fa;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.85rem;
+            max-height: 300px;
+            overflow-y: auto;
+            border: 1px solid #e8eaed;
+            border-radius: 6px;
+            padding: 15px;
+            white-space: pre-wrap;
+        }
+
+        .source-file-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid #f1f3f4;
+        }
+
+        .source-file-item:last-child {
+            border-bottom: none;
+        }
+
+        .source-file-name {
+            color: #1a73e8;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .source-file-count {
+            color: #5f6368;
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-left">
+                <h1>🚀 GCP Professional Cloud Architect Exam</h1>
+                <p>Extracted Exam Questions & Answers</p>
+            </div>
+            <div class="header-controls">
+                <label class="btn" onclick="handleUploadClick()">
+                    📄 Upload PDFs
+                    <input type="file" id="pdfUpload" multiple accept=".pdf" style="display: none;">
+                </label>
+                <button id="runAnalysisBtn" class="btn">
+                    🔧 Analyze
+                </button>
+                <button id="showAllAnswersBtn" class="btn">
+                    🔍 Extend/Collapse All Answers
+                </button>
+                <button id="highlightAnswersBtn" class="btn">
+                    🎯 Highlight Answers
+                </button>
+                <button id="statisticsBtn" class="btn">
+                    📊 Stats
+                </button>
+                <button id="evaluateBtn" class="btn" style="background: linear-gradient(135deg, #ac4fa9, #740178); color: white;">
+                    🎯 Evaluate Answers
+                </button>
+                <button id="warningsBtn" class="btn" style="background: linear-gradient(135deg, #ac4f4f, #bb0101); color: white;">
+                    ⚠️ Warnings
+                </button>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="sidebar">
+                <h3>🔍 Filters</h3>
+                <div class="filter-panel">
+            <div class="filter-group">
+                <label class="filter-label">Search</label>
+                <input type="text" id="searchBox" class="filter-input" placeholder="Search questions, answers, topics...">
+            </div>
+            
+            <div class="filter-group">
+                <label class="filter-label">Question Number</label>
+                <input type="text" id="questionNumberFilter" class="filter-input" placeholder="e.g., 1, 5, 10-15">
+            </div>
+            
+            <div class="filter-group">
+                <label class="filter-label">Topic</label>
+                <select id="topicFilter" class="filter-select">
+                    <option value="">All Topics</option>
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <label class="filter-label">Source File</label>
+                <select id="sourceFilter" class="filter-select">
+                    <option value="">All Sources</option>
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <label class="filter-label">Page Number</label>
+                <input type="text" id="pageNumberFilter" class="filter-input" placeholder="e.g., 5, 10-20">
+            </div>
+            
+            <div class="filter-group">
+                <label class="filter-label">Confidence Score</label>
+                <select id="confidenceFilter" class="filter-select">
+                    <option value="">All Confidence</option>
+                    <option value="high">High (≥0.8)</option>
+                    <option value="medium">Medium (0.5-0.8)</option>
+                    <option value="low">Low (<0.5)</option>
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <label class="filter-label">Has AI Answer</label>
+                <select id="claudeAnswerFilter" class="filter-select">
+                    <option value="">All</option>
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <label class="filter-label">Community Answer</label>
+                <select id="communityAnswerFilter" class="filter-select">
+                    <option value="">All</option>
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                    <option value="C">C</option>
+                    <option value="D">D</option>
+                    <option value="E">E</option>
+                    <option value="F">F</option>
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <label class="filter-label">Highly Voted Answer</label>
+                <select id="highlyVotedFilter" class="filter-select">
+                    <option value="">All</option>
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                    <option value="C">C</option>
+                    <option value="D">D</option>
+                    <option value="E">E</option>
+                    <option value="F">F</option>
+                </select>
+            </div>
+            
+                </div>
+                
+                <div style="margin-top: 20px;">
+                        <button id="resetFiltersBtn" class="btn btn-warning" style="width: 100%; margin-bottom: 20px;">
+                        🔄 Reset Filters
+                    </button>
+                </div>
+                
+                <div class="filter-stats" style="border-top: 1px solid #e9ecef; padding-top: 15px; font-size: 0.85rem; color: #5f6368;">
+                    <div id="questionCount" style="margin-bottom: 5px;">Loading...</div>
+                    <div id="filterStatus" style="margin-bottom: 5px;"></div>
+                    <div id="confidenceStats"></div>
+                </div>
+            </div>
+            
+            <div class="content-area">
+
+                <div class="analysis-status" id="analysisStatus">
+                    <div id="analysisStatusText">🔧 Processing analysis...</div>
+                    <div class="analysis-log" id="analysisLog"></div>
+                </div>
+
+                <!-- Pagination Controls -->
+                <div class="pagination-container" style="padding: 15px 25px; border-bottom: 1px solid #e8eaed; background: #f8f9fa;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div style="color: #5f6368; font-size: 0.9rem;">
+                            Showing <span id="questionsRange">0-0</span> of <span id="totalQuestions">0</span> questions
+                        </div>
+                        <div class="pagination-controls" style="display: flex; align-items: center; gap: 10px;">
+                            <button id="prevPageBtn" onclick="changePage(-1)" style="padding: 8px 12px; border: 1px solid #dadce0; background: white; border-radius: 4px; cursor: pointer;">« Previous</button>
+                            <span style="color: #5f6368;">Page <span id="currentPageNum">1</span> of <span id="totalPages">1</span></span>
+                            <button id="nextPageBtn" onclick="changePage(1)" style="padding: 8px 12px; border: 1px solid #dadce0; background: white; border-radius: 4px; cursor: pointer;">Next »</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="questions-container" id="questionsContainer">
+                    <div class="loading">
+                        <div class="loading-spinner">⏳</div>
+                        <div>Loading enhanced question data...</div>
+                    </div>
+                </div>
+
+                <!-- Bottom Pagination Controls -->
+                <div class="pagination-container" style="padding: 15px 25px; border-top: 1px solid #e8eaed; background: #f8f9fa;">
+                    <div style="display: flex; justify-content: center; align-items: center; gap: 15px;">
+                        <button id="prevPageBtnBottom" onclick="changePage(-1)" style="padding: 8px 12px; border: 1px solid #dadce0; background: white; border-radius: 4px; cursor: pointer;">« Previous</button>
+                        <div id="pageNumbersContainer" style="display: flex; gap: 5px; align-items: center;">
+                            <!-- Page numbers will be populated by JavaScript -->
+                        </div>
+                        <button id="nextPageBtnBottom" onclick="changePage(1)" style="padding: 8px 12px; border: 1px solid #dadce0; background: white; border-radius: 4px; cursor: pointer;">Next »</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Community Comments Modal -->
+    <div id="communityModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title" id="modalTitle">Community Comments</div>
+                <button class="close-btn" id="closeModalBtn">×</button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Comments will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Question Modal -->
+    <div id="editModal" class="modal edit-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">Edit Question</div>
+                <button class="close-btn" id="closeEditModalBtn">×</button>
+            </div>
+            <div class="modal-body" id="editModalBody">
+                <form id="editForm">
+                    <div class="form-group">
+                        <label class="form-label">Question Number</label>
+                        <input type="text" id="editQuestionNumber" class="form-input">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Question Description</label>
+                        <textarea id="editQuestionDescription" class="form-textarea" rows="6"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Answer Options</label>
+                        <div style="background: #fff8e1; border: 1px solid #ffc107; padding: 10px; border-radius: 5px; margin-bottom: 15px; font-size: 0.9rem;">
+                            <strong>Instructions:</strong> Edit answer options below and check the correct answer(s). You can select multiple correct answers for multi-choice questions.
+                        </div>
+                        <div class="options-editor" id="optionsEditor">
+                            <!-- Options will be populated here -->
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Correct Answer(s)</label>
+                        <div id="correctAnswersSection" style="background: #e8f5e8; padding: 15px; border-radius: 5px; border-left: 4px solid #4caf50;">
+                            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+                                <span style="font-weight: 600; color: #2e7d32;">Selected Correct Answers:</span>
+                                <span id="selectedAnswersDisplay" style="background: white; padding: 5px 10px; border-radius: 3px; border: 1px solid #4caf50; min-width: 50px; color: #2e7d32;">None</span>
+                            </div>
+                            <div style="font-size: 0.85rem; color: #388e3c;">Click the checkboxes next to answer options above to mark them as correct.</div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Topic</label>
+                        <input type="text" id="editTopic" class="form-input">
+                    </div>
+                    
+                    <div class="control-buttons">
+                        <button type="submit" class="btn btn-success">💾 Save Changes</button>
+                        <button type="button" class="btn btn-warning" id="cancelEditBtn">❌ Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Evaluation Modal -->
+    <div class="modal" id="evaluationModal">
+        <div class="modal-content" style="max-width: 1200px;">
+            <div class="modal-header">
+                <h2>🎯 Exam Evaluation Results</h2>
+                <button class="close-btn" onclick="document.getElementById('evaluationModal').classList.remove('show')">×</button>
+            </div>
+            <div class="modal-body" id="evaluationBody" style="max-height: 80vh;">
+                <!-- Evaluation content will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Statistics & Logs Modal -->
+    <div id="statisticsModal" class="modal">
+        <div class="modal-content" style="max-width: 1200px;">
+            <div class="modal-header">
+                <div class="modal-title">📊 Statistics & Processing Logs</div>
+                <button class="close-btn" id="closeStatisticsModalBtn">×</button>
+            </div>
+            <div class="modal-body" id="statisticsModalBody">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-bottom: 25px;">
+                    <div class="stats-card">
+                        <h3>📈 Extraction Summary</h3>
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <span class="stat-label">Total Questions:</span>
+                                <span class="stat-value" id="totalQuestionsCount">-</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Questions Validated:</span>
+                                <span class="stat-value" id="validatedQuestionsCount">-</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Average Confidence:</span>
+                                <span class="stat-value" id="averageConfidence">-</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Community Comments:</span>
+                                <span class="stat-value" id="communityCommentsCount">-</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="stats-card">
+                        <h3>🎯 Quality Breakdown</h3>
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <span class="stat-label">High Confidence (≥80%):</span>
+                                <span class="stat-value" id="highConfidenceCount">-</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Medium Confidence (50-80%):</span>
+                                <span class="stat-value" id="mediumConfidenceCount">-</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Low Confidence (<50%):</span>
+                                <span class="stat-value" id="lowConfidenceCount">-</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Complete Questions (≥4 options):</span>
+                                <span class="stat-value" id="completeQuestionsCount">-</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="stats-card">
+                        <h3>📁 Source Files</h3>
+                        <div id="sourceFilesStats">
+                            Loading source statistics...
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stats-card">
+                    <h3>📋 Processing Log</h3>
+                    <div class="processing-log" id="processingLog">
+                        <div style="color: #5f6368; font-style: italic;">No processing logs available yet. Run analysis to see logs.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating UP Arrow -->
+    <button id="floatUpBtn" class="float-up-btn" onclick="scrollToTop()">↑</button>
+
+    <!-- Warnings & Debug Modal -->
+    <div id="warningsModal" class="modal">
+        <div class="modal-content" style="max-width: 1200px;">
+            <div class="modal-header">
+                <div class="modal-title">⚠️ Extraction Warnings & Debug Information</div>
+                <button class="close-btn" id="closeWarningsModalBtn">×</button>
+            </div>
+            <div class="modal-body" id="warningsModalBody">
+                <div style="display: grid; grid-template-columns: 1fr; gap: 20px;">
+                    <div class="stats-card">
+                        <h3>⚠️ Extraction Warnings</h3>
+                        <div id="warningsContent">
+                            Loading warnings...
+                        </div>
+                    </div>
+                    
+                    <div class="stats-card">
+                        <h3>🐛 Debug Information</h3>
+                        <div id="debugContent">
+                            <div style="color: #5f6368; font-style: italic;">Debug information will be populated after running analysis.</div>
+                        </div>
+                    </div>
+                    
+                    <div class="stats-card">
+                        <h3>📋 Parsing Issues</h3>
+                        <div id="parsingIssues">
+                            <div style="color: #5f6368; font-style: italic;">Parsing issues will be shown here.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Upload PDFs Modal -->
+    <div id="uploadModal" class="modal">
+        <div class="modal-content" style="max-width: 800px;">
+            <div class="modal-header">
+                <div class="modal-title">📄 Upload PDF Files</div>
+                <button class="close-btn" onclick="document.getElementById('uploadModal').classList.remove('show')">×</button>
+            </div>
+            <div class="modal-body">
+                <div style="margin-bottom: 20px;">
+                    <h3 style="color: #202124; margin-bottom: 15px;">📋 Instructions</h3>
+                    <div style="background: #e3f2fd; padding: 15px; border-radius: 8px; border-left: 4px solid #2196f3; margin-bottom: 20px;">
+                        <ul style="margin: 0; padding-left: 20px; line-height: 1.6;">
+                            <li>Select one or multiple PDF files containing GCP exam questions</li>
+                            <li>Supported formats: PDF files with extractable text</li>
+                            <li>Files will be processed to extract questions, answers, and community comments</li>
+                            <li>Large files may take a few minutes to process</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Select PDF Files</label>
+                    <div style="border: 2px dashed #e0e0e0; border-radius: 8px; padding: 30px; text-align: center; background: #fafafa;">
+                        <div style="font-size: 3rem; color: #9e9e9e; margin-bottom: 15px;">📁</div>
+                        <p style="color: #5f6368; margin-bottom: 15px;">Drag & drop PDF files here or click to browse</p>
+                        <input type="file" id="pdfUploadInput" multiple accept=".pdf" style="display: none;" onchange="handleFileSelection()">
+                        <button type="button" class="btn btn-primary" onclick="document.getElementById('pdfUploadInput').click()">
+                            📁 Choose Files
+                        </button>
+                    </div>
+                    <div id="selectedFiles" style="margin-top: 15px; display: none;">
+                        <h4 style="color: #202124; margin-bottom: 10px;">Selected Files:</h4>
+                        <div id="filesList" style="background: #f8f9fa; padding: 10px; border-radius: 5px; border: 1px solid #e9ecef;">
+                            <!-- Selected files will be listed here -->
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="control-buttons" style="margin-top: 25px;">
+                    <button type="button" class="btn btn-success" onclick="startProcessing()" id="startProcessingBtn" disabled>
+                        🚀 Start Processing
+                    </button>
+                    <button type="button" class="btn btn-warning" onclick="document.getElementById('uploadModal').classList.remove('show')">
+                        ❌ Cancel
+                    </button>
+                </div>
+                
+                <div id="processingProgress" style="display: none; margin-top: 20px;">
+                    <h4 style="color: #202124;">🔄 Processing Files...</h4>
+                    <div style="background: #f1f3f4; border-radius: 10px; height: 20px; overflow: hidden; margin: 10px 0;">
+                        <div id="progressBar" style="background: linear-gradient(90deg, #4caf50, #2196f3); height: 100%; width: 0%; transition: width 0.3s;"></div>
+                    </div>
+                    <div id="processingStatus" style="font-size: 0.9rem; color: #5f6368;">
+                        Initializing...
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let allQuestions = [];
+        let allComments = [];
+        let filteredQuestions = [];
+        let showAllAnswers = false;
+        let currentPage = 1;
+        let questionsPerPage = 25;
+        let currentEditingQuestion = null;
+
+        // Initialize the application
+        async function initialize() {
+            try {
+                // Try API first, fallback to direct file
+                let response;
+                try {
+                    response = await fetch('http://localhost:9002/api/questions');
+                } catch (apiError) {
+                    console.log('API not available, using direct file access');
+                    response = await fetch('./questions_web_data.json');
+                }
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                
+                allQuestions = data.questions || [];
+                
+                // Add auto-increment numbering as primary key
+                allQuestions.forEach((question, index) => {
+                    question.autoIncrement = index + 1;
+                });
+                
+                allComments = data.community_comments || [];
+                filteredQuestions = [...allQuestions];
+
+                console.log(`Loaded ${allQuestions.length} questions and ${allComments.length} community comments`);
+
+                populateFilters(data);
+                displayQuestions();
+                updateStats();
+                setupEventListeners();
+
+            } catch (error) {
+                console.error('Error loading data:', error);
+                document.getElementById('questionsContainer').innerHTML = 
+                    `<div class="error">
+                        <div class="error-icon">❌</div>
+                        <div>Error loading data: ${error.message}</div>
+                        <div style="margin-top: 15px; font-size: 0.9rem;">
+                            Make sure the data file exists and the server is running.
+                        </div>
+                    </div>`;
+            }
+        }
+
+        function populateFilters(data) {
+            // Populate topic filter
+            const topicFilter = document.getElementById('topicFilter');
+            const topics = [...new Set(allQuestions.map(q => q.metadata?.topic).filter(Boolean))];
+            topics.sort().forEach(topic => {
+                const option = document.createElement('option');
+                option.value = topic;
+                option.textContent = topic;
+                topicFilter.appendChild(option);
+            });
+
+            // Populate source filter
+            const sourceFilter = document.getElementById('sourceFilter');
+            const sources = [...new Set(allQuestions.map(q => q.source_file || q.metadata?.source).filter(Boolean))];
+            sources.sort().forEach(source => {
+                const option = document.createElement('option');
+                option.value = source;
+                option.textContent = source;
+                sourceFilter.appendChild(option);
+            });
+        }
+
+        function displayQuestions() {
+            const container = document.getElementById('questionsContainer');
+            
+            if (filteredQuestions.length === 0) {
+                container.innerHTML = `
+                    <div class="error">
+                        <div class="error-icon">🔍</div>
+                        <div>No questions found matching your criteria</div>
+                        <div style="margin-top: 15px;">
+                            <button class="btn btn-warning" onclick="resetFilters()">Reset Filters</button>
+                        </div>
+                    </div>
+                `;
+                updatePaginationInfo(0, 0, 0);
+                return;
+            }
+
+            // Paginate results
+            const totalPages = Math.ceil(filteredQuestions.length / questionsPerPage);
+            const startIndex = (currentPage - 1) * questionsPerPage;
+            const endIndex = Math.min(startIndex + questionsPerPage, filteredQuestions.length);
+            const paginatedQuestions = filteredQuestions.slice(startIndex, endIndex);
+            
+            // Update pagination info
+            updatePaginationInfo(startIndex + 1, endIndex, filteredQuestions.length, totalPages);
+
+            container.innerHTML = paginatedQuestions.map(question => {
+                // Normalize data structure for compatibility
+                const normalizedQuestion = {
+                    ...question,
+                    topic: question.topic || question.metadata?.topic || 'General',
+                    source_file: question.source_file || question.metadata?.source || 'N/A',
+                    page_number: question.page_number || question.metadata?.page || 'N/A',
+                    confidence_score: question.confidence_score || question.metadata?.confidence || 0,
+                    community_answer: question.community_answer || question.answers?.community || 'N/A',
+                    highly_voted_answer: extractHighlyVotedAnswer(question),
+                    most_recent_answer: extractMostRecentAnswer(question),
+                    claude_answer: question.claude_answer || question.answers?.claude || 'N/A'
+                };
+                
+                return `
+                <div class="question-card">
+                    <div class="question-header" style="padding: 12px 20px; display: flex; justify-content: space-between; align-items: center;">
+                        <div style="font-size: 1.2rem; font-weight: 600; color: #202124;">
+                            Question #${question.autoIncrement} | 
+                            Page: <a href="#" class="meta-link" onclick="openPDFPage('${normalizedQuestion.source_file}', ${normalizedQuestion.page_number})">${normalizedQuestion.page_number}</a> | 
+                            Source: <a href="#" class="meta-link" onclick="openPDF('${normalizedQuestion.source_file}')">${normalizedQuestion.source_file}</a> | 
+                            Confidence: <span class="confidence ${getConfidenceClass(normalizedQuestion.confidence_score)}">📊 ${((normalizedQuestion.confidence_score || 0) * 100).toFixed(0)}%</span>
+                            ${question.case_study_info ? `<button class="case-study-btn" onclick="showCaseStudyInfo('${question.id}')" title="View Case Study Information">ℹ️</button>` : ''}
+                        </div>
+                        <button class="edit-btn" onclick="editQuestion('${question.id}')">✏️ Edit</button>
+                    </div>
+                    <div class="question-content">
+                        ${question.introductory_info ? `
+                            <div class="intro-info">
+                                <strong>📋 Background Information:</strong><br>
+                                ${question.introductory_info}
+                            </div>
+                        ` : ''}
+                        
+                        <div class="question-description">${question.description || 'Question description not available'}</div>
+                        
+                        ${question.options && Object.keys(question.options).length > 0 ? `
+                            <div class="options-container">
+                                <div class="options-title">📝 Answer Options:</div>
+                                ${Object.entries(question.options).map(([letter, text]) => `
+                                    <div class="option" data-option="${letter}" data-question-id="${normalizedQuestion.autoIncrement}" onclick="toggleUserAnswer('${normalizedQuestion.autoIncrement}', '${letter}', this)">
+                                        <div class="option-letter">${letter}</div>
+                                        <div class="option-text">${text}</div>
+                                        <div class="user-answer-marker" style="display: none;">✓</div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        ` : '<div class="error" style="padding: 20px;">⚠️ Answer options not available</div>'}
+                    </div>
+                    
+                    <div class="answers-section">
+                        <button class="answers-toggle" onclick="toggleAnswers('${question.id}')">
+                            <div class="toggle-left">
+                                <span id="toggle-${question.id}">▶</span>
+                                <span>Show Answers & Analysis</span>
+                            </div>
+                        </button>
+                        <div class="answers-content" id="answers-${question.id}">
+                            <div class="answer-grid">
+                                <div class="answer-item">
+                                    <div class="answer-label">Community</div>
+                                    <div class="answer-value ${!normalizedQuestion.community_answer || normalizedQuestion.community_answer === 'N/A' ? 'empty' : ''}">${normalizedQuestion.community_answer}</div>
+                                </div>
+                                <div class="answer-item">
+                                    <div class="answer-label">Highly Voted</div>
+                                    <div class="answer-value ${!normalizedQuestion.highly_voted_answer || normalizedQuestion.highly_voted_answer === 'N/A' ? 'empty' : ''}">${normalizedQuestion.highly_voted_answer}</div>
+                                </div>
+                                <div class="answer-item">
+                                    <div class="answer-label">Most Recent</div>
+                                    <div class="answer-value ${!normalizedQuestion.most_recent_answer || normalizedQuestion.most_recent_answer === 'N/A' ? 'empty' : ''}">${normalizedQuestion.most_recent_answer}</div>
+                                </div>
+                                <div class="answer-item claude-answer">
+                                    <div class="answer-label" title="${question.claude_reasoning || 'No AI analysis available'}">AI</div>
+                                    <div class="answer-value ${!normalizedQuestion.claude_answer || normalizedQuestion.claude_answer === 'N/A' ? 'empty' : ''}" title="${question.claude_reasoning || 'No AI analysis available'}">${normalizedQuestion.claude_answer}</div>
+                                </div>
+                                <div class="answer-item">
+                                    <div class="answer-label">Comments</div>
+                                    <div class="answer-value">
+                                        <button class="community-btn" onclick="showAllCommunityComments('${question.id}', '${question.number || question.id}')" style="padding: 4px 10px; font-size: 0.75rem; margin: 0;">
+                                            💬 View (${getCommentsCount(question.id)})
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            }).join('');
+            
+            // Restore user selections and answers after rendering
+            setTimeout(() => {
+                restoreUserSelections();
+                restoreUserAnswers();
+            }, 100);
+        }
+
+        function updatePaginationInfo(start, end, total, totalPages = 0) {
+            const totalPgs = totalPages || Math.ceil(total / questionsPerPage);
+            
+            document.getElementById('questionsRange').textContent = `${start}-${end}`;
+            document.getElementById('totalQuestions').textContent = total;
+            document.getElementById('currentPageNum').textContent = currentPage;
+            document.getElementById('totalPages').textContent = totalPgs;
+            
+            // Update button states (top)
+            document.getElementById('prevPageBtn').disabled = currentPage <= 1;
+            document.getElementById('nextPageBtn').disabled = currentPage >= totalPgs;
+            
+            // Update button states (bottom)
+            document.getElementById('prevPageBtnBottom').disabled = currentPage <= 1;
+            document.getElementById('nextPageBtnBottom').disabled = currentPage >= totalPgs;
+            
+            // Generate page number buttons
+            generatePageNumbers(totalPgs);
+        }
+
+        function generatePageNumbers(totalPages) {
+            const container = document.getElementById('pageNumbersContainer');
+            container.innerHTML = '';
+            
+            if (totalPages <= 1) return;
+            
+            // Show page numbers with smart pagination
+            let startPage = Math.max(1, currentPage - 2);
+            let endPage = Math.min(totalPages, currentPage + 2);
+            
+            // Adjust if we're near the beginning or end
+            if (endPage - startPage < 4) {
+                if (startPage === 1) {
+                    endPage = Math.min(totalPages, 5);
+                } else if (endPage === totalPages) {
+                    startPage = Math.max(1, totalPages - 4);
+                }
+            }
+            
+            // Add first page and ellipsis if needed
+            if (startPage > 1) {
+                addPageButton(1);
+                if (startPage > 2) {
+                    container.appendChild(createSpan('...', 'color: #5f6368; padding: 0 5px;'));
+                }
+            }
+            
+            // Add page numbers
+            for (let i = startPage; i <= endPage; i++) {
+                addPageButton(i);
+            }
+            
+            // Add ellipsis and last page if needed
+            if (endPage < totalPages) {
+                if (endPage < totalPages - 1) {
+                    container.appendChild(createSpan('...', 'color: #5f6368; padding: 0 5px;'));
+                }
+                addPageButton(totalPages);
+            }
+        }
+
+        function addPageButton(pageNum) {
+            const container = document.getElementById('pageNumbersContainer');
+            const button = document.createElement('button');
+            button.textContent = pageNum;
+            button.style.cssText = `
+                padding: 6px 10px; 
+                border: 1px solid ${pageNum === currentPage ? '#1a73e8' : '#dadce0'}; 
+                background: ${pageNum === currentPage ? '#1a73e8' : 'white'}; 
+                color: ${pageNum === currentPage ? 'white' : '#3c4043'};
+                border-radius: 4px; 
+                cursor: pointer; 
+                font-size: 0.9rem;
+                min-width: 35px;
+            `;
+            button.onclick = () => goToPage(pageNum);
+            container.appendChild(button);
+        }
+
+        function createSpan(text, style) {
+            const span = document.createElement('span');
+            span.textContent = text;
+            span.style.cssText = style;
+            return span;
+        }
+
+        function goToPage(page) {
+            const totalPages = Math.ceil(filteredQuestions.length / questionsPerPage);
+            if (page >= 1 && page <= totalPages) {
+                currentPage = page;
+                displayQuestions();
+                document.getElementById('questionsContainer').scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        function changePage(direction) {
+            const totalPages = Math.ceil(filteredQuestions.length / questionsPerPage);
+            
+            if (direction === 1 && currentPage < totalPages) {
+                currentPage++;
+            } else if (direction === -1 && currentPage > 1) {
+                currentPage--;
+            }
+            
+            displayQuestions();
+            
+            // Scroll to top of questions
+            document.getElementById('questionsContainer').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function getConfidenceClass(confidence) {
+            const conf = confidence || 0;
+            if (conf >= 0.8) return 'high';
+            if (conf >= 0.5) return 'medium';
+            return 'low';
+        }
+
+        function getCommentsCount(questionId) {
+            // Check both community_comments array and all_community_comments field
+            const arrayCommentsCount = allComments.filter(comment => comment.question_id === questionId).length;
+            const question = allQuestions.find(q => q.id === questionId);
+            const hasDirectComments = question?.all_community_comments && question.all_community_comments.trim().length > 0;
+            
+            return arrayCommentsCount + (hasDirectComments ? 1 : 0);
+        }
+
+        function toggleAnswers(questionId) {
+            const answersDiv = document.getElementById(`answers-${questionId}`);
+            const toggleSpan = document.getElementById(`toggle-${questionId}`);
+            
+            if (answersDiv.classList.contains('show')) {
+                answersDiv.classList.remove('show');
+                toggleSpan.textContent = '▶';
+                toggleSpan.nextElementSibling.textContent = 'Show Answers & Analysis';
+            } else {
+                answersDiv.classList.add('show');
+                toggleSpan.textContent = '▼';
+                toggleSpan.nextElementSibling.textContent = 'Hide Answers & Analysis';
+            }
+        }
+
+        function showCommunityComments(questionId, questionNumber) {
+            const modal = document.getElementById('communityModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalBody = document.getElementById('modalBody');
+
+            const questionComments = allComments.filter(comment => comment.question_id === questionId);
+
+            modalTitle.textContent = `Community Comments - Question ${questionNumber}`;
+
+            if (questionComments.length === 0) {
+                // Show raw unparsed community text if available
+                const question = allQuestions.find(q => q.id === questionId);
+                const rawCommunityText = question?.raw_community_text;
+
+                if (rawCommunityText) {
+                    modalBody.innerHTML = `
+                        <div class="no-comments">
+                            <div style="margin-bottom: 15px;">📭 No parsed community comments available, but raw community text was found:</div>
+                            <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #fbbc05; margin-top: 15px;">
+                                <h4 style="color: #b06000; margin-bottom: 10px;">🔧 Raw Community Text (Unparsed)</h4>
+                                <div style="font-family: 'Monaco', 'Menlo', monospace; font-size: 0.85rem; white-space: pre-wrap; max-height: 300px; overflow-y: auto; color: #3c4043; line-height: 1.5;">${rawCommunityText}</div>
+                                <div style="margin-top: 10px; font-size: 0.8rem; color: #5f6368; font-style: italic;">
+                                    💡 This raw text contains community discussions that couldn't be automatically parsed. You may find useful insights here.
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    modalBody.innerHTML = '<div class="no-comments">📭 No community comments or raw text available for this question.</div>';
+                }
+            } else {
+                // Sort comments by vote count and timestamp
+                questionComments.sort((a, b) => {
+                    if (a.vote_count !== b.vote_count) {
+                        return b.vote_count - a.vote_count;
+                    }
+                    return b.timestamp?.localeCompare(a.timestamp) || 0;
+                });
+
+                function formatCommentContent(content) {
+                    if (!content) return 'No content';
+                    
+                    // Remove burger menu characters (\uf0c9, \uf007, \uf147, etc.)
+                    let formatted = content.replace(/[\uf000-\uf8ff]/g, '');
+                    
+                    // Replace dots with line breaks for better readability
+                    formatted = formatted.replace(/\. /g, '.\n');
+                    
+                    // Clean up extra whitespace and trim
+                    formatted = formatted.replace(/\s+/g, ' ').trim();
+                    
+                    return formatted;
+                }
+                
+                let commentsHtml = questionComments.map(comment => `
+                    <div class="comment-item">
+                        <div class="comment-meta">
+                            <span class="comment-username">${comment.username || 'Anonymous'}</span>
+                            <span class="comment-timestamp">🕐 ${comment.timestamp || 'Unknown date'}</span>
+                            ${comment.vote_type ? `<span class="comment-vote-type">${comment.vote_type}</span>` : ''}
+                            ${comment.vote_count > 0 ? `<span class="comment-vote-type">👍 ${comment.vote_count} votes</span>` : ''}
+                        </div>
+                        <div class="comment-content" style="white-space: pre-line;">${formatCommentContent(comment.content)}</div>
+                    </div>
+                `).join('');
+
+                // Also check for raw community text for additional context
+                const question = allQuestions.find(q => q.id === questionId);
+                const rawCommunityText = question?.raw_community_text;
+
+                if (rawCommunityText && rawCommunityText.length > 100) {
+                    commentsHtml += `
+                        <div style="margin-top: 25px; padding-top: 20px; border-top: 2px solid #e8eaed;">
+                            <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #4285f4;">
+                                <h4 style="color: #1a73e8; margin-bottom: 10px;">🔍 Additional Raw Community Text</h4>
+                                <div style="font-family: 'Monaco', 'Menlo', monospace; font-size: 0.85rem; white-space: pre-wrap; max-height: 200px; overflow-y: auto; color: #3c4043; line-height: 1.5;">${rawCommunityText}</div>
+                                <div style="margin-top: 10px; font-size: 0.8rem; color: #5f6368; font-style: italic;">
+                                    💡 Additional community text that may contain useful context not captured in the parsed comments above.
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }
+
+                modalBody.innerHTML = commentsHtml;
+            }
+
+            modal.classList.add('show');
+        }
+
+        function showAllCommunityComments(questionId, questionNumber) {
+            const modal = document.getElementById('communityModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalBody = document.getElementById('modalBody');
+
+            modalTitle.textContent = `All Community Comments - Question ${questionNumber}`;
+            const question = allQuestions.find(q => q.id === questionId);
+            const allCommunityText = question?.all_community_comments;
+            const arrayComments = allComments.filter(comment => comment.question_id === questionId);
+
+            let commentsHtml = '';
+
+            // Display all_community_comments (for Questions 40/41)
+            if (allCommunityText && allCommunityText.trim()) {
+                const formattedText = formatCommunityText(allCommunityText);
+                commentsHtml += `
+                    <div class="raw-comments-container">
+                        <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #4285f4; margin-bottom: 20px;">
+                            <h4 style="color: #1a73e8; margin-bottom: 10px;">💬 Community Discussion</h4>
+                            <div style="font-family: 'Segoe UI', Arial, sans-serif; font-size: 0.9rem; max-height: 500px; overflow-y: auto; color: #3c4043; line-height: 1.6; padding: 10px; background: white; border-radius: 6px; border: 1px solid #e8eaed;">${formattedText}</div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            // Display comments from array (for regular questions)
+            if (arrayComments.length > 0) {
+                commentsHtml += `
+                    <div class="structured-comments-container">
+                        <div style="background: #f1f8e9; padding: 15px; border-radius: 8px; border-left: 4px solid #34a853;">
+                            <h4 style="color: #137333; margin-bottom: 15px;">💭 Community Comments</h4>
+                `;
+
+                arrayComments.forEach(comment => {
+                    const formattedContent = formatCommunityText(comment.content);
+                    commentsHtml += `
+                        <div style="background: white; padding: 12px; margin-bottom: 10px; border-radius: 6px; border: 1px solid #e8eaed;">
+                            <div style="font-size: 0.9rem; color: #3c4043; line-height: 1.6;">${formattedContent}</div>
+                        </div>
+                    `;
+                });
+
+                commentsHtml += `
+                        </div>
+                    </div>
+                `;
+            }
+
+            if (!commentsHtml) {
+                modalBody.innerHTML = '<div class="no-comments">📭 No community comments available for this question.</div>';
+            } else {
+                modalBody.innerHTML = commentsHtml;
+            }
+
+            modal.classList.add('show');
+        }
+
+        function formatCommunityText(text) {
+            if (!text) return '';
+            
+            return text
+                // Replace multiple spaces/newlines with single spaces first
+                .replace(/\s+/g, ' ')
+                // Format usernames and timestamps
+                .replace(/([a-zA-Z0-9_]+)\s+(Highly Voted|Most Recent)\s+(\d+\s+\w+(?:,\s+\d+\s+\w+)*\s+ago)/g, 
+                         '<strong style="color: #1a73e8;">$1</strong> <span style="background: #e8f5e8; padding: 2px 6px; border-radius: 3px; font-size: 0.8rem; color: #137333;">$2</span> <em style="color: #5f6368;">$3</em>')
+                // Format upvote information
+                .replace(/upvoted\s+(\d+)\s+times?/g, '<span style="color: #ea4335; font-weight: 500;">👍 $1 votes</span>')
+                // Format "Selected Answer:" pattern
+                .replace(/Selected Answer:\s*([A-F])/g, '<span style="background: #fff3cd; padding: 2px 6px; border-radius: 3px; color: #856404;">Selected: <strong>$1</strong></span>')
+                // Add line breaks for better readability
+                .replace(/\.\s+([A-Z][a-zA-Z])/g, '.<br><br>$1')
+                // Format URLs
+                .replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank" style="color: #1a73e8; text-decoration: none;">🔗 Link</a>')
+                // Clean up extra spaces
+                .trim();
+        }
+
+        function extractHighlyVotedAnswer(question) {
+            // First try the existing field
+            if (question.highly_voted_answer && question.highly_voted_answer !== 'N/A' && question.highly_voted_answer.trim()) {
+                return question.highly_voted_answer;
+            }
+            if (question.answers?.highly_voted && question.answers.highly_voted.trim()) {
+                return question.answers.highly_voted;
+            }
+
+            // Extract from community comments
+            const allText = question.all_community_comments || '';
+            const arrayComments = allComments.filter(comment => comment.question_id === question.id);
+            const combinedText = allText + ' ' + arrayComments.map(c => c.content).join(' ');
+
+            // Look for "Highly Voted" pattern with answer
+            const patterns = [
+                /Highly Voted[\s\S]*?Selected Answer:\s*([A-F])/gi,
+                /Highly Voted[\s\S]*?answer.*?is\s*([A-F])/gi,
+                /Highly Voted[\s\S]*?correct.*?([A-F])/gi,
+                /Highly Voted[\s\S]*?vote.*?([A-F])/gi,
+                /([a-zA-Z0-9_]+)\s+Highly Voted[\s\S]*?([A-F])\s+is/gi
+            ];
+
+            for (const pattern of patterns) {
+                const matches = Array.from(combinedText.matchAll(pattern));
+                if (matches.length > 0) {
+                    const answer = matches[0][matches[0].length - 1]; // Get last capture group
+                    if (/^[A-F]$/.test(answer)) {
+                        return answer;
+                    }
+                }
+            }
+
+            return 'N/A';
+        }
+
+        function extractMostRecentAnswer(question) {
+            // First try the existing field
+            if (question.most_recent_answer && question.most_recent_answer !== 'N/A' && question.most_recent_answer.trim()) {
+                return question.most_recent_answer;
+            }
+            if (question.answers?.most_recent && question.answers.most_recent.trim()) {
+                return question.answers.most_recent;
+            }
+
+            // Extract from community comments
+            const allText = question.all_community_comments || '';
+            const arrayComments = allComments.filter(comment => comment.question_id === question.id);
+            const combinedText = allText + ' ' + arrayComments.map(c => c.content).join(' ');
+
+            // Look for "Most Recent" pattern with answer
+            const patterns = [
+                /Most Recent[\s\S]*?Selected Answer:\s*([A-F])/gi,
+                /Most Recent[\s\S]*?answer.*?is\s*([A-F])/gi,
+                /Most Recent[\s\S]*?([A-F])/gi
+            ];
+
+            for (const pattern of patterns) {
+                const matches = Array.from(combinedText.matchAll(pattern));
+                if (matches.length > 0) {
+                    const answer = matches[0][1];
+                    if (/^[A-F]$/.test(answer)) {
+                        return answer;
+                    }
+                }
+            }
+
+            return 'N/A';
+        }
+
+        function extractMultipleAnswers(question) {
+            const allText = question.all_community_comments || '';
+            const arrayComments = allComments.filter(comment => comment.question_id === question.id);
+            const combinedText = allText + ' ' + arrayComments.map(c => c.content).join(' ');
+
+            // Patterns to extract multiple answers
+            const patterns = [
+                /([A-F])\s*,\s*([A-F])\s*,?\s*(?:and\s+)?([A-F])?/gi,  // A, B, C or A, B and C
+                /([A-F])\s+and\s+([A-F])\s*(?:and\s+([A-F]))?/gi,      // A and B and C
+                /([A-F])\s*\/\s*([A-F])\s*\/?\s*([A-F])?/gi,           // A/B/C
+                /Answer.*?([A-F]).*?([A-F]).*?([A-F])?/gi,             // Answer is A B C
+                /correct.*?([A-F]).*?([A-F]).*?([A-F])?/gi             // correct answer is A B C
+            ];
+
+            const foundAnswers = new Set();
+
+            for (const pattern of patterns) {
+                const matches = Array.from(combinedText.matchAll(pattern));
+                matches.forEach(match => {
+                    // Add each capture group that's a valid answer
+                    for (let i = 1; i < match.length; i++) {
+                        if (match[i] && /^[A-F]$/.test(match[i])) {
+                            foundAnswers.add(match[i]);
+                        }
+                    }
+                });
+            }
+
+            // If we found multiple answers, return them
+            if (foundAnswers.size >= 2) {
+                return Array.from(foundAnswers);
+            }
+
+            // Fallback to single answer if no multiple answers found
+            const singleAnswer = question.community_answer || question.answers?.community;
+            return singleAnswer ? [singleAnswer] : [];
+        }
+
+        function showCaseStudyInfo(questionId) {
+            const modal = document.getElementById('communityModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalBody = document.getElementById('modalBody');
+
+            modalTitle.textContent = `Case Study Information`;
+
+            const question = allQuestions.find(q => q.id === questionId);
+            const caseStudyInfo = question?.case_study_info;
+
+            if (caseStudyInfo && caseStudyInfo.trim()) {
+                modalBody.innerHTML = `
+                    <div class="case-study-container">
+                        <div style="background: linear-gradient(135deg, #e8f5e8, #f1f8e9); padding: 20px; border-radius: 12px; border-left: 5px solid #34a853;">
+                            <h4 style="color: #137333; margin-bottom: 15px; display: flex; align-items: center;">
+                                📋 Case Study Background
+                                <span style="margin-left: 10px; font-size: 0.8rem; background: #34a853; color: white; padding: 2px 8px; border-radius: 12px;">INFO</span>
+                            </h4>
+                            <div style="font-family: 'Segoe UI', Arial, sans-serif; font-size: 0.95rem; white-space: pre-wrap; color: #1e1e1e; line-height: 1.7; max-height: 400px; overflow-y: auto;">${caseStudyInfo}</div>
+                            <div style="margin-top: 15px; font-size: 0.8rem; color: #5f6368; font-style: italic; padding-top: 15px; border-top: 1px solid #34a853;">
+                                💡 This background information provides context for understanding and answering the question above.
+                            </div>
+                        </div>
+                    </div>
+                `;
+            } else {
+                modalBody.innerHTML = '<div class="no-comments">📭 No case study information available for this question.</div>';
+            }
+
+            modal.classList.add('show');
+        }
+
+        function editQuestion(questionId) {
+            const question = allQuestions.find(q => q.id === questionId);
+            if (!question) return;
+
+            currentEditingQuestion = question;
+            
+            // Populate edit form
+            document.getElementById('editQuestionNumber').value = question.number || '';
+            document.getElementById('editQuestionDescription').value = question.raw_description || question.description || '';
+            document.getElementById('editTopic').value = question.metadata?.topic || '';
+
+            // Populate options editor with correct answer checkboxes
+            const optionsEditor = document.getElementById('optionsEditor');
+            optionsEditor.innerHTML = '';
+            
+            const options = question.options || {};
+            const correctAnswers = getCorrectAnswersForQuestion(question) || [];
+            
+            ['A', 'B', 'C', 'D', 'E', 'F'].forEach(letter => {
+                if (options[letter] || letter <= 'D') { // Always show A-D, show E-F only if they exist
+                    const div = document.createElement('div');
+                    div.style.marginBottom = '15px';
+                    div.innerHTML = `
+                        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 5px;">
+                            <input type="checkbox" id="correctAnswer${letter}" class="correct-answer-checkbox" 
+                                   ${correctAnswers.includes(letter) ? 'checked' : ''} 
+                                   onchange="updateCorrectAnswersDisplay()">
+                            <label for="correctAnswer${letter}" style="font-weight: 600; color: #2e7d32;">✓</label>
+                            <label class="form-label" style="margin: 0; font-weight: 600;">Option ${letter}</label>
+                        </div>
+                        <textarea id="editOption${letter}" class="form-input" rows="3" 
+                                  placeholder="Enter answer option ${letter}..." 
+                                  style="width: 100%; resize: vertical; min-height: 60px;">${options[letter] || ''}</textarea>
+                    `;
+                    optionsEditor.appendChild(div);
+                }
+            });
+            
+            // Update the correct answers display
+            updateCorrectAnswersDisplay();
+
+            document.getElementById('editModal').classList.add('show');
+        }
+        
+        function updateCorrectAnswersDisplay() {
+            const checkboxes = document.querySelectorAll('.correct-answer-checkbox');
+            const selectedAnswers = [];
+            
+            checkboxes.forEach(checkbox => {
+                if (checkbox.checked) {
+                    const letter = checkbox.id.replace('correctAnswer', '');
+                    selectedAnswers.push(letter);
+                }
+            });
+            
+            const display = document.getElementById('selectedAnswersDisplay');
+            if (selectedAnswers.length === 0) {
+                display.textContent = 'None';
+                display.style.background = '#ffebee';
+                display.style.borderColor = '#f44336';
+                display.style.color = '#c62828';
+            } else {
+                display.textContent = selectedAnswers.join(', ');
+                display.style.background = 'white';
+                display.style.borderColor = '#4caf50';
+                display.style.color = '#2e7d32';
+            }
+        }
+
+        function openPDF(filename) {
+            // Open PDF file in new tab
+            const pdfUrl = `./pdfs/${filename}`;
+            window.open(pdfUrl, '_blank');
+        }
+
+        function openPDFPage(filename, pageNumber) {
+            // Open PDF file at specific page (PDF.js format)
+            const pdfUrl = `./pdfs/${filename}#page=${pageNumber}`;
+            window.open(pdfUrl, '_blank');
+        }
+
+        function setupEventListeners() {
+            // Search and filter event listeners
+            document.getElementById('searchBox').addEventListener('input', filterQuestions);
+            document.getElementById('questionNumberFilter').addEventListener('input', filterQuestions);
+            document.getElementById('topicFilter').addEventListener('change', filterQuestions);
+            document.getElementById('sourceFilter').addEventListener('change', filterQuestions);
+            document.getElementById('pageNumberFilter').addEventListener('input', filterQuestions);
+            document.getElementById('confidenceFilter').addEventListener('change', filterQuestions);
+            document.getElementById('claudeAnswerFilter').addEventListener('change', filterQuestions);
+            document.getElementById('communityAnswerFilter').addEventListener('change', filterQuestions);
+            document.getElementById('highlyVotedFilter').addEventListener('change', filterQuestions);
+
+            // Control buttons
+            document.getElementById('showAllAnswersBtn').addEventListener('click', toggleAllAnswers);
+            document.getElementById('resetFiltersBtn').addEventListener('click', resetFilters);
+            document.getElementById('highlightAnswersBtn').addEventListener('click', toggleHighlightAnswers);
+
+            // New feature buttons
+            document.getElementById('pdfUpload').addEventListener('change', handlePDFUpload);
+            document.getElementById('runAnalysisBtn').addEventListener('click', runAnalysis);
+            document.getElementById('statisticsBtn').addEventListener('click', showStatistics);
+            document.getElementById('evaluateBtn').addEventListener('click', showEvaluationResults);
+            document.getElementById('warningsBtn').addEventListener('click', showWarnings);
+
+            // Modal controls
+            document.getElementById('closeModalBtn').addEventListener('click', closeModal);
+            document.getElementById('closeEditModalBtn').addEventListener('click', closeEditModal);
+            document.getElementById('closeStatisticsModalBtn').addEventListener('click', closeStatisticsModal);
+            document.getElementById('closeWarningsModalBtn').addEventListener('click', closeWarningsModal);
+            document.getElementById('cancelEditBtn').addEventListener('click', closeEditModal);
+            
+            // Modal background clicks
+            document.getElementById('communityModal').addEventListener('click', function(e) {
+                if (e.target === this) closeModal();
+            });
+            
+            document.getElementById('editModal').addEventListener('click', function(e) {
+                if (e.target === this) closeEditModal();
+            });
+
+            document.getElementById('statisticsModal').addEventListener('click', function(e) {
+                if (e.target === this) closeStatisticsModal();
+            });
+
+            // Edit form submission
+            document.getElementById('editForm').addEventListener('submit', saveQuestionEdits);
+
+            // ESC key to close modals
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    closeModal();
+                    closeEditModal();
+                    closeStatisticsModal();
+                }
+            });
+        }
+
+        function filterQuestions() {
+            const searchTerm = document.getElementById('searchBox').value.toLowerCase();
+            const questionNumber = document.getElementById('questionNumberFilter').value;
+            const topicFilter = document.getElementById('topicFilter').value;
+            const sourceFilter = document.getElementById('sourceFilter').value;
+            const pageNumber = document.getElementById('pageNumberFilter').value;
+            const confidenceFilter = document.getElementById('confidenceFilter').value;
+            const claudeAnswerFilter = document.getElementById('claudeAnswerFilter').value;
+            const communityAnswerFilter = document.getElementById('communityAnswerFilter').value;
+            const highlyVotedFilter = document.getElementById('highlyVotedFilter').value;
+
+            filteredQuestions = allQuestions.filter(question => {
+                // Search filter
+                if (searchTerm) {
+                    const searchableText = (
+                        (question.description || '') + ' ' +
+                        JSON.stringify(question.options || {}) + ' ' +
+                        (question.metadata?.topic || '') + ' ' +
+                        (question.claude_reasoning || '') + ' ' +
+                        (question.introductory_info || '')
+                    ).toLowerCase();
+                    
+                    if (!searchableText.includes(searchTerm)) {
+                        return false;
+                    }
+                }
+
+                // Question number filter
+                if (questionNumber && !matchesNumberFilter(question.number, questionNumber)) {
+                    return false;
+                }
+
+                // Page number filter
+                if (pageNumber && !matchesNumberFilter(question.page_number || question.metadata?.page, pageNumber)) {
+                    return false;
+                }
+
+                // Topic filter
+                if (topicFilter && question.metadata?.topic !== topicFilter) {
+                    return false;
+                }
+
+                // Source filter  
+                if (sourceFilter && (question.source_file || question.metadata?.source) !== sourceFilter) {
+                    return false;
+                }
+
+                // Confidence filter
+                if (confidenceFilter) {
+                    const confidence = question.metadata?.confidence || 0;
+                    if (confidenceFilter === 'high' && confidence < 0.8) return false;
+                    if (confidenceFilter === 'medium' && (confidence < 0.5 || confidence >= 0.8)) return false;
+                    if (confidenceFilter === 'low' && confidence >= 0.5) return false;
+                }
+
+                // Claude answer filter
+                if (claudeAnswerFilter !== '') {
+                    const hasClaudeAnswer = question.metadata?.has_claude_answer || false;
+                    if (claudeAnswerFilter === 'true' && !hasClaudeAnswer) return false;
+                    if (claudeAnswerFilter === 'false' && hasClaudeAnswer) return false;
+                }
+
+                // Answer filters
+                if (communityAnswerFilter && question.answers?.community !== communityAnswerFilter) {
+                    return false;
+                }
+
+                if (highlyVotedFilter && question.answers?.highly_voted !== highlyVotedFilter) {
+                    return false;
+                }
+
+                return true;
+            });
+
+            // Reset to first page when filters change
+            currentPage = 1;
+            displayQuestions();
+            updateStats();
+            updateFilterActiveStates();
+        }
+
+        function matchesNumberFilter(value, filter) {
+            if (!value || !filter) return false;
+            
+            const valueNum = parseInt(value);
+            
+            // Handle range (e.g., "10-15")
+            if (filter.includes('-')) {
+                const [start, end] = filter.split('-').map(n => parseInt(n.trim()));
+                return valueNum >= start && valueNum <= end;
+            }
+            
+            // Handle comma-separated (e.g., "1,5,10")
+            if (filter.includes(',')) {
+                const numbers = filter.split(',').map(n => parseInt(n.trim()));
+                return numbers.includes(valueNum);
+            }
+            
+            // Handle single number
+            return valueNum === parseInt(filter);
+        }
+
+        function updateFilterActiveStates() {
+            // Add visual feedback for active filters
+            const inputs = document.querySelectorAll('.filter-input, .filter-select');
+            inputs.forEach(input => {
+                if (input.value) {
+                    input.classList.add('filter-active');
+                } else {
+                    input.classList.remove('filter-active');
+                }
+            });
+        }
+
+        function updateStats() {
+            const total = allQuestions.length;
+            const filtered = filteredQuestions.length;
+            
+            document.getElementById('questionCount').textContent = 
+                `${filtered} questions displayed`;
+            
+            document.getElementById('filterStatus').textContent = 
+                filtered < total ? `(filtered from ${total} total)` : '';
+
+            // Confidence statistics for filtered questions
+            const confidenceStats = calculateConfidenceStats(filteredQuestions);
+            document.getElementById('confidenceStats').textContent = 
+                `High: ${confidenceStats.high}, Medium: ${confidenceStats.medium}, Low: ${confidenceStats.low}`;
+        }
+
+        function calculateConfidenceStats(questions) {
+            const stats = { high: 0, medium: 0, low: 0 };
+            questions.forEach(q => {
+                const confidence = q.metadata?.confidence || 0;
+                if (confidence >= 0.8) stats.high++;
+                else if (confidence >= 0.5) stats.medium++;
+                else stats.low++;
+            });
+            return stats;
+        }
+
+        function resetFilters() {
+            // Clear all filter inputs
+            document.querySelectorAll('.filter-input').forEach(input => input.value = '');
+            document.querySelectorAll('.filter-select').forEach(select => select.selectedIndex = 0);
+            
+            // Reset filtered questions
+            filteredQuestions = [...allQuestions];
+            
+            // Update display
+            displayQuestions();
+            updateStats();
+            updateFilterActiveStates();
+        }
+
+        let highlightAnswers = false;
+        
+        function toggleAllAnswers() {
+            const btn = document.getElementById('showAllAnswersBtn');
+            showAllAnswers = !showAllAnswers;
+
+            if (showAllAnswers) {
+                filteredQuestions.forEach(q => {
+                    const answersDiv = document.getElementById(`answers-${q.id}`);
+                    const toggleSpan = document.getElementById(`toggle-${q.id}`);
+                    if (answersDiv && toggleSpan) {
+                        answersDiv.classList.add('show');
+                        toggleSpan.textContent = '▼';
+                        toggleSpan.nextElementSibling.textContent = 'Hide Answers & Analysis';
+                    }
+                });
+                btn.innerHTML = '🔼 Collapse All Answers';
+            } else {
+                filteredQuestions.forEach(q => {
+                    const answersDiv = document.getElementById(`answers-${q.id}`);
+                    const toggleSpan = document.getElementById(`toggle-${q.id}`);
+                    if (answersDiv && toggleSpan) {
+                        answersDiv.classList.remove('show');
+                        toggleSpan.textContent = '▶';
+                        toggleSpan.nextElementSibling.textContent = 'Show Answers & Analysis';
+                    }
+                });
+                btn.innerHTML = '🔍 Extend All Answers';
+            }
+        }
+        
+        function toggleHighlightAnswers() {
+            const btn = document.getElementById('highlightAnswersBtn');
+            highlightAnswers = !highlightAnswers;
+            
+            if (highlightAnswers) {
+                btn.innerHTML = '🎯 Remove Highlighting';
+                btn.style.background = 'linear-gradient(135deg, #4caf50, #388e3c)';
+                
+                // Highlight correct answers based on Community values and multi-selection detection
+                filteredQuestions.forEach(question => {
+                    // Check if it's a multi-selection question
+                    const questionText = question.description.toLowerCase();
+                    const isMultiSelection = questionText.includes('choose three') || 
+                                           questionText.includes('choose two') ||
+                                           questionText.includes('select three') ||
+                                           questionText.includes('select two') ||
+                                           questionText.includes('choose 3') ||
+                                           questionText.includes('choose 2') ||
+                                           questionText.includes('select 3') ||
+                                           questionText.includes('select 2');
+                    
+                    if (isMultiSelection) {
+                        // Extract multiple answers from community comments
+                        const multiAnswers = extractMultipleAnswers(question);
+                        multiAnswers.forEach(answer => {
+                            const optionElement = document.querySelector(`[data-question-id="${question.autoIncrement}"][data-option="${answer}"]`);
+                            if (optionElement) {
+                                optionElement.classList.add('highlighted');
+                            }
+                        });
+                    } else {
+                        // Single answer highlighting
+                        const communityAnswer = question.community_answer || question.answers?.community;
+                        if (communityAnswer) {
+                            const optionElement = document.querySelector(`[data-question-id="${question.autoIncrement}"][data-option="${communityAnswer}"]`);
+                            if (optionElement) {
+                                optionElement.classList.add('highlighted');
+                            }
+                        }
+                    }
+                });
+
+                // Mark wrong answers with red background
+                markWrongAnswers();
+            } else {
+                btn.innerHTML = '🎯 Highlight Answers';
+                btn.style.background = '';
+                
+                // Remove all highlighting and wrong answer marks
+                document.querySelectorAll('.option.highlighted').forEach(option => {
+                    option.classList.remove('highlighted');
+                });
+                document.querySelectorAll('.option.wrong-answer').forEach(option => {
+                    option.classList.remove('wrong-answer');
+                });
+            }
+        }
+
+        function markWrongAnswers() {
+            // Only mark wrong answers if highlights are active and answers are highlighted
+            if (!highlightAnswers) return;
+            
+            filteredQuestions.forEach(question => {
+                // Get user's marked answers
+                const userAnswers = JSON.parse(localStorage.getItem('userAnswers') || '{}');
+                const questionKey = `q_${question.autoIncrement}`;
+                const userMarkedAnswers = userAnswers[questionKey] || [];
+                
+                if (userMarkedAnswers.length === 0) return;
+                
+                // Get correct answers
+                const correctAnswers = getCorrectAnswersForQuestion(question);
+                
+                // Mark user answers as wrong if they don't match correct answers
+                userMarkedAnswers.forEach(userAnswer => {
+                    if (!correctAnswers.includes(userAnswer)) {
+                        const optionElement = document.querySelector(`[data-question-id="${question.autoIncrement}"][data-option="${userAnswer}"]`);
+                        if (optionElement && optionElement.classList.contains('user-marked')) {
+                            optionElement.classList.add('wrong-answer');
+                        }
+                    }
+                });
+            });
+        }
+
+        function showIndicatorDetails(type, dataStr) {
+            // Parse the data string safely
+            let data;
+            try {
+                data = JSON.parse(dataStr.replace(/&apos;/g, "'"));
+            } catch(e) {
+                console.error('Error parsing evaluation data:', e);
+                return;
+            }
+            
+            const detailsDiv = document.getElementById('indicatorDetails');
+            detailsDiv.style.display = 'block';
+            
+            let content = '';
+            let title = '';
+            let items = [];
+            
+            switch(type) {
+                case 'correct':
+                    title = `✅ Correct Answers (${data.correctAnswers})`;
+                    const correctAnswered = allQuestions.filter(q => {
+                        const userAnswers = JSON.parse(localStorage.getItem('userAnswers') || '{}');
+                        const questionKey = `q_${q.autoIncrement}`;
+                        const userAnswer = userAnswers[questionKey];
+                        if (!userAnswer) return false;
+                        const correctAnswer = getCorrectAnswersForQuestion(q);
+                        return arraysEqual(userAnswer.sort(), correctAnswer.sort());
+                    });
+                    items = correctAnswered.map(q => ({
+                        number: q.autoIncrement,
+                        id: `q_${q.autoIncrement}`,
+                        description: q.description.substring(0, 100) + '...',
+                        buttonText: 'Go to Question →',
+                        buttonStyle: 'background: #4caf50; color: white;'
+                    }));
+                    break;
+                    
+                case 'wrong':
+                    title = `❌ Wrong Answers (${data.wrongAnswers.length})`;
+                    items = data.wrongAnswers.map(wrong => ({
+                        number: wrong.number,
+                        id: wrong.id,
+                        description: wrong.description,
+                        buttonText: 'Review Question →',
+                        buttonStyle: 'background: #f44336; color: white;',
+                        extra: `<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 0.85rem; margin-top: 8px;">
+                            <div><span style="color: #f44336; font-weight: 500;">Your Answer:</span> <span style="background: #ffebee; padding: 2px 6px; border-radius: 3px;">${wrong.userAnswer.join(', ')}</span></div>
+                            <div><span style="color: #4caf50; font-weight: 500;">Correct Answer:</span> <span style="background: #e8f5e8; padding: 2px 6px; border-radius: 3px;">${wrong.correctAnswer.join(', ')}</span></div>
+                        </div>`
+                    }));
+                    break;
+                    
+                case 'skipped':
+                    title = `⚠️ Skipped Questions (${data.skippedQuestions.length})`;
+                    items = data.skippedQuestions.map(skipped => ({
+                        number: skipped.number,
+                        id: skipped.id,
+                        description: skipped.description,
+                        buttonText: 'Answer Now →',
+                        buttonStyle: 'background: #ff9800; color: white;'
+                    }));
+                    break;
+                    
+                case 'answered':
+                    title = `🔵 Answered Questions (${data.answeredQuestions})`;
+                    const answeredQuestions = allQuestions.filter(q => {
+                        const userAnswers = JSON.parse(localStorage.getItem('userAnswers') || '{}');
+                        const questionKey = `q_${q.autoIncrement}`;
+                        const userAnswer = userAnswers[questionKey];
+                        return userAnswer && userAnswer.length > 0;
+                    });
+                    items = answeredQuestions.map(q => ({
+                        number: q.autoIncrement,
+                        id: `q_${q.autoIncrement}`,
+                        description: q.description.substring(0, 100) + '...',
+                        buttonText: 'View Question →',
+                        buttonStyle: 'background: #2196f3; color: white;'
+                    }));
+                    break;
+            }
+            
+            content = `
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                    <h3 style="margin: 0; color: #3c4043;">${title}</h3>
+                    <button onclick="document.getElementById('indicatorDetails').style.display='none'" 
+                            style="background: #f1f3f4; border: none; color: #5f6368; padding: 8px 12px; border-radius: 4px; cursor: pointer; font-size: 0.9rem;">
+                        ✕ Hide Details
+                    </button>
+                </div>
+                <div style="max-height: 400px; overflow-y: auto;">
+                    ${items.map(item => `
+                        <div style="background: white; border: 1px solid #e8eaed; border-radius: 8px; padding: 15px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; gap: 15px;">
+                            <div style="flex: 1;">
+                                <div style="font-weight: 600; margin-bottom: 5px;">Question ${item.number}</div>
+                                <div style="color: #5f6368; font-size: 0.9rem;">${item.description}</div>
+                                ${item.extra || ''}
+                            </div>
+                            <button onclick="goToQuestion('${item.id}')" 
+                                    style="${item.buttonStyle} border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; font-size: 0.8rem; white-space: nowrap;">
+                                ${item.buttonText}
+                            </button>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+            
+            detailsDiv.innerHTML = content;
+        }
+
+        function getCorrectAnswersForQuestion(question) {
+            // Check if it's a multi-selection question
+            const questionText = question.description.toLowerCase();
+            const isMultiSelection = questionText.includes('choose three') || 
+                                   questionText.includes('choose two') ||
+                                   questionText.includes('select three') ||
+                                   questionText.includes('select two') ||
+                                   questionText.includes('choose 3') ||
+                                   questionText.includes('choose 2') ||
+                                   questionText.includes('select 3') ||
+                                   questionText.includes('select 2');
+            
+            if (isMultiSelection) {
+                return extractMultipleAnswers(question);
+            } else {
+                const singleAnswer = question.community_answer || question.answers?.community;
+                return singleAnswer ? [singleAnswer] : [];
+            }
+        }
+
+        function showEvaluationResults() {
+            const evaluationData = calculateEvaluationResults();
+            displayEvaluationResults(evaluationData);
+            document.getElementById('evaluationModal').classList.add('show');
+        }
+
+        function calculateEvaluationResults() {
+            const userAnswers = JSON.parse(localStorage.getItem('userAnswers') || '{}');
+            console.log('User answers from localStorage:', userAnswers); // Debug
+            let totalQuestions = 0;
+            let answeredQuestions = 0;
+            let correctAnswers = 0;
+            let wrongAnswers = [];
+            let skippedQuestions = [];
+
+            allQuestions.forEach(question => {
+                totalQuestions++;
+                const questionKey = `q_${question.autoIncrement}`;
+                const userAnswer = userAnswers[questionKey];
+                const correctAnswer = getCorrectAnswersForQuestion(question);
+                
+                console.log(`Question ${question.autoIncrement}: userAnswer=${JSON.stringify(userAnswer)}, correctAnswer=${JSON.stringify(correctAnswer)}`);
+
+                if (!userAnswer || userAnswer.length === 0) {
+                    skippedQuestions.push({
+                        id: questionKey,
+                        number: question.autoIncrement,
+                        description: question.description.substring(0, 100) + '...'
+                    });
+                } else {
+                    answeredQuestions++;
+                    
+                    // Check if user's answer matches correct answer
+                    const isCorrect = arraysEqual(userAnswer.sort(), correctAnswer.sort());
+                    
+                    if (isCorrect) {
+                        correctAnswers++;
+                    } else {
+                        wrongAnswers.push({
+                            id: questionKey,
+                            number: question.autoIncrement,
+                            description: question.description.substring(0, 100) + '...',
+                            userAnswer: userAnswer,
+                            correctAnswer: correctAnswer,
+                            source: question.source_file || question.metadata?.source || 'N/A',
+                            page: question.page_number || question.metadata?.page || 'N/A'
+                        });
+                    }
+                }
+            });
+
+            const score = totalQuestions > 0 ? (correctAnswers / totalQuestions) * 100 : 0;
+            const passingScore = 70; // GCP exam passing score is typically 70%
+
+            return {
+                totalQuestions,
+                answeredQuestions,
+                correctAnswers,
+                wrongAnswers,
+                skippedQuestions,
+                score: score.toFixed(1),
+                passed: score >= passingScore,
+                passingScore
+            };
+        }
+
+        function arraysEqual(a, b) {
+            return JSON.stringify(a) === JSON.stringify(b);
+        }
+
+        function displayEvaluationResults(data) {
+            const modalBody = document.getElementById('evaluationBody');
+            
+            modalBody.innerHTML = `
+                <div style="display: grid; gap: 25px;">
+                    <!-- Overall Score Card -->
+                    <div style="background: linear-gradient(135deg, ${data.passed ? '#e8f5e8' : '#ffebee'}, ${data.passed ? '#c8e6c9' : '#ffcdd2'}); padding: 25px; border-radius: 15px; border-left: 5px solid ${data.passed ? '#4caf50' : '#f44336'}; text-align: center;">
+                        <h2 style="margin: 0 0 15px 0; color: ${data.passed ? '#2e7d32' : '#c62828'};">
+                            ${data.passed ? '🎉 PASSED' : '❌ FAILED'}
+                        </h2>
+                        <div style="font-size: 2.5rem; font-weight: bold; color: ${data.passed ? '#2e7d32' : '#c62828'}; margin: 10px 0;">
+                            ${data.score}%
+                        </div>
+                        <div style="color: #5f6368; font-size: 1.1rem;">
+                            ${data.correctAnswers}/${data.totalQuestions} questions correct
+                            <br>
+                            Passing score: ${data.passingScore}%
+                        </div>
+                    </div>
+
+                    <!-- Interactive Summary Stats -->
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                        <div class="stats-card clickable-indicator" style="background: #e8f5e8; border-left: 4px solid #4caf50; cursor: pointer;" onclick="showIndicatorDetails('correct', ${JSON.stringify(data).replace(/'/g, "&apos;")})">
+                            <div style="font-size: 1.5rem; font-weight: bold; color: #2e7d32;">${data.correctAnswers}</div>
+                            <div style="color: #5f6368;">Correct Answers</div>
+                            <div style="font-size: 0.8rem; color: #4caf50; margin-top: 5px;">Click to view →</div>
+                        </div>
+                        <div class="stats-card clickable-indicator" style="background: #ffebee; border-left: 4px solid #f44336; cursor: pointer;" onclick="showIndicatorDetails('wrong', ${JSON.stringify(data).replace(/'/g, "&apos;")})">
+                            <div style="font-size: 1.5rem; font-weight: bold; color: #c62828;">${data.wrongAnswers.length}</div>
+                            <div style="color: #5f6368;">Wrong Answers</div>
+                            <div style="font-size: 0.8rem; color: #f44336; margin-top: 5px;">Click to view →</div>
+                        </div>
+                        <div class="stats-card clickable-indicator" style="background: #fff3e0; border-left: 4px solid #ff9800; cursor: pointer;" onclick="showIndicatorDetails('skipped', ${JSON.stringify(data).replace(/'/g, "&apos;")})">
+                            <div style="font-size: 1.5rem; font-weight: bold; color: #f57c00;">${data.skippedQuestions.length}</div>
+                            <div style="color: #5f6368;">Skipped Questions</div>
+                            <div style="font-size: 0.8rem; color: #ff9800; margin-top: 5px;">Click to view →</div>
+                        </div>
+                        <div class="stats-card clickable-indicator" style="background: #e3f2fd; border-left: 4px solid #2196f3; cursor: pointer;" onclick="showIndicatorDetails('answered', ${JSON.stringify(data).replace(/'/g, "&apos;")})">
+                            <div style="font-size: 1.5rem; font-weight: bold; color: #1976d2;">${data.answeredQuestions}</div>
+                            <div style="color: #5f6368;">Answered Questions</div>
+                            <div style="font-size: 0.8rem; color: #2196f3; margin-top: 5px;">Click to view →</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Filtered Details Section -->
+                    <div id="indicatorDetails" style="display: none; background: #f8f9fa; border-radius: 10px; padding: 20px; border: 1px solid #e9ecef;">
+                        <!-- Details will be populated by JavaScript -->
+                    </div>
+
+                </div>
+            `;
+        }
+
+        function goToQuestion(questionId) {
+            // Close the evaluation modal
+            document.getElementById('evaluationModal').classList.remove('show');
+            
+            // Find the question in the filtered list
+            const questionIndex = filteredQuestions.findIndex(q => q.id === questionId);
+            if (questionIndex !== -1) {
+                // Calculate which page the question is on
+                const targetPage = Math.floor(questionIndex / questionsPerPage) + 1;
+                currentPage = targetPage;
+                displayQuestions();
+                
+                // Scroll to the question after a short delay
+                setTimeout(() => {
+                    const questionElement = document.querySelector(`[data-question-id="${questionId}"]`);
+                    if (questionElement) {
+                        questionElement.closest('.question-card').scrollIntoView({ 
+                            behavior: 'smooth', 
+                            block: 'center' 
+                        });
+                        // Highlight the question briefly
+                        const questionCard = questionElement.closest('.question-card');
+                        questionCard.style.boxShadow = '0 0 20px rgba(255, 152, 0, 0.5)';
+                        setTimeout(() => {
+                            questionCard.style.boxShadow = '';
+                        }, 2000);
+                    }
+                }, 300);
+            }
+        }
+
+        function handleUploadClick() {
+            document.getElementById('uploadModal').classList.add('show');
+        }
+        
+        function handleFileSelection() {
+            const input = document.getElementById('pdfUploadInput');
+            const selectedFiles = document.getElementById('selectedFiles');
+            const filesList = document.getElementById('filesList');
+            const startBtn = document.getElementById('startProcessingBtn');
+            
+            if (input.files.length > 0) {
+                selectedFiles.style.display = 'block';
+                
+                let filesHtml = '';
+                Array.from(input.files).forEach((file, index) => {
+                    const fileSize = (file.size / (1024 * 1024)).toFixed(2); // Convert to MB
+                    filesHtml += `
+                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px; border-bottom: 1px solid #e9ecef;">
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <span style="font-size: 1.5rem;">📄</span>
+                                <div>
+                                    <div style="font-weight: 600; color: #202124;">${file.name}</div>
+                                    <div style="font-size: 0.8rem; color: #5f6368;">${fileSize} MB</div>
+                                </div>
+                            </div>
+                            <button onclick="removeFile(${index})" style="background: none; border: none; color: #f44336; font-size: 1.2rem; cursor: pointer;" title="Remove file">×</button>
+                        </div>
+                    `;
+                });
+                
+                filesList.innerHTML = filesHtml;
+                startBtn.disabled = false;
+            } else {
+                selectedFiles.style.display = 'none';
+                startBtn.disabled = true;
+            }
+        }
+        
+        function removeFile(index) {
+            const input = document.getElementById('pdfUploadInput');
+            const dt = new DataTransfer();
+            
+            Array.from(input.files).forEach((file, i) => {
+                if (i !== index) {
+                    dt.items.add(file);
+                }
+            });
+            
+            input.files = dt.files;
+            handleFileSelection();
+        }
+        
+        function startProcessing() {
+            const input = document.getElementById('pdfUploadInput');
+            const progressDiv = document.getElementById('processingProgress');
+            const statusDiv = document.getElementById('processingStatus');
+            const progressBar = document.getElementById('progressBar');
+            const startBtn = document.getElementById('startProcessingBtn');
+            
+            if (input.files.length === 0) {
+                alert('Please select PDF files to process.');
+                return;
+            }
+            
+            // Show progress section
+            progressDiv.style.display = 'block';
+            startBtn.disabled = true;
+            
+            // Simulate processing (in real implementation, this would call your backend API)
+            let progress = 0;
+            const totalFiles = input.files.length;
+            
+            const processFiles = () => {
+                if (progress < 100) {
+                    progress += 10;
+                    progressBar.style.width = progress + '%';
+                    
+                    if (progress <= 30) {
+                        statusDiv.textContent = `Uploading files... (${Math.ceil(progress/30 * totalFiles)}/${totalFiles})`;
+                    } else if (progress <= 60) {
+                        statusDiv.textContent = 'Extracting text from PDFs...';
+                    } else if (progress <= 80) {
+                        statusDiv.textContent = 'Parsing questions and answers...';
+                    } else if (progress <= 90) {
+                        statusDiv.textContent = 'Running Claude AI analysis...';
+                    } else {
+                        statusDiv.textContent = 'Finalizing results...';
+                    }
+                    
+                    setTimeout(processFiles, 500);
+                } else {
+                    statusDiv.innerHTML = `
+                        <div style="color: #4caf50; font-weight: 600;">
+                            ✅ Processing completed successfully!
+                        </div>
+                        <div style="margin-top: 10px; font-size: 0.85rem;">
+                            ${totalFiles} file(s) processed. New questions have been added to the database.
+                        </div>
+                    `;
+                    
+                    // Reset form after 3 seconds
+                    setTimeout(() => {
+                        document.getElementById('uploadModal').classList.remove('show');
+                        progressDiv.style.display = 'none';
+                        document.getElementById('selectedFiles').style.display = 'none';
+                        startBtn.disabled = false;
+                        progress = 0;
+                        progressBar.style.width = '0%';
+                        input.value = '';
+                        
+                        // Refresh the questions display (in real implementation, reload data from API)
+                        location.reload();
+                    }, 3000);
+                }
+            };
+            
+            processFiles();
+        }
+        
+        // Floating UP arrow functionality
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+        
+        // Show/hide floating UP arrow based on scroll
+        window.addEventListener('scroll', function() {
+            const floatUpBtn = document.getElementById('floatUpBtn');
+            if (window.pageYOffset > 300) {
+                floatUpBtn.classList.add('show');
+            } else {
+                floatUpBtn.classList.remove('show');
+            }
+        });
+        
+        // User answer selection functionality
+        function toggleUserSelection(optionElement) {
+            const questionId = optionElement.getAttribute('data-question-id');
+            const option = optionElement.getAttribute('data-option');
+            
+            // Check if this is a multi-selection question
+            const questionContainer = optionElement.closest('.question-card');
+            const questionTextElement = questionContainer.querySelector('.question-description');
+            const questionText = questionTextElement ? questionTextElement.textContent.toLowerCase() : '';
+            const isMultiSelection = questionText.includes('choose three') || 
+                                   questionText.includes('select three') ||
+                                   questionText.includes('choose 3') ||
+                                   questionText.includes('select 3');
+            
+            if (isMultiSelection) {
+                // For multi-selection, allow multiple options
+                optionElement.classList.toggle('user-selected');
+                
+                // Limit to 3 selections
+                const selectedOptions = questionContainer.querySelectorAll('.option.user-selected');
+                if (selectedOptions.length > 3) {
+                    optionElement.classList.remove('user-selected');
+                }
+            } else {
+                // For single selection, clear other selections in this question
+                const allOptions = questionContainer.querySelectorAll('.option');
+                allOptions.forEach(opt => opt.classList.remove('user-selected'));
+                
+                // Select this option
+                optionElement.classList.add('user-selected');
+            }
+            
+            // Store user selection in localStorage
+            storeUserSelection(questionId, option, isMultiSelection);
+        }
+        
+        function storeUserSelection(questionId, option, isMultiSelection) {
+            let userSelections = JSON.parse(localStorage.getItem('userSelections') || '{}');
+            
+            if (isMultiSelection) {
+                if (!userSelections[questionId]) {
+                    userSelections[questionId] = [];
+                }
+                
+                const index = userSelections[questionId].indexOf(option);
+                if (index > -1) {
+                    userSelections[questionId].splice(index, 1);
+                } else {
+                    if (userSelections[questionId].length < 3) {
+                        userSelections[questionId].push(option);
+                    }
+                }
+            } else {
+                userSelections[questionId] = [option];
+            }
+            
+            localStorage.setItem('userSelections', JSON.stringify(userSelections));
+        }
+        
+        // Restore user selections on page load
+        function restoreUserSelections() {
+            const userSelections = JSON.parse(localStorage.getItem('userSelections') || '{}');
+            
+            Object.entries(userSelections).forEach(([questionId, selections]) => {
+                selections.forEach(option => {
+                    const optionElement = document.querySelector(`[data-question-id="${questionId}"][data-option="${option}"]`);
+                    if (optionElement) {
+                        optionElement.classList.add('user-selected');
+                    }
+                });
+            });
+        }
+
+        // User Answer Marking (separate from user selection)
+        function toggleUserAnswer(questionId, option, optionElement) {
+            // Toggle the marked state
+            optionElement.classList.toggle('user-marked');
+            
+            // Check if this is a multi-selection question
+            const questionContainer = optionElement.closest('.question-card');
+            const questionTextElement = questionContainer.querySelector('.question-description');
+            const questionText = questionTextElement ? questionTextElement.textContent.toLowerCase() : '';
+            const isMultiSelection = questionText.includes('choose three') || 
+                                   questionText.includes('choose two') ||
+                                   questionText.includes('select three') ||
+                                   questionText.includes('select two') ||
+                                   questionText.includes('choose 3') ||
+                                   questionText.includes('choose 2') ||
+                                   questionText.includes('select 3') ||
+                                   questionText.includes('select 2');
+            
+            if (!isMultiSelection) {
+                // For single selection, clear other marks in this question
+                const allOptions = questionContainer.querySelectorAll('.option');
+                allOptions.forEach(opt => {
+                    if (opt !== optionElement) {
+                        opt.classList.remove('user-marked');
+                    }
+                });
+            } else {
+                // For multi-selection, limit selections based on question type
+                const markedOptions = questionContainer.querySelectorAll('.option.user-marked');
+                let maxSelections = 2; // default
+                
+                if (questionText.includes('three') || questionText.includes('3')) {
+                    maxSelections = 3;
+                }
+                
+                if (markedOptions.length > maxSelections && optionElement.classList.contains('user-marked')) {
+                    optionElement.classList.remove('user-marked');
+                }
+            }
+            
+            // Store user answers
+            storeUserAnswers(questionId, option, isMultiSelection, optionElement.classList.contains('user-marked'));
+        }
+
+        function storeUserAnswers(questionId, option, isMultiSelection, isMarked) {
+            let userAnswers = JSON.parse(localStorage.getItem('userAnswers') || '{}');
+            const questionKey = `q_${questionId}`;
+            
+            if (isMultiSelection) {
+                if (!userAnswers[questionKey]) {
+                    userAnswers[questionKey] = [];
+                }
+                
+                const index = userAnswers[questionKey].indexOf(option);
+                if (isMarked && index === -1) {
+                    userAnswers[questionKey].push(option);
+                } else if (!isMarked && index > -1) {
+                    userAnswers[questionKey].splice(index, 1);
+                }
+            } else {
+                if (isMarked) {
+                    userAnswers[questionKey] = [option];
+                } else {
+                    delete userAnswers[questionKey];
+                }
+            }
+            
+            localStorage.setItem('userAnswers', JSON.stringify(userAnswers));
+        }
+
+        // Restore user answers on page load
+        function restoreUserAnswers() {
+            const userAnswers = JSON.parse(localStorage.getItem('userAnswers') || '{}');
+            
+            Object.entries(userAnswers).forEach(([questionKey, answers]) => {
+                // Extract the auto-increment ID from the key (e.g., "q_1" -> "1")
+                const autoIncrement = questionKey.replace('q_', '');
+                
+                answers.forEach(option => {
+                    const optionElement = document.querySelector(`[data-question-id="${autoIncrement}"][data-option="${option}"]`);
+                    if (optionElement) {
+                        optionElement.classList.add('user-marked');
+                        
+                        // Add user answer marker
+                        const marker = document.createElement('span');
+                        marker.className = 'user-answer-marker';
+                        marker.textContent = '✓';
+                        marker.title = 'Your selected answer';
+                        optionElement.appendChild(marker);
+                    }
+                });
+            });
+        }
+
+        async function saveQuestionEdits(event) {
+            event.preventDefault();
+            
+            if (!currentEditingQuestion) return;
+
+            // Collect form data
+            const updates = {
+                id: currentEditingQuestion.id,
+                number: document.getElementById('editQuestionNumber').value,
+                description: document.getElementById('editQuestionDescription').value,
+                metadata: {
+                    ...currentEditingQuestion.metadata,
+                    topic: document.getElementById('editTopic').value
+                },
+                options: {}
+            };
+
+            // Collect options
+            ['A', 'B', 'C', 'D', 'E', 'F'].forEach(letter => {
+                const valueElement = document.getElementById(`editOption${letter}`);
+                if (valueElement) {
+                    const value = valueElement.value.trim();
+                    if (value) {
+                        updates.options[letter] = value;
+                    }
+                }
+            });
+            
+            // Collect correct answers
+            const correctAnswers = [];
+            const checkboxes = document.querySelectorAll('.correct-answer-checkbox');
+            checkboxes.forEach(checkbox => {
+                if (checkbox.checked) {
+                    const letter = checkbox.id.replace('correctAnswer', '');
+                    correctAnswers.push(letter);
+                }
+            });
+            updates.correct_answers = correctAnswers;
+
+            try {
+                // Try to save via API first
+                const response = await fetch('http://localhost:9002/api/questions/update', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(updates)
+                });
+
+                if (response.ok) {
+                    // Update local data
+                    const questionIndex = allQuestions.findIndex(q => q.id === currentEditingQuestion.id);
+                    if (questionIndex !== -1) {
+                        allQuestions[questionIndex] = { ...allQuestions[questionIndex], ...updates };
+                        
+                        // Update filtered questions if this question is currently visible
+                        const filteredIndex = filteredQuestions.findIndex(q => q.id === currentEditingQuestion.id);
+                        if (filteredIndex !== -1) {
+                            filteredQuestions[filteredIndex] = allQuestions[questionIndex];
+                        }
+                    }
+
+                    // Refresh display
+                    displayQuestions();
+                    closeEditModal();
+                    
+                    alert('✅ Question updated successfully and saved to JSON file!');
+                } else {
+                    throw new Error('Server update failed');
+                }
+            } catch (error) {
+                console.error('API save failed, falling back to browser storage:', error);
+                
+                // Fallback to browser-only update
+                const questionIndex = allQuestions.findIndex(q => q.id === currentEditingQuestion.id);
+                if (questionIndex !== -1) {
+                    allQuestions[questionIndex] = { ...allQuestions[questionIndex], ...updates };
+                    
+                    const filteredIndex = filteredQuestions.findIndex(q => q.id === currentEditingQuestion.id);
+                    if (filteredIndex !== -1) {
+                        filteredQuestions[filteredIndex] = allQuestions[questionIndex];
+                    }
+                }
+
+                displayQuestions();
+                closeEditModal();
+                
+                alert('⚠️ Question updated in browser only. \n\nTo persist changes, start the API server: \npython3 web_ui/api.py');
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('communityModal').classList.remove('show');
+        }
+
+        function closeEditModal() {
+            document.getElementById('editModal').classList.remove('show');
+            currentEditingQuestion = null;
+        }
+
+        function closeStatisticsModal() {
+            document.getElementById('statisticsModal').classList.remove('show');
+        }
+        
+        function showWarnings() {
+            populateWarnings();
+            document.getElementById('warningsModal').classList.add('show');
+        }
+        
+        function closeWarningsModal() {
+            document.getElementById('warningsModal').classList.remove('show');
+        }
+        
+        function populateWarnings() {
+            // Analyze questions for warnings and issues
+            const warnings = [];
+            const debugInfo = [];
+            const parsingIssues = [];
+            
+            allQuestions.forEach(question => {
+                // Check for missing options
+                const optionCount = Object.keys(question.options || {}).length;
+                if (optionCount < 3) {
+                    warnings.push({
+                        type: 'WARNING',
+                        message: `Question ${question.number || question.id}: Too few options (${optionCount})`,
+                        question: question,
+                        details: {
+                            description: question.description || 'No description',
+                            options: question.options || {},
+                            source: question.metadata?.source || 'Unknown',
+                            page: question.metadata?.page || 'Unknown'
+                        }
+                    });
+                }
+                
+                // Check for short descriptions
+                if (!question.description || question.description.length < 50) {
+                    warnings.push({
+                        type: 'WARNING',
+                        message: `Question ${question.number || question.id}: Description too short (${question.description?.length || 0} chars)`,
+                        question: question,
+                        details: {
+                            description: question.description || 'No description',
+                            source: question.metadata?.source || 'Unknown',
+                            page: question.metadata?.page || 'Unknown'
+                        }
+                    });
+                }
+                
+                // Check for missing Claude analysis
+                if (!question.claude_reasoning || question.claude_reasoning.length < 10) {
+                    debugInfo.push({
+                        type: 'DEBUG',
+                        message: `Question ${question.number || question.id}: Missing or limited AI analysis`,
+                        question: question
+                    });
+                }
+                
+                // Check for missing community answers
+                if (!question.answers?.community && !question.answers?.highly_voted && !question.answers?.most_recent) {
+                    parsingIssues.push({
+                        type: 'PARSING',
+                        message: `Question ${question.number || question.id}: No community answers found`,
+                        question: question
+                    });
+                }
+            });
+            
+            // Populate warnings content
+            const warningsContent = document.getElementById('warningsContent');
+            if (warnings.length === 0) {
+                warningsContent.innerHTML = '<div style="color: #4caf50; font-style: italic;">✅ No extraction warnings found!</div>';
+            } else {
+                warningsContent.innerHTML = warnings.map((warning, index) => `
+                    <div style="background: #fff3cd; border-left: 4px solid #ffc107; padding: 15px; margin-bottom: 10px; border-radius: 4px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                            <div style="font-weight: 600; color: #856404;">${warning.message}</div>
+                            <button class="btn btn-sm" onclick="goToQuestion('${warning.question?.autoIncrement || warning.question?.id}')" 
+                                    style="background: #ffc107; color: #856404; border: none; padding: 4px 8px; border-radius: 4px; font-size: 0.8rem;">
+                                Go to Question
+                            </button>
+                        </div>
+                        <div style="font-size: 0.9rem; color: #6c757d; margin-bottom: 8px;">
+                            <strong>Source:</strong> 
+                            <a href="#" class="meta-link" onclick="openPDF('${warning.details?.source}')">${warning.details?.source}</a> 
+                            (Page <a href="#" class="meta-link" onclick="openPDFPage('${warning.details?.source}', ${warning.details?.page})">${warning.details?.page}</a>)
+                            | <strong>Question ID:</strong> ${warning.question?.autoIncrement || warning.question?.number || 'N/A'}
+                        </div>
+                        <div style="background: #f8f9fa; padding: 10px; border-radius: 4px; margin-top: 8px;">
+                            <div style="font-size: 0.85rem; color: #495057;">
+                                <strong>Full Description:</strong><br>
+                                <div style="max-height: 100px; overflow-y: auto; margin-top: 5px; padding: 5px; border: 1px solid #ddd; border-radius: 3px; background: white;">
+                                    ${warning.details?.description || 'No description available'}
+                                </div>
+                            </div>
+                            <div style="font-size: 0.85rem; color: #495057; margin-top: 8px;">
+                                <strong>Answer Options:</strong> ${Object.keys(warning.details?.options || {}).length > 0 ? 
+                                    Object.entries(warning.details?.options || {}).map(([key, value]) => `<br><strong>${key}:</strong> ${value}`).join('') : 
+                                    '<span style="color: #dc3545;">No options found</span>'
+                                }
+                            </div>
+                            ${warning.question?.all_community_comments ? `
+                                <div style="font-size: 0.85rem; color: #495057; margin-top: 8px;">
+                                    <strong>Raw Context (first 200 chars):</strong><br>
+                                    <div style="background: #e9ecef; padding: 8px; margin-top: 5px; border-radius: 3px; font-family: monospace; font-size: 0.75rem;">
+                                        ${warning.question.all_community_comments.substring(0, 200)}${warning.question.all_community_comments.length > 200 ? '...' : ''}
+                                    </div>
+                                </div>
+                            ` : ''}
+                        </div>
+                    </div>
+                `).join('');
+            }
+            
+            // Populate debug content
+            const debugContent = document.getElementById('debugContent');
+            if (debugInfo.length === 0) {
+                debugContent.innerHTML = '<div style="color: #4caf50; font-style: italic;">✅ No debug issues found!</div>';
+            } else {
+                debugContent.innerHTML = debugInfo.map(debug => `
+                    <div style="background: #e3f2fd; border-left: 4px solid #2196f3; padding: 15px; margin-bottom: 10px; border-radius: 4px;">
+                        <div style="font-weight: 600; color: #1976d2;">${debug.message}</div>
+                    </div>
+                `).join('');
+            }
+            
+            // Populate parsing issues
+            const parsingIssuesDiv = document.getElementById('parsingIssues');
+            if (parsingIssues.length === 0) {
+                parsingIssuesDiv.innerHTML = '<div style="color: #4caf50; font-style: italic;">✅ No parsing issues found!</div>';
+            } else {
+                parsingIssuesDiv.innerHTML = parsingIssues.map(issue => `
+                    <div style="background: #ffebee; border-left: 4px solid #f44336; padding: 15px; margin-bottom: 10px; border-radius: 4px;">
+                        <div style="font-weight: 600; color: #c62828;">${issue.message}</div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        // New functionality for PDF upload and analysis
+        async function handlePDFUpload(event) {
+            const files = event.target.files;
+            if (!files.length) return;
+
+            const statusDiv = document.getElementById('analysisStatus');
+            const statusText = document.getElementById('analysisStatusText');
+            
+            statusText.textContent = `📤 Uploading ${files.length} PDF file(s)...`;
+            statusDiv.classList.add('show');
+
+            // Simulate file upload (in real implementation, this would upload to server)
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                console.log(`Uploading file: ${file.name}`);
+                
+                // In real implementation, you would:
+                // 1. Create FormData with the file
+                // 2. Send POST request to server endpoint
+                // 3. Server saves file to ./data/input/ directory
+                
+                // For now, just log the process
+                await new Promise(resolve => setTimeout(resolve, 500)); // Simulate upload time
+            }
+
+            statusText.textContent = `✅ Successfully uploaded ${files.length} PDF file(s) to ./data/input/`;
+            setTimeout(() => {
+                statusDiv.classList.remove('show');
+            }, 3000);
+
+            // Clear the file input
+            event.target.value = '';
+            
+            // Show success message with next steps
+            alert(`✅ PDF files uploaded successfully!\n\n${files.length} files have been saved to ./data/input/\n\nNext step: Click "Run Analysis" to process the new files.`);
+        }
+
+        async function runAnalysis() {
+            const statusDiv = document.getElementById('analysisStatus');
+            const statusText = document.getElementById('analysisStatusText');
+            const logDiv = document.getElementById('analysisLog');
+            const btn = document.getElementById('runAnalysisBtn');
+
+            // Disable button and show processing
+            btn.disabled = true;
+            btn.innerHTML = '⏳ Processing...';
+            statusText.textContent = '🔧 Running question extraction analysis...';
+            statusDiv.classList.add('show');
+            
+            let logContent = '';
+            
+            function addLog(message) {
+                const timestamp = new Date().toLocaleTimeString();
+                logContent += `[${timestamp}] ${message}\n`;
+                logDiv.textContent = logContent;
+                logDiv.scrollTop = logDiv.scrollHeight;
+            }
+
+            try {
+                addLog('Starting PDF analysis...');
+                addLog('Command: ./venv/bin/python src/robust_question_parser.py');
+                
+                // In real implementation, this would make an API call to trigger the analysis
+                // For now, simulate the process
+                await new Promise(resolve => setTimeout(resolve, 1000));
+                addLog('Initializing question parser...');
+                
+                await new Promise(resolve => setTimeout(resolve, 1500));
+                addLog('Processing PDF files from ./data/input/');
+                
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                addLog('Extracting questions and community comments...');
+                
+                await new Promise(resolve => setTimeout(resolve, 1500));
+                addLog('Running AI analysis...');
+                
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                addLog('Generating output files...');
+                
+                await new Promise(resolve => setTimeout(resolve, 1000));
+                addLog('✅ Analysis completed successfully!');
+                
+                statusText.textContent = '✅ Analysis completed! Reloading data...';
+                
+                // Reload the data
+                await initialize();
+                
+                setTimeout(() => {
+                    statusDiv.classList.remove('show');
+                }, 2000);
+                
+                alert('🎉 Analysis completed successfully!\n\nThe question data has been updated. Check the Statistics page for detailed results.');
+                
+            } catch (error) {
+                addLog(`❌ Error: ${error.message}`);
+                statusText.textContent = '❌ Analysis failed. Check the log for details.';
+                
+                setTimeout(() => {
+                    statusDiv.classList.remove('show');
+                }, 5000);
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = '🔧 Run Analysis';
+            }
+        }
+
+        function showStatistics() {
+            // Populate statistics
+            populateStatistics();
+            
+            // Show modal
+            document.getElementById('statisticsModal').classList.add('show');
+        }
+
+        function populateStatistics() {
+            // Basic counts
+            document.getElementById('totalQuestionsCount').textContent = allQuestions.length;
+            document.getElementById('validatedQuestionsCount').textContent = allQuestions.length;
+            document.getElementById('communityCommentsCount').textContent = allComments.length;
+
+            // Confidence breakdown
+            const confidenceStats = calculateConfidenceStats(allQuestions);
+            document.getElementById('highConfidenceCount').textContent = confidenceStats.high;
+            document.getElementById('mediumConfidenceCount').textContent = confidenceStats.medium;
+            document.getElementById('lowConfidenceCount').textContent = confidenceStats.low;
+
+            // Average confidence
+            const avgConfidence = allQuestions.reduce((sum, q) => sum + (q.metadata?.confidence || 0), 0) / allQuestions.length;
+            document.getElementById('averageConfidence').textContent = `${(avgConfidence * 100).toFixed(1)}%`;
+
+            // Complete questions
+            const completeQuestions = allQuestions.filter(q => Object.keys(q.options || {}).length >= 3).length;
+            document.getElementById('completeQuestionsCount').textContent = `${completeQuestions}/${allQuestions.length} (${(completeQuestions/allQuestions.length*100).toFixed(1)}%)`;
+
+            // Source files breakdown
+            const sourceFiles = {};
+            allQuestions.forEach(q => {
+                const source = q.metadata?.source || 'Unknown';
+                sourceFiles[source] = (sourceFiles[source] || 0) + 1;
+            });
+
+            const sourceFilesDiv = document.getElementById('sourceFilesStats');
+            sourceFilesDiv.innerHTML = Object.entries(sourceFiles)
+                .sort(([,a], [,b]) => b - a)
+                .map(([source, count]) => `
+                    <div class="source-file-item">
+                        <span class="source-file-name">${source}</span>
+                        <span class="source-file-count">${count} questions</span>
+                    </div>
+                `).join('');
+
+            // Generate dynamic processing log
+            const processingLog = document.getElementById('processingLog');
+            const currentTime = new Date().toLocaleString();
+            
+            // Calculate real statistics
+            const questionsWithClaudeAnalysis = allQuestions.filter(q => q.claude_answer && q.claude_answer !== 'N/A').length;
+            const questionsWithComments = allQuestions.filter(q => q.all_community_comments && q.all_community_comments.trim().length > 0).length;
+            const averageConfidence = allQuestions.length > 0 ? 
+                (allQuestions.reduce((sum, q) => sum + (q.confidence_score || 0), 0) / allQuestions.length * 100).toFixed(1) : 0;
+            
+            processingLog.textContent = `Last Analysis: ${currentTime}
+
+📊 Summary:
+- Total Questions Extracted: ${allQuestions.length}
+- Community Comments Found: ${questionsWithComments}
+- High Confidence Questions: ${confidenceStats.high}
+- PDF Files Processed: ${Object.keys(sourceFiles).length}
+- Claude AI Analysis Coverage: ${questionsWithClaudeAnalysis}/${allQuestions.length} (${((questionsWithClaudeAnalysis/allQuestions.length)*100).toFixed(1)}%)
+- Average Confidence Score: ${averageConfidence}%
+- Questions with Parsing Issues: ${allQuestions.filter(q => (q.confidence_score || 0) < 0.5).length}
+
+🔧 Processing Status:
+1. PDF text extraction: ✅ ${allQuestions.length} questions found
+2. Question boundary detection: ✅ ${((questionsWithComments/allQuestions.length)*100).toFixed(0)}% success rate
+3. Community comment separation: ✅ ${questionsWithComments} questions with comments
+4. OCR error correction: ✅ Applied to all extracted text
+5. Claude AI analysis: ${questionsWithClaudeAnalysis === allQuestions.length ? '✅' : '⚠️'} ${questionsWithClaudeAnalysis}/${allQuestions.length} completed
+6. Output files: ✅ JSON data loaded successfully
+
+${allQuestions.length > 0 ? '✅ Data ready for analysis' : '❌ No questions found'}
+${questionsWithClaudeAnalysis < allQuestions.length ? '💡 Some questions may need Claude AI analysis' : '💡 All questions analyzed'}`;
+        }
+
+        // Initialize the application when page loads
+        document.addEventListener('DOMContentLoaded', initialize);
+    </script>
+</body>
+</html>

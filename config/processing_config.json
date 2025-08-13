@@ -1,0 +1,19 @@
+{
+    "pdf_processing": {
+        "input_directory": "./data/input",
+        "file_pattern": "Questions_*.pdf",
+        "chunk_size": 5,
+        "overlap_pages": 1
+    },
+    "text_cleaning": {
+        "remove_urls": true,
+        "fix_line_breaks": true,
+        "standardize_spacing": true,
+        "preserve_code_blocks": true
+    },
+    "question_detection": {
+        "question_patterns": ["Question #\\d+", "Topic \\d+"],
+        "option_patterns": ["^[A-F]\\.", "^[A-F]\\)"],
+        "minimum_question_length": 50
+    }
+}
