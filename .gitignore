@@ -201,4 +201,25 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
-logs/archive/expert_extraction_20250812_000541.log
+
+# ExaMiner specific exclusions
+# Data directories (contain processed files and uploads)
+web_ui/pdfs/*
+data/output/*
+data/input/*
+logs/*
+src/logs/*
+
+# Files/folders starting with underscore
+_*
+
+# Configuration files with sensitive credentials
+project_config.json
+config/api_config.json
+api_config.json
+
+# Keep directory structure but ignore contents
+!data/output/.gitkeep
+!data/input/.gitkeep  
+!logs/.gitkeep
+!web_ui/pdfs/.gitkeep
