@@ -1,18 +1,20 @@
-# ExaMiner
+# exaMiner
 
 A comprehensive solution for extracting, parsing, and analyzing certification exam questions, answers and comments provided by community as PDF documents with LLM-powered analysis and turn into an interactive web interface.
 
 ## 🚀 Features
 
 ### Core Processing
+
 - **PDF Processing**: Extract text from multiple PDF files with intelligent question boundary detection
-- **Question Parsing**: Parse question structures, answer options, and community responses  
+- **Question Parsing**: Parse question structures, answer options, and community responses
 - **LLM Analysis**: Real-time Claude AI analysis for expert-level answer determination
 - **Text Enhancement**: Advanced OCR error correction and text cleaning
 - **Auto-increment Numbering**: Unique primary key system for all questions
 - **Multiple Output Formats**: CSV, Markdown Tables, JSON Data, Clean JSON format for Web UI
 
 ### Interactive Web UI
+
 - **🔍 Smart Search & Filtering**: Search across all content with multiple filter options
 - **📝 Answer Marking**: Mark your answers with persistent storage across sessions
 - **✨ Answer Highlighting**: Show/hide correct answers with visual indicators
@@ -52,25 +54,27 @@ examiner/
 ## 🛠️ Installation
 
 1. **Clone the repository**:
+
    ```bash
    git clone https://github.com/fxerkan/examiner.git
    cd examiner
    ```
-
 2. **Create virtual environment**:
+
    ```bash
    python3 -m venv venv
    source venv/bin/activate  # On Windows: venv\Scripts\activate
    ```
-
 3. **Install dependencies**:
+
    ```bash
    pip install -r requirements.txt
    ```
-
 4. **Configure Claude API**:
+
    - Open `config/api_config.json`
    - Add your Claude API key
+
    ```json
    {
      "claude": {
@@ -84,28 +88,29 @@ examiner/
 ### Method 1: Manual Processing (Recommended)
 
 1. **Place PDF files** in `data/input/` directory:
+
    ```
    data/input/
    ├── Questions_1.pdf
    ├── Questions_2.pdf
    └── Questions_3.pdf
    ```
-
 2. **Run the extractor**:
+
    ```bash
    source venv/bin/activate
    python src/robust_question_parser.py
    ```
-
 3. **Start web UI**:
+
    ```bash
    cd web_ui
    python -m http.server 9000
    ```
-   
 4. **Open browser**: [http://localhost:9000](http://localhost:9000)
 
 ### Future Feature: PDF Upload Interface
+
 PDF upload functionality is currently in development and temporarily disabled in the web interface. Manual file placement method above is the current supported workflow.
 
 ## 🔧 Command Line Usage
@@ -154,16 +159,17 @@ python -c "from src.question_parser import QuestionParser; print('✅ Import suc
 ### Common Issues
 
 1. **PDF Processing Errors**:
+
    - Ensure PDF files are not password-protected
    - Check file permissions
    - Verify PDF files are text-based (not scanned images)
-
 2. **Claude API Issues**:
+
    - Verify API key in `config/api_config.json`
    - Check rate limits and quotas
    - Ensure internet connection
-
 3. **Web UI Not Loading**:
+
    - Ensure `data/output/questions_web_data.json` exists
    - Check browser console for JavaScript errors
    - Verify local server is running
@@ -181,6 +187,7 @@ tail -f logs/examiner_processor.log
 The system processes questions like this:
 
 **Input (from PDF)**:
+
 ```
 Question #1 Topic 1
 
@@ -197,14 +204,14 @@ Most Recent: B
 ```
 
 **Output (Structured)**:
+
 - ✅ **Question ID**: Q1_1
 - 📝 **Description**: Clean, enhanced question text
 - 🔤 **Options**: A, B, C, D with full text
-- 👥 **Community**: A (Highly Voted: A, Most Recent: B)  
+- 👥 **Community**: A (Highly Voted: A, Most Recent: B)
 - 🤖 **Claude AI**: B (with detailed reasoning)
 - 🎯 **Confidence**: 0.95 (High)
 - 📍 **Metadata**: Topic 1, Page 12, Questions_1.pdf
-
 
 ## 📜 License
 
@@ -213,20 +220,24 @@ This project is provided as-is for educational and professional development purp
 ## 🙏 Acknowledgments
 
 ### AI Assistant & Development Tools
+
 - **[Claude Code](https://claude.ai/code)** - Primary AI assistant for development
 - **[Anthropic Claude](https://www.anthropic.com)** - LLM integration for question analysis
 - **[Claude Sonnet 4](https://www.anthropic.com)** - Advanced reasoning and code generation
 
 ### MCP Agents & Specialized Tools
+
 - **Playwright MCP** - Browser automation and web UI testing
 - **General-Purpose Agent** - Complex task orchestration and multi-step workflows
 - **Code-Reviewer Agent** - Code quality analysis and review
 - **Test-Automator Agent** - Test suite creation and automation infrastructure
 
 ### Data Source
+
 - **[ExamTopics](https://www.examtopics.com)** - Community-driven exam questions and discussions
 
 ### Technologies & Libraries
+
 - **Python** - Core application development
 - **JavaScript/HTML/CSS** - Interactive web interface
 - **PDF Processing** - Text extraction and parsing

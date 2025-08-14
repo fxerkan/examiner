@@ -101,7 +101,7 @@ gösterebilmeli.
 - işlem sonunda kaç tane soru parse edildi, edilemedi, hata alanlar, hiç aktarılamayanlar, şıkları yakalanamayan, commentler bulunamayan, AI tarafından işlenemeyen yada düzeltilemeyen gibi birçok warning, error, info logları detaylı şekilde görülebilmeli.
 
 
-
+# FX
 ## Config dosyaları ve uygulama ayarlarnın merkezileştirilmesi
 
 ultrathink
