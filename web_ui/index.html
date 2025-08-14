@@ -1525,7 +1525,7 @@
                             Page: <a href="#" class="meta-link" onclick="openPDFPage('${normalizedQuestion.source_file}', ${normalizedQuestion.page_number})">${normalizedQuestion.page_number}</a> | 
                             Source: <a href="#" class="meta-link" onclick="openPDF('${normalizedQuestion.source_file}')">${normalizedQuestion.source_file}</a> | 
                             Confidence: <span class="confidence ${getConfidenceClass(normalizedQuestion.confidence_score)}">📊 ${((normalizedQuestion.confidence_score || 0) * 100).toFixed(0)}%</span>
-                            ${question.case_study_info ? `<button class="case-study-btn" onclick="showCaseStudyInfo('${question.id}')" title="View Case Study Information">ℹ️</button>` : ''}
+                            ${question.case_study_info ? `<button class="case-study-btn" onclick="openCaseStudyInNewTab('${question.id}')" title="View Case Study Information"><strong style="color: white; font-weight: bold; font-size: 1.1em;">i</strong></button>` : ''}
                         </div>
                         <button class="edit-btn" onclick="editQuestion('${question.id}')">✏️ Edit</button>
                     </div>
@@ -3487,6 +3487,58 @@
 
 ${allQuestions.length > 0 ? '✅ Data ready for analysis' : '❌ No questions found'}
 ${questionsWithClaudeAnalysis < allQuestions.length ? '💡 Some questions may need Claude AI analysis' : '💡 All questions analyzed'}`;
+        }
+
+        // Open case study in new tab
+        function openCaseStudyInNewTab(questionId) {
+            const question = allQuestions.find(q => q.id === questionId);
+            if (!question || !question.case_study_info) return;
+            
+            const content = formatCaseStudyText(question.case_study_info);
+            
+            const newWindow = window.open('', 'casestudy_' + questionId, 'width=1000,height=800');
+            newWindow.document.write(`
+                <html>
+                    <head>
+                        <title>Case Study - Question ${question.autoIncrement}</title>
+                        <style>
+                            body { 
+                                font-family: 'Segoe UI', Arial, sans-serif; 
+                                padding: 30px; 
+                                line-height: 1.8; 
+                                max-width: 900px; 
+                                margin: 0 auto;
+                            }
+                            h1 { color: #4285f4; border-bottom: 2px solid #4285f4; padding-bottom: 10px; }
+                            .content { white-space: pre-wrap; }
+                        </style>
+                    </head>
+                    <body>
+                        <h1>📋 Case Study - Question ${question.autoIncrement}</h1>
+                        <div class="content">${content}</div>
+                        <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee; text-align: center; color: #666;">
+                            Source: ${question.metadata?.source || 'Unknown'} | Page: ${question.metadata?.page || 'N/A'}
+                        </div>
+                    </body>
+                </html>
+            `);
+            newWindow.document.close();
+        }
+
+        // Format case study text for better readability
+        function formatCaseStudyText(text) {
+            if (!text) return '';
+            
+            let formatted = text
+                // Convert periods to newlines for better readability
+                .replace(/\. /g, '.\n')
+                // Handle bullet points
+                .replace(/^(\s*)[\-\*]\s+/gm, '$1• ')
+                // Clean extra whitespace
+                .replace(/\n\s*\n/g, '\n\n')
+                .trim();
+            
+            return formatted;
         }
 
         // Initialize the application when page loads
