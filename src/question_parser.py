@@ -351,8 +351,8 @@ class QuestionParser:
                 if re.search(r'(is the answer|upvoted|months ago|weeks ago|days ago|Selected Answer)', option_text, re.IGNORECASE):
                     continue
                 
-                # Skip very short or clearly non-option text
-                if len(option_text) < 5:
+                # Skip very short or clearly non-option text (but allow file paths like ~/bin)
+                if len(option_text) < 2 or (len(option_text) < 5 and not re.search(r'[~/\\.]', option_text)):
                     continue
                 
                 # Clean up OCR errors in option text

@@ -1542,13 +1542,33 @@
                         ${question.options && Object.keys(question.options).length > 0 ? `
                             <div class="options-container">
                                 <div class="options-title">📝 Answer Options:</div>
-                                ${Object.entries(question.options).map(([letter, text]) => `
-                                    <div class="option" data-option="${letter}" data-question-id="${normalizedQuestion.autoIncrement}" onclick="toggleUserAnswer('${normalizedQuestion.autoIncrement}', '${letter}', this)">
-                                        <div class="option-letter">${letter}</div>
-                                        <div class="option-text">${text}</div>
-                                        <div class="user-answer-marker" style="display: none;">✓</div>
-                                    </div>
-                                `).join('')}
+                                ${(() => {
+                                    // Get existing option letters and find the range
+                                    const existingLetters = Object.keys(question.options).filter(key => /^[A-F]$/.test(key));
+                                    if (existingLetters.length === 0) return '';
+                                    
+                                    // Sort and find max to fill from A to max
+                                    existingLetters.sort();
+                                    const maxLetter = existingLetters[existingLetters.length - 1];
+                                    const maxIndex = maxLetter.charCodeAt(0) - 65; // A=0, B=1, etc.
+                                    
+                                    // Generate range from A to max
+                                    const allLetters = [];
+                                    for (let i = 0; i <= maxIndex; i++) {
+                                        allLetters.push(String.fromCharCode(65 + i));
+                                    }
+                                    
+                                    return allLetters.map(letter => {
+                                        const text = question.options[letter] || '(Option not available)';
+                                        return `
+                                            <div class="option" data-option="${letter}" data-question-id="${normalizedQuestion.autoIncrement}" onclick="toggleUserAnswer('${normalizedQuestion.autoIncrement}', '${letter}', this)">
+                                                <div class="option-letter">${letter}</div>
+                                                <div class="option-text">${text}</div>
+                                                <div class="user-answer-marker" style="display: none;">✓</div>
+                                            </div>
+                                        `;
+                                    }).join('');
+                                })()}
                             </div>
                         ` : '<div class="error" style="padding: 20px;">⚠️ Answer options not available</div>'}
                     </div>
