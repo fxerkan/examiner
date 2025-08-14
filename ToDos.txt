@@ -1,13 +1,24 @@
 ToDos
 =====
 
-# Filter panel iyileştirmeleri.
+# instructions
+- şimdi sana yapılması gereken bazı işlerin listesini vereceğim bunların hepsini **kesinlikle** sırayla yap. 
+- varolan branch üzerinden çalışmalarına devam et, asla main üzerinde değişiklik yapma.
+- her bir bölüm ile geliştirmeler bitince test edeceğim ve **ancak ben onay verirsem** commit işlemini yapıp bir sonraki bölüm için geliştirmeye devam edeceksin.
+- **kesinlikle** ve **asla** varolan kod yapılarını bozmaman **çok önemli**, asla yeni scriptler oluşturma, sadece mevcut codebase de varolan yapıları geliştir ve düzelt.
+- web arayüzünü test etmeden bir işi bitirdim şeklinde söyleme, **kesinlikle** kontrol et yapılan değişiklikler sonrasında bozulan çalışmayan yada istendiği şekilde uygulanmamış bir nokta olup olmadığına playwright mcp ile bak.
+- web server'ı her zaman "cd web_ui & python3 -m http.server 9000" şeklinde çalıştır. eğer 9000 portunu kullanan birşey varsa onu "kill" et her zaman.
+
+# ToDos
+
+
+## Filter panel iyileştirmeleri.
 
 1. there is a "blank" area under the filter panel which occurs to filter panel height needs to viewable only with scrolling but this should NOT be necessaray. fix this to see the filter panel fully (without need to scroll bar)
 
 
 
-# Questions & Answers bölümlerinde yapılması gereken iyileştirmeler.
+## Questions & Answers bölümlerinde yapılması gereken iyileştirmeler.
 
 1. bazı sorular için tüm cevap şıkları görünmüyor. 
 yani normalde minimum 4 tane şık olması gerekirken bazılarında 2-3 oluyor.
@@ -22,7 +33,7 @@ bu tip durumların önüne geçebilmek için ilgili şıkka ait veri yoksa da, c
 
 
 
-# Case Study sayfasını daha işlevsel ve güzel hale getir.
+## Case Study sayfasını daha işlevsel ve güzel hale getir.
 
 think
 
@@ -52,9 +63,22 @@ think
 7. case study modal/popup ın istenirse ayrıca bir sayfa olarak açılabilmesi içinde bir özellik ekle.
 böylelikle kullanıcı soruyu okuduğu browser tabı ile case study tabını yanyana açıp okuyabilmeli.
 
+### Case Study v2 revisions
+
+1.case study butonu için yeni ikon olmamış - onu sadece beyaz renkli, bold "i" harfi ile değiştir.
+2.case study ikonunu tıklayınca popup/modal değilde artık yeni eklediğin "open in new tab" özelliğindeki ayrı sayfayı açsın direkt olarak.
+3.açılan yeni sayfanın başlığında sadece Case Study - Question #Number yazılı olsun. şu anda Question #79 için açtım ama "Case Study - Question 1"
+olarak gösteriyor.
+4.Edit Case Study butonu hiç çalışmıyor! bu botunu ve fonksiyoneliyeti de yeni "Open in new tab" olarak açılan sayfaya taşı.
+5. Case study'ler için PDF yada Resim ekleme imkanı olmalı ve bu artifactleri de kalıcı olarak tutabilmeli.
+6.bir exam için ortalama 4-6 tane Case Study olabilir ve farklı yada aynı sorular bu Case Studylere refere edebilir.
+Olurda bir soru için Case Study ilişkisi otomatik olarak parse edilip bulunamasa dahi, Edit Question sayfasında bu Case Studylerden birisini seçerek
+bağlantı işlemini yapabilmeli.
+Sonrasında ilgili soru başlığında "i" ikonu görülebilir olmalı ve tıklanınca ayrıca sayfada Case Study metni, PDF, PNG image gibi şeyleri açıp
+gösterebilmeli.
 
 
-# Exam Evaluation Results sayfasını daha doğru ve işlevsel hale getir.
+## Exam Evaluation Results sayfasını daha doğru ve işlevsel hale getir.
 
 1. Indicator kutucuklarına tıklandığında ilgili soru setini göstermiyor, hiçbir aksiyon yapmıyor.
 - oysaki "Correct Answers" kısmına tıklandığında detaylı bir şekilde hangi soru olduğunun kısa metni, numarası, sayfa ve dosya bilgisi ile birlikte hızlıca ilgili soruya konumlanıp göstermeyi sağlayan bir buton olmalı en sağda.
@@ -63,7 +87,7 @@ böylelikle kullanıcı soruyu okuduğu browser tabı ile case study tabını ya
 
 
 
-# Warnings sayfasında ki düzeltmeler.
+## Warnings sayfasında ki düzeltmeler.
 
 1. still does NOT show the errors, pdf file or page number links.
 
@@ -78,7 +102,7 @@ böylelikle kullanıcı soruyu okuduğu browser tabı ile case study tabını ya
 
 
 
-# Config dosyaları ve uygulama ayarlarnın merkezileştirilmesi
+## Config dosyaları ve uygulama ayarlarnın merkezileştirilmesi
 
 ultrathink
 
