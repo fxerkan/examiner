@@ -26,37 +26,35 @@ A comprehensive solution for extracting, parsing, and analyzing certification ex
 ## 📁 Project Structure
 
 ```
-examtopics_extractor/
+examiner/
 ├── src/                          # Core application modules
-│   ├── main.py                   # Main application controller
+│   ├── robust_question_parser.py # Main extraction script
 │   ├── pdf_processor.py          # PDF text extraction and processing
 │   ├── question_parser.py        # Question structure parsing
 │   ├── llm_integrator.py         # Claude API integration
 │   ├── text_enhancer.py          # Text cleaning and enhancement
-│   ├── output_generator.py       # Output generation (CSV/MD/JSON)
-│   └── error_handler.py          # Error handling and logging
+│   └── output_generator.py       # Output generation (CSV/MD/JSON)
 ├── config/                       # Configuration files
 │   ├── api_config.json          # Claude API configuration
 │   ├── processing_config.json   # Processing parameters
 │   └── prompts.json            # LLM prompt templates
 ├── data/
 │   ├── input/                   # Source PDF files
-│   ├── output/                  # Generated output files
-│   └── processed/               # Intermediate processed data
+│   └── output/                  # Generated output files
 ├── web_ui/                      # Interactive web interface
-│   ├── index.html              # Main web UI page
-│   ├── styles.css              # CSS styling
-│   └── script.js               # JavaScript functionality
+│   └── index.html              # Main web UI application
 ├── logs/                        # Application logs
 ├── tests/                       # Test files
-└── demo_output/                 # Demo results
+├── samples/                     # Sample PDF files for testing
+└── assets/                      # Screenshots and documentation images
 ```
 
 ## 🛠️ Installation
 
 1. **Clone the repository**:
    ```bash
-   cd examtopics_extractor
+   git clone https://github.com/fxerkan/examiner.git
+   cd examiner
    ```
 
 2. **Create virtual environment**:
@@ -105,144 +103,19 @@ examtopics_extractor/
    python -m http.server 9000
    ```
    
-4. **Open browser**: http://localhost:9000
+4. **Open browser**: [http://localhost:9000](http://localhost:9000)
 
 ### Future Feature: PDF Upload Interface
 PDF upload functionality is currently in development and temporarily disabled in the web interface. Manual file placement method above is the current supported workflow.
 
-## 💡 Usage Guide
-
-### Web Interface Features
-
-#### 🔍 **Search & Filter**
-- **Search**: Search across questions, answers, and comments
-- **Filters**: Question number, topic, source file, page, confidence score
-- **Results**: Shows 25 questions per page with pagination
-
-#### 📝 **Answer Marking** 
-- Click answer options to mark your selections
-- Answers are automatically saved (localStorage)
-- Multi-select questions supported
-- Persistent across browser sessions
-
-#### ✨ **Answer Highlighting**
-- Toggle "Highlight Answers" to show correct answers
-- Green background = Correct answer
-- Blue background = Your marked answer  
-- Red background = Wrong answer (when highlighted)
-
-#### 📊 **Exam Evaluation**
-- Click "🎯 Evaluate Answers" for detailed scoring
-- Shows overall pass/fail status (70% threshold)
-- Click score indicators to filter question types:
-  - ✅ **Correct Answers**: Questions you got right
-  - ❌ **Wrong Answers**: Review incorrect responses  
-  - ⚠️ **Skipped Questions**: Questions you haven't answered
-  - 🔵 **Answered Questions**: All questions with your responses
-
-#### ✏️ **Question Editing**
-- Click "✏️ Edit" on any question
-- Edit question text and answer options
-- Mark correct answers with checkboxes
-- Changes saved to JSON file
-
-#### ⚠️ **Quality Warnings**
-- Click "🚨 Warnings" to view extraction issues
-- Detailed information with clickable navigation
-- Shows parsing problems and raw context
-- "Go to Question" links for quick navigation
-
-#### 📄 **PDF Processing**
-- Manual PDF file placement in `data/input/` directory
-- Batch processing support for multiple files
-- Comprehensive extraction statistics and progress tracking
-- Quality warnings and debugging information
-   
-
-## ⚙️ Configuration
-
-### Main Configuration (`project_config.json`)
-
-```json
-{
-  "paths": {
-    "input_directory": "./data/input",
-    "output_directory": "./data/output"
-  },
-  "pdf_processing": {
-    "file_pattern": "Questions_*.pdf",
-    "batch_size": 3
-  },
-  "llm_integration": {
-    "model": "claude-4-sonnet-20250219",
-    "temperature": 0.1,
-    "max_tokens": 4000
-  }
-}
-```
-
-### Advanced Options
-
-- **Processing Configuration**: `config/processing_config.json`
-- **LLM Prompts**: `config/prompts.json`  
-- **API Settings**: `config/api_config.json`
-
-## 🎯 Output Formats
-
-### 1. Markdown Table
-```markdown
-| Question No | Question Description | Answer Options | Community Answer | Claude Answer | Topic | Page Number | Source |
-|-------------|---------------------|----------------|------------------|---------------|--------|-------------|---------|
-| 1 | Your company wants to migrate... | A: Rehost; B: Refactor... | A | B | Topic 1 | 12 | Questions_1.pdf |
-```
-
-### 2. CSV Format
-```csv
-Question No,Question Description,Answer Options,Community Answer,Claude Answer,Topic,Page Number,Source
-1,"Your company wants to migrate...","A: Rehost; B: Refactor...",A,B,Topic 1,12,Questions_1.pdf
-```
-
-### 3. JSON Format
-```json
-{
-  "metadata": {
-    "generated_at": "2025-08-11T18:54:05",
-    "total_questions": 150
-  },
-  "questions": [
-    {
-      "id": "Q1_1",
-      "description": "Your company wants to migrate...",
-      "options": {"A": "Rehost", "B": "Refactor"},
-      "answers": {
-        "community": "A",
-        "claude": "B"
-      }
-    }
-  ]
-}
-```
-
 ## 🔧 Command Line Usage
 
 ```bash
-# Basic usage
+# Run the main extraction process
+python src/robust_question_parser.py
+
+# Alternative: Use main.py (legacy)
 python src/main.py
-
-# Custom input directory
-python src/main.py --input /path/to/pdfs
-
-# Generate specific formats
-python src/main.py --output-formats csv json
-
-# Limit questions (for testing)
-python src/main.py --max-questions 10
-
-# Skip LLM analysis
-python src/main.py --no-llm
-
-# Custom configuration
-python src/main.py --config /path/to/config.json
 ```
 
 ## 📊 Quality Assurance
@@ -269,11 +142,8 @@ The extractor includes comprehensive quality control:
 ## 🧪 Testing
 
 ```bash
-# Run basic project tests
-python test_simple.py
-
-# Run comprehensive demo
-python demo.py
+# Run basic project tests  
+python tests/test_basic_functionality.py
 
 # Check specific module
 python -c "from src.question_parser import QuestionParser; print('✅ Import successful')"
@@ -300,10 +170,10 @@ python -c "from src.question_parser import QuestionParser; print('✅ Import suc
 
 ### Logging
 
-Check logs in `logs/examtopics_processor.log` for detailed error information:
+Check logs in `logs/examiner_processor.log` for detailed error information:
 
 ```bash
-tail -f logs/examtopics_processor.log
+tail -f logs/examiner_processor.log
 ```
 
 ## 🎯 Example Output
@@ -342,8 +212,25 @@ This project is provided as-is for educational and professional development purp
 
 ## 🙏 Acknowledgments
 
-- Claude Code
-- ExamTopics https://www.examtopics.com
+### AI Assistant & Development Tools
+- **[Claude Code](https://claude.ai/code)** - Primary AI assistant for development
+- **[Anthropic Claude](https://www.anthropic.com)** - LLM integration for question analysis
+- **[Claude Sonnet 4](https://www.anthropic.com)** - Advanced reasoning and code generation
+
+### MCP Agents & Specialized Tools
+- **Playwright MCP** - Browser automation and web UI testing
+- **General-Purpose Agent** - Complex task orchestration and multi-step workflows
+- **Code-Reviewer Agent** - Code quality analysis and review
+- **Test-Automator Agent** - Test suite creation and automation infrastructure
+
+### Data Source
+- **[ExamTopics](https://www.examtopics.com)** - Community-driven exam questions and discussions
+
+### Technologies & Libraries
+- **Python** - Core application development
+- **JavaScript/HTML/CSS** - Interactive web interface
+- **PDF Processing** - Text extraction and parsing
+- **JSON/CSV** - Data serialization and export formats
 
 ---
 

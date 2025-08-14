@@ -1,4 +1,4 @@
-# GCP Professional Cloud Architect Exam Question Extractor
+# ExaMiner - GCP Professional Cloud Architect Exam Question Extractor
 
 ## Project Overview
 This application extracts, parses, and analyzes Google Professional Cloud Architect certification exam questions from PDF documents. It processes community answers, identifies correct solutions, and provides structured output with LLM-powered analysis.
@@ -201,6 +201,12 @@ project/
 - Allow for manual intervention when needed
 
 This modular approach ensures reliability, maintainability, and the ability to handle the complexities of PDF processing and LLM integration effectively.
+
+## 🔗 Repository Information
+
+- **Repository**: [https://github.com/fxerkan/examiner.git](https://github.com/fxerkan/examiner.git)
+- **Project Name**: ExaMiner
+- **Primary Script**: `src/robust_question_parser.py`
 
 ## ✅ Implementation Status
 
