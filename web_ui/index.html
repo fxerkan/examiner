@@ -991,9 +991,9 @@
                 <p>Extracted Exam Questions & Answers</p>
             </div>
             <div class="header-controls">
-                <label class="btn" onclick="handleUploadClick()">
-                    📄 Upload PDFs
-                    <input type="file" id="pdfUpload" multiple accept=".pdf" style="display: none;">
+                <label class="btn" style="background: #f1f3f4; color: #5f6368; cursor: not-allowed;" title="PDF upload functionality temporarily disabled - feature in development">
+                    📄 Upload PDFs (Disabled)
+                    <input type="file" id="pdfUpload" multiple accept=".pdf" style="display: none;" disabled>
                 </label>
                 <button id="runAnalysisBtn" class="btn">
                     🔧 Analyze
@@ -1368,20 +1368,30 @@
 
     <!-- Upload PDFs Modal -->
     <div id="uploadModal" class="modal">
-        <div class="modal-content" style="max-width: 800px;">
+        <div class="modal-content" style="max-width: 800px; max-height: 90vh; display: flex; flex-direction: column;">
             <div class="modal-header">
                 <div class="modal-title">📄 Upload PDF Files</div>
                 <button class="close-btn" onclick="document.getElementById('uploadModal').classList.remove('show')">×</button>
             </div>
-            <div class="modal-body">
-                <div style="margin-bottom: 20px;">
-                    <h3 style="color: #202124; margin-bottom: 15px;">📋 Instructions</h3>
-                    <div style="background: #e3f2fd; padding: 15px; border-radius: 8px; border-left: 4px solid #2196f3; margin-bottom: 20px;">
-                        <ul style="margin: 0; padding-left: 20px; line-height: 1.6;">
+            <div class="modal-body" style="max-height: none; overflow: visible; flex: 1; display: flex; flex-direction: column; justify-content: space-between; padding: 20px 25px;">
+                <div style="margin-bottom: 20px; position: relative;">
+                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 15px;">
+                        <h3 style="color: #202124; margin: 0;">📄 PDF Upload</h3>
+                        <div class="info-icon" onclick="toggleUploadInstructions()" 
+                             title="Click for upload instructions"
+                             style="display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; background: #2196f3; color: white; border-radius: 50%; font-size: 12px; font-weight: bold; cursor: pointer; transition: all 0.2s ease;"
+                             onmouseover="this.style.background='#1976d2'; this.style.transform='scale(1.1)'"
+                             onmouseout="if(document.getElementById('uploadInstructions').style.display !== 'block') { this.style.background='#2196f3'; this.style.transform='scale(1)' } else { this.style.transform='scale(1)' }">
+                            i
+                        </div>
+                    </div>
+                    <div id="uploadInstructions" style="background: #e3f2fd; padding: 15px; border-radius: 8px; border-left: 4px solid #2196f3; margin-bottom: 20px; display: none;">
+                        <ul style="margin: 0; padding-left: 20px; line-height: 1.6; font-size: 0.9rem;">
                             <li>Select one or multiple PDF files containing GCP exam questions</li>
                             <li>Supported formats: PDF files with extractable text</li>
                             <li>Files will be processed to extract questions, answers, and community comments</li>
                             <li>Large files may take a few minutes to process</li>
+                            <li>Files are saved to <code>/data/input/</code> directory for processing</li>
                         </ul>
                     </div>
                 </div>
@@ -1404,22 +1414,24 @@
                     </div>
                 </div>
                 
-                <div class="control-buttons" style="margin-top: 25px;">
-                    <button type="button" class="btn btn-success" onclick="startProcessing()" id="startProcessingBtn" disabled>
-                        🚀 Start Processing
-                    </button>
-                    <button type="button" class="btn btn-warning" onclick="document.getElementById('uploadModal').classList.remove('show')">
-                        ❌ Cancel
-                    </button>
-                </div>
-                
-                <div id="processingProgress" style="display: none; margin-top: 20px;">
-                    <h4 style="color: #202124;">🔄 Processing Files...</h4>
-                    <div style="background: #f1f3f4; border-radius: 10px; height: 20px; overflow: hidden; margin: 10px 0;">
-                        <div id="progressBar" style="background: linear-gradient(90deg, #4caf50, #2196f3); height: 100%; width: 0%; transition: width 0.3s;"></div>
+                <div style="flex-shrink: 0; margin-top: auto; padding-top: 15px;">
+                    <div class="control-buttons" style="margin-bottom: 15px;">
+                        <button type="button" class="btn btn-success" onclick="startProcessing()" id="startProcessingBtn" disabled>
+                            🚀 Start Processing
+                        </button>
+                        <button type="button" class="btn btn-warning" onclick="document.getElementById('uploadModal').classList.remove('show')">
+                            ❌ Cancel
+                        </button>
                     </div>
-                    <div id="processingStatus" style="font-size: 0.9rem; color: #5f6368;">
-                        Initializing...
+                    
+                    <div id="processingProgress" style="display: none;">
+                        <h4 style="color: #202124; margin-bottom: 10px;">🔄 Processing Files...</h4>
+                        <div style="background: #f1f3f4; border-radius: 10px; height: 20px; overflow: hidden; margin: 10px 0;">
+                            <div id="progressBar" style="background: linear-gradient(90deg, #4caf50, #2196f3); height: 100%; width: 0%; transition: width 0.3s;"></div>
+                        </div>
+                        <div id="processingStatus" style="font-size: 0.9rem; color: #5f6368;">
+                            Initializing...
+                        </div>
                     </div>
                 </div>
             </div>
@@ -2882,6 +2894,21 @@
             document.getElementById('uploadModal').classList.add('show');
         }
         
+        function toggleUploadInstructions() {
+            const instructions = document.getElementById('uploadInstructions');
+            const icon = document.querySelector('.info-icon');
+            
+            if (instructions.style.display === 'none' || instructions.style.display === '') {
+                instructions.style.display = 'block';
+                icon.style.background = '#1976d2';
+                icon.title = 'Click to hide instructions';
+            } else {
+                instructions.style.display = 'none'; 
+                icon.style.background = '#2196f3';
+                icon.title = 'Click for upload instructions';
+            }
+        }
+        
         function handleFileSelection() {
             const input = document.getElementById('pdfUploadInput');
             const selectedFiles = document.getElementById('selectedFiles');
@@ -3451,51 +3478,160 @@
             const parsingIssues = [];
             
             allQuestions.forEach(question => {
-                // Check for missing options
+                const qNum = question.autoIncrement || question.number || question.id;
+                const source = question.metadata?.source || 'Unknown';
+                const page = question.metadata?.page || 'Unknown';
+                
+                // Check for missing options with detailed analysis
                 const optionCount = Object.keys(question.options || {}).length;
                 if (optionCount < 3) {
+                    const missingOptions = [];
+                    const expectedOptions = ['A', 'B', 'C', 'D', 'E', 'F'];
+                    const existingOptions = Object.keys(question.options || {});
+                    expectedOptions.forEach(opt => {
+                        if (!existingOptions.includes(opt)) {
+                            missingOptions.push(opt);
+                        }
+                    });
+                    
                     warnings.push({
                         type: 'WARNING',
-                        message: `Question ${question.number || question.id}: Too few options (${optionCount})`,
+                        message: `Question ${qNum}: Incomplete answer options (${optionCount}/4+ expected)`,
                         question: question,
                         details: {
-                            description: question.description || 'No description',
+                            error: 'Missing answer options detected during parsing',
+                            description: question.description || 'No description available',
                             options: question.options || {},
-                            source: question.metadata?.source || 'Unknown',
-                            page: question.metadata?.page || 'Unknown'
+                            missingOptions: missingOptions.slice(0, 4 - optionCount),
+                            source: source,
+                            page: page,
+                            rawText: question.all_community_comments ? question.all_community_comments.substring(0, 200) + '...' : 'No raw text available',
+                            parseError: `Expected minimum 4 options (A, B, C, D) but found ${optionCount}: [${existingOptions.join(', ')}]`,
+                            suggestedFix: 'Review PDF page for missing answer options or OCR errors'
                         }
                     });
                 }
                 
-                // Check for short descriptions
+                // Check for short descriptions with more details
                 if (!question.description || question.description.length < 50) {
                     warnings.push({
                         type: 'WARNING',
-                        message: `Question ${question.number || question.id}: Description too short (${question.description?.length || 0} chars)`,
+                        message: `Question ${qNum}: Insufficient question text (${question.description?.length || 0} chars)`,
                         question: question,
                         details: {
-                            description: question.description || 'No description',
-                            source: question.metadata?.source || 'Unknown',
-                            page: question.metadata?.page || 'Unknown'
+                            error: 'Question description too short or missing',
+                            description: question.description || '[NO DESCRIPTION FOUND]',
+                            source: source,
+                            page: page,
+                            minExpected: '50 characters minimum for meaningful question',
+                            actualLength: question.description?.length || 0,
+                            rawText: question.all_community_comments ? question.all_community_comments.substring(0, 300) + '...' : 'No raw text available',
+                            parseError: question.description ? `Question text too short: "${question.description.substring(0, 100)}..."` : 'No question description extracted',
+                            suggestedFix: 'Check PDF page for complete question text or OCR parsing issues'
                         }
                     });
                 }
                 
-                // Check for missing Claude analysis
+                // Check for missing Claude analysis with detailed info
                 if (!question.claude_reasoning || question.claude_reasoning.length < 10) {
                     debugInfo.push({
                         type: 'DEBUG',
-                        message: `Question ${question.number || question.id}: Missing or limited AI analysis`,
-                        question: question
+                        message: `Question ${qNum}: AI analysis incomplete or missing`,
+                        question: question,
+                        details: {
+                            error: 'Claude AI reasoning not generated or too short',
+                            aiReasoning: question.claude_reasoning || '[NO AI ANALYSIS]',
+                            source: source,
+                            page: page,
+                            expectedLength: 'At least 10 characters of meaningful analysis',
+                            actualLength: question.claude_reasoning?.length || 0,
+                            claudeAnswer: question.answers?.claude || 'No Claude answer',
+                            debugInfo: {
+                                hasOptions: Object.keys(question.options || {}).length > 0,
+                                hasDescription: !!question.description,
+                                hasCommunityAnswers: !!(question.answers?.community || question.answers?.highly_voted),
+                                processingTimestamp: question.metadata?.timestamp || 'Unknown'
+                            },
+                            suggestedFix: 'Re-run AI analysis or check API connectivity'
+                        }
                     });
                 }
                 
-                // Check for missing community answers
+                // Check for missing community answers with verbose details
                 if (!question.answers?.community && !question.answers?.highly_voted && !question.answers?.most_recent) {
                     parsingIssues.push({
                         type: 'PARSING',
-                        message: `Question ${question.number || question.id}: No community answers found`,
-                        question: question
+                        message: `Question ${qNum}: No community answers extracted from PDF`,
+                        question: question,
+                        details: {
+                            error: 'Community answer parsing failed',
+                            source: source,
+                            page: page,
+                            answerData: question.answers || {},
+                            searchPatterns: [
+                                'Highly Voted Answer:', 
+                                'Most Recent Answer:', 
+                                'Community Answer:', 
+                                'Answer: A|B|C|D|E|F'
+                            ],
+                            rawText: question.all_community_comments ? question.all_community_comments.substring(0, 500) + '...' : 'No raw community text found',
+                            parseError: 'Failed to extract community voting data or answer selections',
+                            debugInfo: {
+                                hasComments: !!question.all_community_comments,
+                                commentsLength: question.all_community_comments?.length || 0,
+                                hasVotingInfo: !!(question.metadata?.voting_info),
+                                extractedAnswers: Object.keys(question.answers || {})
+                            },
+                            suggestedFix: 'Check PDF page for community answer section or update parsing regex patterns'
+                        }
+                    });
+                }
+                
+                // Additional checks for more detailed warnings
+                
+                // Check for malformed option text
+                if (question.options) {
+                    Object.entries(question.options).forEach(([key, value]) => {
+                        if (!value || value.length < 3) {
+                            warnings.push({
+                                type: 'WARNING',
+                                message: `Question ${qNum}: Malformed answer option ${key}`,
+                                question: question,
+                                details: {
+                                    error: `Answer option ${key} is empty or too short`,
+                                    optionKey: key,
+                                    optionValue: value || '[EMPTY]',
+                                    source: source,
+                                    page: page,
+                                    allOptions: question.options,
+                                    parseError: `Option ${key}: "${value || 'EMPTY'}" (${(value || '').length} chars)`,
+                                    suggestedFix: 'Check PDF for complete option text or OCR issues'
+                                }
+                            });
+                        }
+                    });
+                }
+                
+                // Check for confidence score issues
+                if (question.metadata?.confidence && question.metadata.confidence < 0.5) {
+                    debugInfo.push({
+                        type: 'DEBUG', 
+                        message: `Question ${qNum}: Low extraction confidence (${Math.round(question.metadata.confidence * 100)}%)`,
+                        question: question,
+                        details: {
+                            error: 'Low confidence score indicates potential parsing issues',
+                            confidence: question.metadata.confidence,
+                            confidencePercentage: Math.round(question.metadata.confidence * 100) + '%',
+                            source: source,
+                            page: page,
+                            qualityIndicators: {
+                                textLength: question.description?.length || 0,
+                                optionCount: Object.keys(question.options || {}).length,
+                                hasAIAnalysis: !!question.claude_reasoning,
+                                hasCommunityData: !!(question.answers?.community || question.answers?.highly_voted)
+                            },
+                            suggestedFix: 'Review PDF page quality or consider manual verification'
+                        }
                     });
                 }
             });
@@ -3520,25 +3656,56 @@
                             (Page <a href="#" class="meta-link" onclick="openPDFPage('${warning.details?.source}', ${warning.details?.page})">${warning.details?.page}</a>)
                             | <strong>Question ID:</strong> ${warning.question?.autoIncrement || warning.question?.number || 'N/A'}
                         </div>
+                        
+                        ${warning.details?.error ? `
+                            <div style="background: #f8d7da; border: 1px solid #f5c6cb; padding: 8px; border-radius: 4px; margin-bottom: 8px;">
+                                <div style="font-size: 0.85rem; color: #721c24; font-weight: 600;">⚠️ Error Details:</div>
+                                <div style="font-size: 0.8rem; color: #721c24; margin-top: 4px;">${warning.details.error}</div>
+                            </div>
+                        ` : ''}
+                        
+                        ${warning.details?.parseError ? `
+                            <div style="background: #fff3cd; border: 1px solid #ffeaa7; padding: 8px; border-radius: 4px; margin-bottom: 8px;">
+                                <div style="font-size: 0.85rem; color: #856404; font-weight: 600;">🔍 Parse Error:</div>
+                                <div style="font-size: 0.8rem; color: #856404; margin-top: 4px; font-family: monospace;">${warning.details.parseError}</div>
+                            </div>
+                        ` : ''}
+                        
                         <div style="background: #f8f9fa; padding: 10px; border-radius: 4px; margin-top: 8px;">
                             <div style="font-size: 0.85rem; color: #495057;">
-                                <strong>Full Description:</strong><br>
+                                <strong>Question Text:</strong><br>
                                 <div style="max-height: 100px; overflow-y: auto; margin-top: 5px; padding: 5px; border: 1px solid #ddd; border-radius: 3px; background: white;">
                                     ${warning.details?.description || 'No description available'}
                                 </div>
                             </div>
+                            
+                            ${warning.details?.missingOptions ? `
+                                <div style="font-size: 0.85rem; color: #495057; margin-top: 8px;">
+                                    <strong>Missing Options:</strong> 
+                                    <span style="color: #dc3545; font-weight: 600;">${warning.details.missingOptions.join(', ')}</span>
+                                </div>
+                            ` : ''}
+                            
                             <div style="font-size: 0.85rem; color: #495057; margin-top: 8px;">
-                                <strong>Answer Options:</strong> ${Object.keys(warning.details?.options || {}).length > 0 ? 
-                                    Object.entries(warning.details?.options || {}).map(([key, value]) => `<br><strong>${key}:</strong> ${value}`).join('') : 
+                                <strong>Found Options:</strong> ${Object.keys(warning.details?.options || {}).length > 0 ? 
+                                    Object.entries(warning.details?.options || {}).map(([key, value]) => `<br><strong>${key}:</strong> ${value.substring(0, 50)}${value.length > 50 ? '...' : ''}`).join('') : 
                                     '<span style="color: #dc3545;">No options found</span>'
                                 }
                             </div>
-                            ${warning.question?.all_community_comments ? `
+                            
+                            ${warning.details?.rawText && warning.details.rawText !== 'No raw text available' ? `
                                 <div style="font-size: 0.85rem; color: #495057; margin-top: 8px;">
-                                    <strong>Raw Context (first 200 chars):</strong><br>
-                                    <div style="background: #e9ecef; padding: 8px; margin-top: 5px; border-radius: 3px; font-family: monospace; font-size: 0.75rem;">
-                                        ${warning.question.all_community_comments.substring(0, 200)}${warning.question.all_community_comments.length > 200 ? '...' : ''}
+                                    <strong>Raw PDF Text Sample:</strong><br>
+                                    <div style="background: #e9ecef; padding: 8px; margin-top: 5px; border-radius: 3px; font-family: monospace; font-size: 0.75rem; max-height: 80px; overflow-y: auto;">
+                                        ${warning.details.rawText}
                                     </div>
+                                </div>
+                            ` : ''}
+                            
+                            ${warning.details?.suggestedFix ? `
+                                <div style="background: #d4edda; border: 1px solid #c3e6cb; padding: 8px; border-radius: 4px; margin-top: 8px;">
+                                    <div style="font-size: 0.85rem; color: #155724; font-weight: 600;">💡 Suggested Fix:</div>
+                                    <div style="font-size: 0.8rem; color: #155724; margin-top: 4px;">${warning.details.suggestedFix}</div>
                                 </div>
                             ` : ''}
                         </div>
@@ -3553,7 +3720,83 @@
             } else {
                 debugContent.innerHTML = debugInfo.map(debug => `
                     <div style="background: #e3f2fd; border-left: 4px solid #2196f3; padding: 15px; margin-bottom: 10px; border-radius: 4px;">
-                        <div style="font-weight: 600; color: #1976d2;">${debug.message}</div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                            <div style="font-weight: 600; color: #1976d2;">${debug.message}</div>
+                            <button class="btn btn-sm" onclick="goToQuestion('${debug.question?.autoIncrement || debug.question?.id}')" 
+                                    style="background: #2196f3; color: white; border: none; padding: 4px 8px; border-radius: 4px; font-size: 0.8rem;">
+                                Go to Question
+                            </button>
+                        </div>
+                        
+                        ${debug.details ? `
+                            <div style="font-size: 0.9rem; color: #0d47a1; margin-bottom: 8px;">
+                                <strong>Source:</strong> 
+                                <a href="#" class="meta-link" onclick="openPDF('${debug.details.source}')">${debug.details.source}</a> 
+                                (Page <a href="#" class="meta-link" onclick="openPDFPage('${debug.details.source}', ${debug.details.page})">${debug.details.page}</a>)
+                            </div>
+                            
+                            <div style="background: #bbdefb; border: 1px solid #90caf9; padding: 8px; border-radius: 4px; margin-bottom: 8px;">
+                                <div style="font-size: 0.85rem; color: #0d47a1; font-weight: 600;">🔍 Debug Info:</div>
+                                <div style="font-size: 0.8rem; color: #0d47a1; margin-top: 4px;">${debug.details.error}</div>
+                            </div>
+                            
+                            ${debug.details.aiReasoning ? `
+                                <div style="font-size: 0.85rem; color: #1976d2; margin-bottom: 8px;">
+                                    <strong>AI Analysis Found:</strong><br>
+                                    <div style="background: #e1f5fe; padding: 8px; border-radius: 3px; font-family: monospace; font-size: 0.75rem; max-height: 60px; overflow-y: auto; margin-top: 4px;">
+                                        ${debug.details.aiReasoning.substring(0, 200)}${debug.details.aiReasoning.length > 200 ? '...' : ''}
+                                    </div>
+                                    <div style="font-size: 0.75rem; color: #666; margin-top: 4px;">Length: ${debug.details.actualLength} chars (Expected: ${debug.details.expectedLength})</div>
+                                </div>
+                            ` : ''}
+                            
+                            ${debug.details.debugInfo ? `
+                                <div style="font-size: 0.85rem; color: #1976d2; margin-bottom: 8px;">
+                                    <strong>Processing Status:</strong><br>
+                                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-top: 4px;">
+                                        <div style="background: ${debug.details.debugInfo.hasOptions ? '#c8e6c9' : '#ffcdd2'}; padding: 4px 8px; border-radius: 3px; font-size: 0.75rem;">
+                                            Options: ${debug.details.debugInfo.hasOptions ? '✓' : '✗'}
+                                        </div>
+                                        <div style="background: ${debug.details.debugInfo.hasDescription ? '#c8e6c9' : '#ffcdd2'}; padding: 4px 8px; border-radius: 3px; font-size: 0.75rem;">
+                                            Description: ${debug.details.debugInfo.hasDescription ? '✓' : '✗'}
+                                        </div>
+                                        <div style="background: ${debug.details.debugInfo.hasCommunityAnswers ? '#c8e6c9' : '#ffcdd2'}; padding: 4px 8px; border-radius: 3px; font-size: 0.75rem;">
+                                            Community: ${debug.details.debugInfo.hasCommunityAnswers ? '✓' : '✗'}
+                                        </div>
+                                        <div style="font-size: 0.75rem; color: #666; padding: 4px 8px;">
+                                            Processed: ${debug.details.debugInfo.processingTimestamp}
+                                        </div>
+                                    </div>
+                                </div>
+                            ` : ''}
+                            
+                            ${debug.details.qualityIndicators ? `
+                                <div style="font-size: 0.85rem; color: #1976d2; margin-bottom: 8px;">
+                                    <strong>Quality Metrics:</strong><br>
+                                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 4px; margin-top: 4px; font-size: 0.75rem;">
+                                        <div>Text Length: ${debug.details.qualityIndicators.textLength} chars</div>
+                                        <div>Options: ${debug.details.qualityIndicators.optionCount}</div>
+                                        <div>AI Analysis: ${debug.details.qualityIndicators.hasAIAnalysis ? 'Yes' : 'No'}</div>
+                                        <div>Community Data: ${debug.details.qualityIndicators.hasCommunityData ? 'Yes' : 'No'}</div>
+                                    </div>
+                                    ${debug.details.confidence !== undefined ? `
+                                        <div style="margin-top: 6px;">
+                                            <div style="font-size: 0.75rem; color: #666;">Confidence: ${debug.details.confidencePercentage}</div>
+                                            <div style="background: #f0f0f0; border-radius: 10px; height: 6px; margin-top: 2px;">
+                                                <div style="background: ${debug.details.confidence > 0.7 ? '#4caf50' : debug.details.confidence > 0.4 ? '#ff9800' : '#f44336'}; height: 100%; border-radius: 10px; width: ${debug.details.confidence * 100}%;"></div>
+                                            </div>
+                                        </div>
+                                    ` : ''}
+                                </div>
+                            ` : ''}
+                            
+                            ${debug.details.suggestedFix ? `
+                                <div style="background: #e8f5e8; border: 1px solid #c3e6cb; padding: 8px; border-radius: 4px; margin-top: 8px;">
+                                    <div style="font-size: 0.85rem; color: #155724; font-weight: 600;">💡 Suggested Fix:</div>
+                                    <div style="font-size: 0.8rem; color: #155724; margin-top: 4px;">${debug.details.suggestedFix}</div>
+                                </div>
+                            ` : ''}
+                        ` : ''}
                     </div>
                 `).join('');
             }
@@ -3572,13 +3815,94 @@
                                 Go to Question
                             </button>
                         </div>
-                        ${issue.question?.metadata ? `
-                            <div style="font-size: 0.9rem; color: #6c757d; margin-bottom: 8px;">
-                                <strong>Source:</strong> 
-                                <a href="#" class="meta-link" onclick="openPDF('${issue.question.metadata.source}')">${issue.question.metadata.source}</a> 
-                                (Page <a href="#" class="meta-link" onclick="openPDFPage('${issue.question.metadata.source}', ${issue.question.metadata.page})">${issue.question.metadata.page}</a>)
+                        
+                        <div style="font-size: 0.9rem; color: #6c757d; margin-bottom: 8px;">
+                            <strong>Source:</strong> 
+                            <a href="#" class="meta-link" onclick="openPDF('${issue.details?.source || issue.question?.metadata?.source}')">${issue.details?.source || issue.question?.metadata?.source}</a> 
+                            (Page <a href="#" class="meta-link" onclick="openPDFPage('${issue.details?.source || issue.question?.metadata?.source}', ${issue.details?.page || issue.question?.metadata?.page})">${issue.details?.page || issue.question?.metadata?.page}</a>)
+                            | <strong>Question ID:</strong> ${issue.question?.autoIncrement || issue.question?.number || 'N/A'}
+                        </div>
+                        
+                        ${issue.details?.error ? `
+                            <div style="background: #ffcdd2; border: 1px solid #ef5350; padding: 8px; border-radius: 4px; margin-bottom: 8px;">
+                                <div style="font-size: 0.85rem; color: #c62828; font-weight: 600;">❌ Parsing Error:</div>
+                                <div style="font-size: 0.8rem; color: #c62828; margin-top: 4px;">${issue.details.error}</div>
                             </div>
                         ` : ''}
+                        
+                        ${issue.details?.parseError ? `
+                            <div style="background: #fff3cd; border: 1px solid #ffeaa7; padding: 8px; border-radius: 4px; margin-bottom: 8px;">
+                                <div style="font-size: 0.85rem; color: #856404; font-weight: 600;">🔍 Parse Details:</div>
+                                <div style="font-size: 0.8rem; color: #856404; margin-top: 4px; font-family: monospace;">${issue.details.parseError}</div>
+                            </div>
+                        ` : ''}
+                        
+                        ${issue.details?.searchPatterns ? `
+                            <div style="font-size: 0.85rem; color: #c62828; margin-bottom: 8px;">
+                                <strong>Search Patterns Used:</strong><br>
+                                <div style="background: #ffebee; padding: 8px; border-radius: 3px; margin-top: 4px;">
+                                    ${issue.details.searchPatterns.map(pattern => `
+                                        <div style="font-family: monospace; font-size: 0.75rem; margin: 2px 0; color: #666;">
+                                            <span style="color: #f44336;">Regex:</span> ${pattern}
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        ` : ''}
+                        
+                        <div style="background: #f8f9fa; padding: 10px; border-radius: 4px; margin-top: 8px;">
+                            ${issue.details?.answerData ? `
+                                <div style="font-size: 0.85rem; color: #495057; margin-bottom: 8px;">
+                                    <strong>Found Answer Data:</strong><br>
+                                    <div style="background: #e9ecef; padding: 8px; margin-top: 4px; border-radius: 3px; font-family: monospace; font-size: 0.75rem;">
+                                        ${Object.keys(issue.details.answerData).length > 0 ? 
+                                            Object.entries(issue.details.answerData).map(([key, value]) => `${key}: ${value || 'null'}`).join('<br>') : 
+                                            '<span style="color: #dc3545;">No answer data extracted</span>'
+                                        }
+                                    </div>
+                                </div>
+                            ` : ''}
+                            
+                            ${issue.details?.debugInfo ? `
+                                <div style="font-size: 0.85rem; color: #495057; margin-bottom: 8px;">
+                                    <strong>Diagnostic Information:</strong><br>
+                                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-top: 4px;">
+                                        <div style="background: ${issue.details.debugInfo.hasComments ? '#c8e6c9' : '#ffcdd2'}; padding: 4px 8px; border-radius: 3px; font-size: 0.75rem;">
+                                            Comments: ${issue.details.debugInfo.hasComments ? '✓' : '✗'} (${issue.details.debugInfo.commentsLength} chars)
+                                        </div>
+                                        <div style="background: ${issue.details.debugInfo.hasVotingInfo ? '#c8e6c9' : '#ffcdd2'}; padding: 4px 8px; border-radius: 3px; font-size: 0.75rem;">
+                                            Voting Info: ${issue.details.debugInfo.hasVotingInfo ? '✓' : '✗'}
+                                        </div>
+                                        <div style="font-size: 0.75rem; color: #666; padding: 4px 8px; grid-column: span 2;">
+                                            Extracted Answer Types: ${issue.details.debugInfo.extractedAnswers?.length > 0 ? issue.details.debugInfo.extractedAnswers.join(', ') : 'None'}
+                                        </div>
+                                    </div>
+                                </div>
+                            ` : ''}
+                            
+                            ${issue.details?.rawText && issue.details.rawText !== 'No raw community text found' ? `
+                                <div style="font-size: 0.85rem; color: #495057; margin-top: 8px;">
+                                    <strong>Raw PDF Text Sample:</strong><br>
+                                    <div style="background: #e9ecef; padding: 8px; margin-top: 5px; border-radius: 3px; font-family: monospace; font-size: 0.75rem; max-height: 120px; overflow-y: auto;">
+                                        ${issue.details.rawText}
+                                    </div>
+                                </div>
+                            ` : `
+                                <div style="font-size: 0.85rem; color: #c62828; margin-top: 8px;">
+                                    <strong>⚠️ No Raw Text Available:</strong><br>
+                                    <div style="background: #ffebee; padding: 8px; margin-top: 4px; border-radius: 3px; font-size: 0.8rem; color: #c62828;">
+                                        No community text or comments were extracted from the PDF for analysis
+                                    </div>
+                                </div>
+                            `}
+                            
+                            ${issue.details?.suggestedFix ? `
+                                <div style="background: #e8f5e8; border: 1px solid #c3e6cb; padding: 8px; border-radius: 4px; margin-top: 8px;">
+                                    <div style="font-size: 0.85rem; color: #155724; font-weight: 600;">💡 Suggested Fix:</div>
+                                    <div style="font-size: 0.8rem; color: #155724; margin-top: 4px;">${issue.details.suggestedFix}</div>
+                                </div>
+                            ` : ''}
+                        </div>
                     </div>
                 `).join('');
             }

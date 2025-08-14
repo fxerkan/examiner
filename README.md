@@ -19,8 +19,7 @@ A comprehensive solution for extracting, parsing, and analyzing certification ex
 - **📊 Exam Evaluation**: Comprehensive scoring system with 70% GCP passing threshold
 - **📈 Detailed Analytics**: Wrong answer review, skipped questions tracking
 - **✏️ Question Editing**: Edit questions, answers, and mark correct solutions
-- **📄 PDF Upload**: Interactive upload interface with progress tracking
-- **⚠️ Quality Warnings**: Detailed extraction warnings with clickable navigation
+- **⚠️ Quality Warnings**: Comprehensive extraction warnings with verbose error analysis and clickable navigation
 
 ![ExaMiner](assets/examiner.png)
 
@@ -84,23 +83,7 @@ examtopics_extractor/
 
 ## 🚀 Quick Start
 
-### Method 1: Web UI Upload (Recommended)
-
-1. **Start the web interface**:
-   ```bash
-   cd web_ui
-   python -m http.server 9000
-   ```
-
-2. **Open browser**: http://localhost:9000
-
-3. **Upload PDFs**: 
-   - Click "📄 Upload PDFs" button
-   - Select your PDF files (supports multiple files)
-   - Click "🚀 Start Processing" 
-   - Wait for processing to complete
-
-### Method 2: Manual Processing
+### Method 1: Manual Processing (Recommended)
 
 1. **Place PDF files** in `data/input/` directory:
    ```
@@ -121,6 +104,11 @@ examtopics_extractor/
    cd web_ui
    python -m http.server 9000
    ```
+   
+4. **Open browser**: http://localhost:9000
+
+### Future Feature: PDF Upload Interface
+PDF upload functionality is currently in development and temporarily disabled in the web interface. Manual file placement method above is the current supported workflow.
 
 ## 💡 Usage Guide
 
@@ -164,11 +152,11 @@ examtopics_extractor/
 - Shows parsing problems and raw context
 - "Go to Question" links for quick navigation
 
-#### 📄 **PDF Upload**
-- Drag & drop or browse for PDF files
-- Real-time upload progress
-- Automatic processing and analysis
-- Results integrated immediately
+#### 📄 **PDF Processing**
+- Manual PDF file placement in `data/input/` directory
+- Batch processing support for multiple files
+- Comprehensive extraction statistics and progress tracking
+- Quality warnings and debugging information
    
 
 ## ⚙️ Configuration
