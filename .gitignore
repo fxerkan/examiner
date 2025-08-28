@@ -219,6 +219,10 @@ project_config.json
 config/api_config.json
 api_config.json
 
+web_ui/_questions_web_data.json
+web_ui/questions_web_data.json
+web_ui/questions_web_data.json.backup
+
 # Keep directory structure but ignore contents
 !data/output/.gitkeep
 !data/input/.gitkeep  
