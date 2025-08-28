@@ -209,6 +209,7 @@ data/output/*
 data/input/*
 logs/*
 src/logs/*
+backup_configs/*
 
 # Files/folders starting with underscore
 _*

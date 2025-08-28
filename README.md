@@ -1,6 +1,8 @@
 # exaMiner
 
-A comprehensive solution for extracting, parsing, and analyzing certification exam questions, answers and comments provided by community as PDF documents with LLM-powered analysis and turn into an interactive web interface.
+A comprehensive solution for extracting, parsing, and analyzing ExamTopics certification exam questions, answers and comments provided by community as PDF documents (with LLM-powered) analysis and turn into an interactive Exam Preparation Web UI.
+
+![ExaMiner](assets/examiner-pdf_to_exam.png)
 
 ## 🚀 Features
 
@@ -23,7 +25,7 @@ A comprehensive solution for extracting, parsing, and analyzing certification ex
 - **✏️ Question Editing**: Edit questions, answers, and mark correct solutions
 - **⚠️ Quality Warnings**: Comprehensive extraction warnings with verbose error analysis and clickable navigation
 
-![ExaMiner](assets/examiner.png)
+
 
 ## 📁 Project Structure
 
